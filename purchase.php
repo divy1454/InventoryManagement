@@ -1,5 +1,7 @@
 <?php
 ob_start();
+
+// This is a header file include
 include('header.php');
 include('command/conn.php');
 session_start();
