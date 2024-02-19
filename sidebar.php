@@ -1,6 +1,10 @@
 <?php
 include('command/conn.php');
-$email = $_COOKIE['email'];
+if (isset($_COOKIE['email'])) {
+    $email = $_COOKIE['email'];
+} else {
+    header("Location: http://localhost/newproject/login/index.php");
+}
 
 $query_uid = "select username from user where email='$email'";
 $result = mysqli_query($con, $query_uid);

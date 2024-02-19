@@ -31,7 +31,7 @@
                     toast: true,
                     position: "top",
                 }).then(function() {
-                    window.location.href = "http://localhost/bootstrap/login/index.php";
+                    window.location.href = "http://localhost/newproject/login/index.php";
                 });
             </script>
         <?php
