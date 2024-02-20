@@ -20,13 +20,16 @@ if ($row >= 0) {
 } else {
     echo "User ID Not found";
 }
+
+$query_prod_name = "select product_name,typeofsell from product where user_id='$u_id'";
+$result_prod_name = mysqli_query($con, $query_prod_name);
 ?>
 
 <div class="container-fluid vh-100 h-100">
     <div class="row min-vh-80 h-100">
         <div class="col-12">
             <!-- Main Content Start -->
-            <!-- Modal start For Add Product -->
+            <!-- Modal start For Add purchase -->
             <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
@@ -35,7 +38,7 @@ if ($row >= 0) {
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            <form action="./command/product_sql.php" method="post">
+                            <form action="./command/purchase_sql.php" method="post">
                                 <div class="mb-3">
                                     <label class="form-label">User Email</label>
                                     <input type="text" value="<?php echo $email; ?>" class="form-control" name="u_email" readonly style="border: 1px solid gray; padding:5px 5px 5px 5px;">
@@ -46,21 +49,21 @@ if ($row >= 0) {
                                 </div>
                                 <div class="mb-3">
                                     <label class="form-label">Product Name</label>
-                                    <input type="text" class="form-control" name="p_name" required style="border: 1px solid gray; padding:5px 5px 5px 5px;">
+                                    <select class="form-select" name="prod_name" required style="border: 1px solid gray; padding:5px 5px 5px 5px;">
+                                        <?php while ($row_prod_name = mysqli_fetch_row($result_prod_name)) { ?>
+                                            <option value="<?php echo $row_prod_name[0]; ?>"><?php echo $row_prod_name[0]; ?></option>
+                                        <?php } ?>
+                                    </select>
                                 </div>
                                 <div class="mb-3">
                                     <label class="form-label">Qty</label>
                                     <input type="number" class="form-control" name="p_qty" required style="border: 1px solid gray; padding:5px 5px 5px 5px;">
                                 </div>
                                 <div class="mb-3">
-                                    <label class="form-label">Mode of Sell</label>
-                                    <select class="form-select" name="p_mos" required style="border: 1px solid gray; padding:5px 5px 5px 5px;">
-                                        <option value="pieces" selected>Pieces</option>
-                                        <option value="kg">K.g</option>
-                                        <option value="liter">Liter</option>
-                                    </select>
+                                    <label class="form-label">Price</label>
+                                    <input type="number" class="form-control" name="p_price" required style="border: 1px solid gray; padding:5px 5px 5px 5px;">
                                 </div>
-                                <input type="submit" name="btn_product_add" class="btn btn-primary" value="Add">
+                                <input type="submit" name="btn_purchase_add" class="btn btn-primary" value="Add">
                             </form>
                         </div>
                         <div class="modal-footer">
@@ -169,46 +172,6 @@ if ($row >= 0) {
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr class="text-center">
-                                                    <td>10001</td>
-                                                    <td>ABC</td>
-                                                    <td>60</td>
-                                                    <td>5000</td>
-                                                    <td>Pics</td>
-                                                    <td>10:52 PM</td>
-                                                </tr>
-                                                <tr class="text-center">
-                                                    <td>10001</td>
-                                                    <td>ABC</td>
-                                                    <td>60</td>
-                                                    <td>5000</td>
-                                                    <td>Pics</td>
-                                                    <td>10:52 PM</td>
-                                                </tr>
-                                                <tr class="text-center">
-                                                    <td>10001</td>
-                                                    <td>ABC</td>
-                                                    <td>60</td>
-                                                    <td>5000</td>
-                                                    <td>Pics</td>
-                                                    <td>10:52 PM</td>
-                                                </tr>
-                                                <tr class="text-center">
-                                                    <td>10001</td>
-                                                    <td>ABC</td>
-                                                    <td>60</td>
-                                                    <td>5000</td>
-                                                    <td>Pics</td>
-                                                    <td>10:52 PM</td>
-                                                </tr>
-                                                <tr class="text-center">
-                                                    <td>10001</td>
-                                                    <td>ABC</td>
-                                                    <td>60</td>
-                                                    <td>5000</td>
-                                                    <td>Pics</td>
-                                                    <td>10:52 PM</td>
-                                                </tr>
                                                 <tr class="text-center">
                                                     <td>10001</td>
                                                     <td>ABC</td>

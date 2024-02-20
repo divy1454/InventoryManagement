@@ -5,7 +5,6 @@ if (isset($_POST['btn_product_add'])) {
     $umail = $_POST['u_email'];
     $u_id = $_POST['u_id'];
     $pname = $_POST['p_name'];
-    $qty = $_POST['p_qty'];
     $mos = $_POST['p_mos'];
 
     $query_duplicate = "select * from product where product_name='$pname' && user_id='$u_id'";
@@ -23,7 +22,7 @@ if (isset($_POST['btn_product_add'])) {
         header("Location: http://localhost/newproject/product.php");
         exit();
     } else {
-        $query = "insert into product(product_name,qty,typeofsell,user_id) values('$pname','$qty','$mos','$u_id')";
+        $query = "insert into product(product_name,qty,typeofsell,user_id) values('$pname','0','$mos','$u_id')";
         $result = mysqli_query($con, $query);
         $row = mysqli_affected_rows($con);
 
@@ -51,12 +50,11 @@ if (isset($_POST['btn_product_edit'])) {
     $umail = $_POST['u_email'];
     $p_id = $_POST['p_id'];
     $pname = $_POST['p_name'];
-    $qty = $_POST['p_qty'];
     $mos = $_POST['p_mos'];
 
     session_start();
 
-    $query_edit = "update product set product_name='$pname',qty='$qty',typeofsell='$mos' where id='$p_id'";
+    $query_edit = "update product set product_name='$pname',typeofsell='$mos' where id='$p_id'";
     $result = mysqli_query($con, $query_edit);
     $row = mysqli_affected_rows($con);
 

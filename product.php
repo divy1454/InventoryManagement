@@ -147,10 +147,10 @@ if (isset($_SESSION['delete_message']) && $_SESSION['delete_message'] != '') {
                                     <label class="form-label">Product Name</label>
                                     <input type="text" class="form-control" name="p_name" required style="border: 1px solid gray; padding:5px 5px 5px 5px;">
                                 </div>
-                                <div class="mb-3">
+                                <!-- <div class="mb-3">
                                     <label class="form-label">Qty</label>
                                     <input type="number" class="form-control" name="p_qty" required style="border: 1px solid gray; padding:5px 5px 5px 5px;">
-                                </div>
+                                </div> -->
                                 <div class="mb-3">
                                     <label class="form-label">Mode of Sell</label>
                                     <select class="form-select" name="p_mos" required style="border: 1px solid gray; padding:5px 5px 5px 5px;">
@@ -193,10 +193,10 @@ if (isset($_SESSION['delete_message']) && $_SESSION['delete_message'] != '') {
                                     <label class="form-label">Product Name</label>
                                     <input type="text" class="form-control" name="p_name" id="p_name" required style="border: 1px solid gray; padding:5px 5px 5px 5px;">
                                 </div>
-                                <div class="mb-3">
+                                <!-- <div class="mb-3">
                                     <label class="form-label">Qty</label>
                                     <input type="text" class="form-control" name="p_qty" id="p_qty" required style="border: 1px solid gray; padding:5px 5px 5px 5px;">
-                                </div>
+                                </div> -->
                                 <div class="mb-3">
                                     <label class="form-label">Mode of Sell</label>
                                     <select class="form-select" name="p_mos" id="p_type" required style="border: 1px solid gray; padding:5px 5px 5px 5px;">
@@ -311,7 +311,6 @@ if (isset($_SESSION['delete_message']) && $_SESSION['delete_message'] != '') {
                         // console.log(data);
                         $('#id').val(data[0]);
                         $('#p_name').val(data[1]);
-                        $('#p_qty').val(data[2]);
                         $('#p_type').val(data[3]);
                     });
 
