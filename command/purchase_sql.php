@@ -22,12 +22,17 @@ if (isset($_POST['btn_purchase_add'])) {
     $row = mysqli_affected_rows($con);
 
     if ($row > 0) {
-        session_start();
-        $_SESSION['purchase_message'] = "Purchase Record Added Successfully!";
-        $_SESSION['icon'] = "success";
-        $_SESSION['title'] = "Success...";
-        header("Location: http://localhost/newproject/purchase.php");
-        exit();
+        $update_query = "update product set qty=qty+'$p_qty' where id='$p_id'";
+        $update_result = mysqli_query($con, $update_query);
+        $update_row = mysqli_affected_rows($con);
+        if ($update_row > 0) {
+            session_start();
+            $_SESSION['purchase_message'] = "Purchase Record Added Successfully!";
+            $_SESSION['icon'] = "success";
+            $_SESSION['title'] = "Success...";
+            header("Location: http://localhost/newproject/purchase.php");
+            exit();
+        }
     } else {
         session_start();
         $_SESSION['purchase_message'] = "Purchase Record Not Add";
