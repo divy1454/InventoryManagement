@@ -21,8 +21,54 @@ if ($row >= 0) {
     echo "User ID Not found";
 }
 
-$query_prod_name = "select product_name,typeofsell from product where user_id='$u_id'";
+$query_prod_name = "select product_name,id from product where user_id='$u_id'";
 $result_prod_name = mysqli_query($con, $query_prod_name);
+?>
+
+
+<?php
+// session_start();
+if (isset($_SESSION['purchase_message']) && $_SESSION['purchase_message'] != '') {
+    if (isset($_SESSION['purchase_message']) && $_SESSION['purchase_message'] == 'Product Added Successfully!') {
+?>
+        <script>
+            Swal.fire({
+                icon: '<?php echo $_SESSION['icon']; ?>',
+                text: '<?php echo $_SESSION['purchase_message']; ?>',
+                showConfirmButton: false,
+                timer: 3000,
+                toast: true,
+                position: "top",
+                timerProgressBar: true,
+                didOpen: (toast) => {
+                    toast.onmouseenter = Swal.stopTimer;
+                    toast.onmouseleave = Swal.resumeTimer;
+                }
+            });
+        </script>
+    <?php
+        unset($_SESSION['purchase_message']);
+    } else {
+    ?>
+        <script>
+            Swal.fire({
+                icon: '<?php echo $_SESSION['icon']; ?>',
+                text: '<?php echo $_SESSION['purchase_message']; ?>',
+                showConfirmButton: false,
+                timer: 2700,
+                toast: true,
+                position: "top",
+                timerProgressBar: true,
+                didOpen: (toast) => {
+                    toast.onmouseenter = Swal.stopTimer;
+                    toast.onmouseleave = Swal.resumeTimer;
+                }
+            });
+        </script>
+<?php
+        unset($_SESSION['purchase_message']);
+    }
+}
 ?>
 
 <div class="container-fluid vh-100 h-100">
@@ -34,7 +80,7 @@ $result_prod_name = mysqli_query($con, $query_prod_name);
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="staticBackdropLabel">Add Product</h5>
+                            <h5 class="modal-title" id="staticBackdropLabel">Add Purchase</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
@@ -72,75 +118,7 @@ $result_prod_name = mysqli_query($con, $query_prod_name);
                     </div>
                 </div>
             </div>
-            <!-- Modal End For Add Product -->
-
-
-            <!-- Modal start For Edit Product -->
-            <div class="modal fade" id="edit_product" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="staticBackdropLabel">Edit Product</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <form action="./command/product_sql.php" method="post">
-                                <div class="mb-3">
-                                    <label class="form-label">User Email</label>
-                                    <input type="text" value="<?php echo $email; ?>" class="form-control" name="u_email" readonly style="border: 1px solid gray; padding:5px 5px 5px 5px;">
-                                </div>
-                                <div class="mb-3">
-                                    <label class="form-label">Product ID</label>
-                                    <input type="text" id="id" class="form-control" name="p_id" readonly style="border: 1px solid gray; padding:5px 5px 5px 5px;">
-                                </div>
-                                <div class="mb-3">
-                                    <label class="form-label">Product Name</label>
-                                    <input type="text" class="form-control" name="p_name" id="p_name" required style="border: 1px solid gray; padding:5px 5px 5px 5px;">
-                                </div>
-                                <div class="mb-3">
-                                    <label class="form-label">Qty</label>
-                                    <input type="text" class="form-control" name="p_qty" id="p_qty" required style="border: 1px solid gray; padding:5px 5px 5px 5px;">
-                                </div>
-                                <div class="mb-3">
-                                    <label class="form-label">Mode of Sell</label>
-                                    <select class="form-select" name="p_mos" id="p_type" required style="border: 1px solid gray; padding:5px 5px 5px 5px;">
-                                        <option value="pieces" selected>Pieces</option>
-                                        <option value="kg">K.g</option>
-                                        <option value="liter">Liter</option>
-                                    </select>
-                                </div>
-                                <input type="submit" name="btn_product_edit" class="btn btn-primary" value="Update Product">
-                            </form>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- Modal End For Edit Product -->
-
-
-            <!-- Modal start For Delete Product -->
-            <div class="modal fade" id="delete_product" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-
-                        <form action="command/product_sql.php" method="post">
-                            <div class="modal-body">
-                                <input type="hidden" name="delete_p_id" id="d_id">
-                                <h4>Are you sure? delete this product?</h4>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
-                                <button type="submit" class="btn btn-danger" name="yes_btn" data-bs-dismiss="modal">Yes</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-            <!-- Modal End For Delete Product -->
-
+            <!-- Modal End For Add Purchase -->
 
             <!-- Table Start -->
             <div class="table_data">
@@ -167,30 +145,26 @@ $result_prod_name = mysqli_query($con, $query_prod_name);
                                                     <th>Product Name</th>
                                                     <th>Qty</th>
                                                     <th>Price</th>
-                                                    <th>Type</th>
-                                                    <th>Time</th>
+                                                    <th>Total Cost</th>
+                                                    <th>Date</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr class="text-center">
-                                                    <td>10001</td>
-                                                    <td>ABC</td>
-                                                    <td>60</td>
-                                                    <td>5000</td>
-                                                    <td>Pics</td>
-                                                    <td>10:52 PM</td>
-                                                </tr>
                                                 <?php
-                                                // $query = "select id,product_name,qty,typeofsell from product where user_id='$u_id'";
-                                                // $product_show_result = mysqli_query($con, $query);
-                                                // while ($row = mysqli_fetch_row($product_show_result)) {
-                                                //     echo "<tr>";
-                                                //     echo "<td>" . $row[0] . "</td>";
-                                                //     echo "<td>" . $row[1] . "</td>";
-                                                //     echo "<td>" . $row[2] . "</td>";
-                                                //     echo "<td>" . $row[3] . "</td>";
-                                                //     echo "</tr>";
-                                                // }
+                                                $query = "select purchase.id,product.product_name,purchase.qty,purchase.price,purchase.total_cost,purchase.time from purchase,product where purchase.user_id='$u_id' AND product.id = purchase.p_id";
+                                                $product_show_result = mysqli_query($con, $query);
+                                                while ($row = mysqli_fetch_row($product_show_result)) {
+                                                    echo "<tr>";
+                                                    echo "<td>" . $row[0] . "</td>";
+                                                    echo "<td>" . $row[1] . "</td>";
+                                                    echo "<td>" . $row[2] . "</td>";
+                                                    echo "<td>" . $row[3] . "</td>";
+                                                    echo "<td>" . $row[4] . "</td>";
+                                                    echo "<td>" . $row[5] . "</td>";
+                                                    echo "</tr>";
+                                                }
+
+                                                // id	qty	price	total_cost	time	p_id	user_id	
                                                 ?>
                                             </tbody>
                                         </table>
