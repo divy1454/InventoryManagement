@@ -106,8 +106,12 @@ if (isset($_SESSION['purchase_message']) && $_SESSION['purchase_message'] != '')
                                     <input type="number" class="form-control" name="p_qty" required style="border: 1px solid gray; padding:5px 5px 5px 5px;">
                                 </div>
                                 <div class="mb-3">
-                                    <label class="form-label">Price</label>
+                                    <label class="form-label">Purchase Price</label>
                                     <input type="number" class="form-control" name="p_price" required style="border: 1px solid gray; padding:5px 5px 5px 5px;">
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Sales Price</label>
+                                    <input type="number" class="form-control" name="s_price" required style="border: 1px solid gray; padding:5px 5px 5px 5px;">
                                 </div>
                                 <input type="submit" name="btn_purchase_add" class="btn btn-primary" value="Add">
                             </form>

@@ -3,12 +3,12 @@ include('../command/conn.php');
 
 if (isset($_POST['btn_purchase_add'])) {
     $date = date('Y-m-d');
-    // echo (date('d-m-Y'));
     $u_email = $_POST['u_email'];
     $u_id = $_POST['u_id'];
     $prod_name = $_POST['prod_name'];
     $p_qty = $_POST['p_qty'];
     $p_price = $_POST['p_price'];
+    $s_price = $_POST['s_price'];
 
     $query = "select id from product where product_name='$prod_name' AND user_id='$u_id'";
     $result = mysqli_query($con, $query);
@@ -17,7 +17,7 @@ if (isset($_POST['btn_purchase_add'])) {
 
     $total_cost = $p_qty * $p_price;
 
-    $insert_query = "insert into purchase (qty,price,total_cost,time,p_id,user_id) values('$p_qty','$p_price','$total_cost','$date','$p_id','$u_id')";
+    $insert_query = "insert into purchase (qty,price,total_cost,s_price,time,p_id,user_id) values('$p_qty','$p_price','$total_cost','$s_price','$date','$p_id','$u_id')";
     $insert_result = mysqli_query($con, $insert_query);
     $row = mysqli_affected_rows($con);
 

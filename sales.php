@@ -95,7 +95,8 @@ if (isset($_SESSION['purchase_message']) && $_SESSION['purchase_message'] != '')
                                 </div>
                                 <div class="mb-3">
                                     <label class="form-label">Product Name</label>
-                                    <select class="form-select" name="prod_name" required style="border: 1px solid gray; padding:5px 5px 5px 5px;">
+                                    <select id="prod-name" class="form-select" name="prod_name" required style="border: 1px solid gray; padding:5px 5px 5px 5px;">
+                                        <option value="select_product">Select Product</option>
                                         <?php while ($row_prod_name = mysqli_fetch_row($result_prod_name)) { ?>
                                             <option value="<?php echo $row_prod_name[0]; ?>"><?php echo $row_prod_name[0]; ?></option>
                                         <?php } ?>
@@ -194,6 +195,18 @@ if (isset($_SESSION['purchase_message']) && $_SESSION['purchase_message'] != '')
                             search: "_INPUT_",
                             searchPlaceholder: "Search",
                         }
+                    });
+
+                    $('#prod-name').change(function() {
+                        var p_name = $('#prod-name').val();
+
+                        <?php
+                        $pid = $row_prod_name[1];
+                        // ====================  P A N D I N G  ====================================
+                        $query = "select ";
+                        // ========================================================
+                        ?>
+                        console.log(p_name);
                     });
                 });
             </script>
