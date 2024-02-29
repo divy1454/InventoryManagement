@@ -52,7 +52,7 @@ if ($row > 0) {
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link text-white " href="#">
+                <a class="nav-link text-white " href="sales.php">
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="material-icons opacity-10">storefront</i>
                     </div>
