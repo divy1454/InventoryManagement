@@ -43,12 +43,3 @@ if (isset($_POST['btn_purchase_add'])) {
         exit();
     }
 }
-
-
-// 1 id	- Auto Increment    - Done
-// 2 qty                    - Done
-// 3 price                  - Done
-// 4 total_cost             - Done
-// 5 time                   - Done
-// 6 p_id                   - Done
-// 7 user_id                - Done
