@@ -147,10 +147,15 @@ if (isset($_SESSION['delete_message']) && $_SESSION['delete_message'] != '') {
                                     <label class="form-label">Product Name</label>
                                     <input type="text" class="form-control" name="p_name" required style="border: 1px solid gray; padding:5px 5px 5px 5px;">
                                 </div>
-                                <!-- <div class="mb-3">
-                                    <label class="form-label">Qty</label>
-                                    <input type="number" class="form-control" name="p_qty" required style="border: 1px solid gray; padding:5px 5px 5px 5px;">
-                                </div> -->
+                                <div class="mb-3">
+                                    <label class="form-label">Buy Price</label>
+                                    <input type="number" class="form-control" name="b_price" required style="border: 1px solid gray; padding:5px 5px 5px 5px;">
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Sell Price</label>
+                                    <input type="number" class="form-control" name="s_price" required style="border: 1px solid gray; padding:5px 5px 5px 5px;">
+                                </div>
+
                                 <div class="mb-3">
                                     <label class="form-label">Mode of Sell</label>
                                     <select class="form-select" name="p_mos" required style="border: 1px solid gray; padding:5px 5px 5px 5px;">
@@ -192,6 +197,14 @@ if (isset($_SESSION['delete_message']) && $_SESSION['delete_message'] != '') {
                                 <div class="mb-3">
                                     <label class="form-label">Product Name</label>
                                     <input type="text" class="form-control" name="p_name" id="p_name" required style="border: 1px solid gray; padding:5px 5px 5px 5px;">
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Buy Price</label>
+                                    <input type="number" class="form-control" name="b_price" id="b_price" required style="border: 1px solid gray; padding:5px 5px 5px 5px;">
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Sell Price</label>
+                                    <input type="number" class="form-control" name="s_price" id="s_price" required style="border: 1px solid gray; padding:5px 5px 5px 5px;">
                                 </div>
                                 <!-- <div class="mb-3">
                                     <label class="form-label">Qty</label>
@@ -263,12 +276,14 @@ if (isset($_SESSION['delete_message']) && $_SESSION['delete_message'] != '') {
                                                     <th>Product Name</th>
                                                     <th>Qty</th>
                                                     <th>Type</th>
+                                                    <th>Buy Price</th>
+                                                    <th>Sell Price</th>
                                                     <th>Action</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
                                                 <?php
-                                                $query = "select id,product_name,qty,typeofsell from product where user_id='$u_id'";
+                                                $query = "select id,product_name,qty,typeofsell,buy_price,sell_price from product where user_id='$u_id'";
                                                 $product_show_result = mysqli_query($con, $query);
                                                 while ($row = mysqli_fetch_row($product_show_result)) {
                                                     echo "<tr>";
@@ -276,6 +291,8 @@ if (isset($_SESSION['delete_message']) && $_SESSION['delete_message'] != '') {
                                                     echo "<td>" . $row[1] . "</td>";
                                                     echo "<td>" . $row[2] . "</td>";
                                                     echo "<td>" . $row[3] . "</td>";
+                                                    echo "<td>" . $row[4] . "</td>";
+                                                    echo "<td>" . $row[5] . "</td>";
                                                     echo "<td> 
                                                     <button type='button' class='btn btn-success btn-sm editbtn' data-bs-toggle='modal' data-bs-target='#edit_product'>Edit</button>
                                                     <button type='button' class='btn btn-danger btn-sm deletebtn' data-bs-toggle='modal' data-bs-target='#delete_product'>Delete</button>
@@ -312,6 +329,8 @@ if (isset($_SESSION['delete_message']) && $_SESSION['delete_message'] != '') {
                         $('#id').val(data[0]);
                         $('#p_name').val(data[1]);
                         $('#p_type').val(data[3]);
+                        $('#b_price').val(data[4]);
+                        $('#s_price').val(data[5]);
                     });
 
                     $('.deletebtn').on('click', function() {
