@@ -36,19 +36,19 @@ if ($row > 0) {
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link text-white " href="purchase.php">
-                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="material-icons opacity-10">shop_two</i>
-                    </div>
-                    <span class="nav-link-text ms-1">Purchase</span>
-                </a>
-            </li>
-            <li class="nav-item">
                 <a class="nav-link text-white " href="product.php">
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="material-icons opacity-10">shopping_cart</i>
                     </div>
                     <span class="nav-link-text ms-1">Product</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-white " href="purchase.php">
+                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                        <i class="material-icons opacity-10">shop_two</i>
+                    </div>
+                    <span class="nav-link-text ms-1">Purchase</span>
                 </a>
             </li>
             <li class="nav-item">

@@ -126,7 +126,7 @@ if (isset($_SESSION['purchase_message']) && $_SESSION['purchase_message'] != '')
                             <div class="card">
                                 <div class="table-responsive">
                                     <div class="card-header">
-                                        <h4>Purchase
+                                        <h4>Product Purchase
                                             <div class="float-end">
                                                 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
                                                     Add Purchase

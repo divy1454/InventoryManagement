@@ -196,18 +196,6 @@ if (isset($_SESSION['purchase_message']) && $_SESSION['purchase_message'] != '')
                             searchPlaceholder: "Search",
                         }
                     });
-
-                    $('#prod-name').change(function() {
-                        var p_name = $('#prod-name').val();
-
-                        <?php
-                        $pid = $row_prod_name[1];
-                        // ====================  P A N D I N G  ====================================
-                        $query = "select ";
-                        // ========================================================
-                        ?>
-                        console.log(p_name);
-                    });
                 });
             </script>
             <!-- Main Content End -->

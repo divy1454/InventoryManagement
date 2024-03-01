@@ -259,7 +259,7 @@ if (isset($_SESSION['delete_message']) && $_SESSION['delete_message'] != '') {
                             <div class="card">
                                 <div class="table-responsive">
                                     <div class="card-header">
-                                        <h4>Product
+                                        <h4>Manage Product
                                             <div class="float-end">
                                                 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
                                                     Add Product
