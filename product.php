@@ -238,7 +238,7 @@ if (isset($_SESSION['delete_message']) && $_SESSION['delete_message'] != '') {
                         <form action="command/product_sql.php" method="post">
                             <div class="modal-body">
                                 <input type="hidden" name="delete_p_id" id="d_id">
-                                <h4>Are you sure? delete this product?</h4>
+                                <h4>Are you sure? delete all the purchase and sales record</h4>
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>

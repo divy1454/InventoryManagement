@@ -96,22 +96,16 @@ if (isset($_SESSION['purchase_message']) && $_SESSION['purchase_message'] != '')
                                 <div class="mb-3">
                                     <label class="form-label">Product Name</label>
                                     <select class="form-select" name="prod_name" required style="border: 1px solid gray; padding:5px 5px 5px 5px;">
+                                        <!-- <option value="select_product">Select Product</option> -->
                                         <?php while ($row_prod_name = mysqli_fetch_row($result_prod_name)) { ?>
                                             <option value="<?php echo $row_prod_name[0]; ?>"><?php echo $row_prod_name[0]; ?></option>
                                         <?php } ?>
                                     </select>
                                 </div>
+
                                 <div class="mb-3">
                                     <label class="form-label">Qty</label>
                                     <input type="number" class="form-control" name="p_qty" required style="border: 1px solid gray; padding:5px 5px 5px 5px;">
-                                </div>
-                                <div class="mb-3">
-                                    <label class="form-label">Purchase Price</label>
-                                    <input type="number" class="form-control" name="p_price" required style="border: 1px solid gray; padding:5px 5px 5px 5px;">
-                                </div>
-                                <div class="mb-3">
-                                    <label class="form-label">Sales Price</label>
-                                    <input type="number" class="form-control" name="s_price" required style="border: 1px solid gray; padding:5px 5px 5px 5px;">
                                 </div>
                                 <input type="submit" name="btn_purchase_add" class="btn btn-primary" value="Add">
                             </form>
@@ -148,23 +142,21 @@ if (isset($_SESSION['purchase_message']) && $_SESSION['purchase_message'] != '')
                                                     <th>ID</th>
                                                     <th>Product Name</th>
                                                     <th>Qty</th>
-                                                    <th>Price</th>
                                                     <th>Total Cost</th>
                                                     <th>Date</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
                                                 <?php
-                                                $query = "select purchase.id,product.product_name,purchase.qty,purchase.price,purchase.total_cost,purchase.time from purchase,product where purchase.user_id='$u_id' AND product.id = purchase.p_id";
+                                                $query = "select purchase.id,product.product_name,purchase.qty,purchase.total_cost,purchase.time from purchase,product where purchase.user_id='$u_id' AND product.id = purchase.p_id";
                                                 $product_show_result = mysqli_query($con, $query);
                                                 while ($row = mysqli_fetch_row($product_show_result)) {
-                                                    echo "<tr>";
+                                                    echo "<tr class='text-center'>";
                                                     echo "<td>" . $row[0] . "</td>";
                                                     echo "<td>" . $row[1] . "</td>";
                                                     echo "<td>" . $row[2] . "</td>";
                                                     echo "<td>" . $row[3] . "</td>";
                                                     echo "<td>" . $row[4] . "</td>";
-                                                    echo "<td>" . $row[5] . "</td>";
                                                     echo "</tr>";
                                                 }
 
