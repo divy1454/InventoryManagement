@@ -7,12 +7,12 @@ if (isset($_POST['btn_purchase_add'])) {
     $u_id = $_POST['u_id'];
     $prod_name = $_POST['prod_name'];
     $p_qty = $_POST['p_qty'];
+    $p_price = $_POST['b_price'];
 
-    $query = "select id,buy_price from product where product_name='$prod_name' AND user_id='$u_id'";
+    $query = "select id from product where product_name='$prod_name' AND user_id='$u_id'";
     $result = mysqli_query($con, $query);
     $row = mysqli_fetch_row($result);
     $p_id = $row[0];
-    $p_price = $row[1];
 
     $total_cost = $p_qty * $p_price;
 

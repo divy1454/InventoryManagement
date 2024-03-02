@@ -91,16 +91,21 @@ if (isset($_SESSION['purchase_message']) && $_SESSION['purchase_message'] != '')
                                 </div>
                                 <div class="mb-3">
                                     <label class="form-label">User ID</label>
-                                    <input type="text" value="<?php echo $u_id; ?>" class="form-control" name="u_id" readonly style="border: 1px solid gray; padding:5px 5px 5px 5px;">
+                                    <input type="text" value="<?php echo $u_id; ?>" class="form-control" name="u_id" id="user_id" readonly style="border: 1px solid gray; padding:5px 5px 5px 5px;">
                                 </div>
                                 <div class="mb-3">
                                     <label class="form-label">Product Name</label>
-                                    <select class="form-select" name="prod_name" required style="border: 1px solid gray; padding:5px 5px 5px 5px;">
-                                        <!-- <option value="select_product">Select Product</option> -->
+                                    <select class="form-select" onchange="getbprice(this.value)" name="prod_name" required style="border: 1px solid gray; padding:5px 5px 5px 5px;">
+                                        <option value="">Select Product</option>
                                         <?php while ($row_prod_name = mysqli_fetch_row($result_prod_name)) { ?>
                                             <option value="<?php echo $row_prod_name[0]; ?>"><?php echo $row_prod_name[0]; ?></option>
                                         <?php } ?>
                                     </select>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label class="form-label">Buy Price</label>
+                                    <input type="text" class="form-control" name="b_price" id="bprice" value="" readonly style="border: 1px solid gray; padding:5px 5px 5px 5px;">
                                 </div>
 
                                 <div class="mb-3">
@@ -159,8 +164,6 @@ if (isset($_SESSION['purchase_message']) && $_SESSION['purchase_message'] != '')
                                                     echo "<td>" . $row[4] . "</td>";
                                                     echo "</tr>";
                                                 }
-
-                                                // id	qty	price	total_cost	time	p_id	user_id	
                                                 ?>
                                             </tbody>
                                         </table>
@@ -194,6 +197,21 @@ if (isset($_SESSION['purchase_message']) && $_SESSION['purchase_message'] != '')
                         }
                     });
                 });
+
+                function getbprice(pname) {
+                    var uid = $('#user_id').val();
+                    $.ajax({
+                        url: 'class.php',
+                        type: 'POST',
+                        data: {
+                            p_name: pname,
+                            u_id: uid
+                        },
+                        success: function(results) {
+                            $('#bprice').attr("value", results);
+                        }
+                    })
+                }
             </script>
             <!-- Main Content End -->
         </div>
