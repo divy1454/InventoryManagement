@@ -105,14 +105,14 @@ if (isset($_SESSION['purchase_message']) && $_SESSION['purchase_message'] != '')
 
                                 <div class="mb-3">
                                     <label class="form-label">Sell Price</label>
-                                    <input type="text" class="form-control" name="b_price" id="sprice" value="" readonly style="border: 1px solid gray; padding:5px 5px 5px 5px;">
+                                    <input type="text" class="form-control" name="s_price" id="sprice" value="" readonly style="border: 1px solid gray; padding:5px 5px 5px 5px;">
                                 </div>
 
                                 <div class="mb-3">
                                     <label class="form-label">Qty</label>
-                                    <input type="number" class="form-control" name="p_qty" required style="border: 1px solid gray; padding:5px 5px 5px 5px;">
+                                    <input type="number" class="form-control" name="s_qty" required style="border: 1px solid gray; padding:5px 5px 5px 5px;">
                                 </div>
-                                <input type="submit" name="btn_purchase_add" class="btn btn-primary" value="Add">
+                                <input type="submit" name="btn_sales_add" class="btn btn-primary" value="Add">
                             </form>
                         </div>
                         <div class="modal-footer">
@@ -154,18 +154,20 @@ if (isset($_SESSION['purchase_message']) && $_SESSION['purchase_message'] != '')
                                             </thead>
                                             <tbody>
                                                 <?php
-                                                // $query = "select purchase.id,product.product_name,purchase.qty,purchase.total_cost,purchase.time from purchase,product where purchase.user_id='$u_id' AND product.id = purchase.p_id";
-                                                // $product_show_result = mysqli_query($con, $query);
-                                                // while ($row = mysqli_fetch_row($product_show_result)) {
-                                                //     echo "<tr class='text-center'>";
-                                                //     echo "<td>" . $row[0] . "</td>";
-                                                //     echo "<td>" . $row[1] . "</td>";
-                                                //     echo "<td>" . $row[2] . "</td>";
-                                                //     echo "<td>" . $row[3] . "</td>";
-                                                //     echo "<td>" . $row[4] . "</td>";
-                                                //     echo "<td>" . $row[4] . "</td>";
-                                                //     echo "</tr>";
-                                                // }
+                                                $query = "select sales.id,product.product_name,sales.s_qty,sales.total_amount,sales.total_profit,sales.date from sales,product where sales.uid='$u_id' AND product.id = sales.pid";
+                                                $product_show_result = mysqli_query($con, $query);
+                                                while ($row = mysqli_fetch_row($product_show_result)) {
+                                                    echo "<tr class='text-center'>";
+                                                    echo "<td>" . $row[0] . "</td>";
+                                                    echo "<td>" . $row[1] . "</td>";
+                                                    echo "<td>" . $row[2] . "</td>";
+                                                    echo "<td>" . $row[3] . "</td>";
+                                                    echo "<td>" . $row[4] . "</td>";
+                                                    echo "<td>" . $row[5] . "</td>";
+                                                    echo "</tr>";
+                                                }
+
+                                                // s_qty,	total_amount,	total_profit,	date,	pid,    uid.
                                                 ?>
                                             </tbody>
                                         </table>

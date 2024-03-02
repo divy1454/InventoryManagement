@@ -2,7 +2,8 @@
 include('../command/conn.php');
 
 if (isset($_POST['btn_purchase_add'])) {
-    $date = date('Y-m-d');
+    date_default_timezone_set("Asia/Kolkata");
+    $date = date("Y-m-d h:i:sa", time());
     $u_email = $_POST['u_email'];
     $u_id = $_POST['u_id'];
     $prod_name = $_POST['prod_name'];

@@ -147,6 +147,7 @@ if (isset($_SESSION['purchase_message']) && $_SESSION['purchase_message'] != '')
                                                     <th>ID</th>
                                                     <th>Product Name</th>
                                                     <th>Qty</th>
+                                                    <!-- <th>Buy Price</th> -->
                                                     <th>Total Cost</th>
                                                     <th>Date</th>
                                                 </tr>
@@ -162,6 +163,7 @@ if (isset($_SESSION['purchase_message']) && $_SESSION['purchase_message'] != '')
                                                     echo "<td>" . $row[2] . "</td>";
                                                     echo "<td>" . $row[3] . "</td>";
                                                     echo "<td>" . $row[4] . "</td>";
+                                                    // echo "<td>" . $row[5] . "</td>";
                                                     echo "</tr>";
                                                 }
                                                 ?>

@@ -10,12 +10,12 @@ if (isset($_POST['btn_product_add'])) {
     $s_price = $_POST['s_price'];
     $profit = $s_price - $b_price;
 
-    $query_duplicate = "select * from product where product_name='$pname' && user_id='$u_id'";
+    $query_duplicate = "select * from product where product_name='$pname' AND user_id='$u_id'";
     $result_duplicate = mysqli_query($con, $query_duplicate);
     $row_duplicate = mysqli_fetch_row($result_duplicate);
 
     $row_pname = $row_duplicate[1];
-    $row_uid = $row_duplicate[4];
+    $row_uid = $row_duplicate[7];
 
     if ($row_pname == $pname && $row_uid == $u_id) {
         session_start();
@@ -66,10 +66,11 @@ if (isset($_POST['btn_product_edit'])) {
     $mos = $_POST['p_mos'];
     $b_price = $_POST['b_price'];
     $s_price = $_POST['s_price'];
+    $profit = $s_price - $b_price;
 
     session_start();
 
-    $query_edit = "update product set product_name='$pname',typeofsell='$mos',buy_price='$b_price',sell_price='$s_price' where id='$p_id'";
+    $query_edit = "update product set product_name='$pname',typeofsell='$mos',buy_price='$b_price',sell_price='$s_price',profit='$profit' where id='$p_id'";
     $result = mysqli_query($con, $query_edit);
     $row = mysqli_affected_rows($con);
 
