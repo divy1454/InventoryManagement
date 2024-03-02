@@ -8,6 +8,7 @@ if (isset($_POST['btn_product_add'])) {
     $mos = $_POST['p_mos'];
     $b_price = $_POST['b_price'];
     $s_price = $_POST['s_price'];
+    $profit = $s_price - $b_price;
 
     $query_duplicate = "select * from product where product_name='$pname' && user_id='$u_id'";
     $result_duplicate = mysqli_query($con, $query_duplicate);
@@ -25,7 +26,7 @@ if (isset($_POST['btn_product_add'])) {
         exit();
     } else {
         if ($s_price >= $b_price) {
-            $query = "insert into product(product_name,qty,typeofsell,buy_price,sell_price,user_id) values('$pname','0','$mos','$b_price','$s_price','$u_id')";
+            $query = "insert into product(product_name,qty,typeofsell,buy_price,sell_price,profit,user_id) values('$pname','0','$mos','$b_price','$s_price','$profit','$u_id')";
             $result = mysqli_query($con, $query);
             $row = mysqli_affected_rows($con);
 
