@@ -24,20 +24,30 @@ if (isset($_POST['btn_product_add'])) {
         header("Location: http://localhost/newproject/product.php");
         exit();
     } else {
-        $query = "insert into product(product_name,qty,typeofsell,buy_price,sell_price,user_id) values('$pname','0','$mos','$b_price','$s_price','$u_id')";
-        $result = mysqli_query($con, $query);
-        $row = mysqli_affected_rows($con);
+        if ($s_price >= $b_price) {
+            $query = "insert into product(product_name,qty,typeofsell,buy_price,sell_price,user_id) values('$pname','0','$mos','$b_price','$s_price','$u_id')";
+            $result = mysqli_query($con, $query);
+            $row = mysqli_affected_rows($con);
 
-        if ($row >= 0) {
-            session_start();
-            $_SESSION['product_message'] = "Product Added Successfully!";
-            $_SESSION['icon'] = "success";
-            $_SESSION['title'] = "Success...";
-            header("Location: http://localhost/newproject/product.php");
-            exit();
+            if ($row >= 0) {
+                session_start();
+                $_SESSION['product_message'] = "Product Added Successfully!";
+                $_SESSION['icon'] = "success";
+                $_SESSION['title'] = "Success...";
+                header("Location: http://localhost/newproject/product.php");
+                exit();
+            } else {
+                session_start();
+                $_SESSION['product_message'] = "Product Not Add";
+                $_SESSION['icon'] = "error";
+                $_SESSION['title'] = "Error...";
+                $_SESSION['mail'] = '';
+                header("Location: http://localhost/newproject/product.php");
+                exit();
+            }
         } else {
             session_start();
-            $_SESSION['product_message'] = "Product Not Add";
+            $_SESSION['product_message'] = "Sell Price is less than Buy Price.. Please enter again.";
             $_SESSION['icon'] = "error";
             $_SESSION['title'] = "Error...";
             $_SESSION['mail'] = '';

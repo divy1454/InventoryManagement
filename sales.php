@@ -75,40 +75,42 @@ if (isset($_SESSION['purchase_message']) && $_SESSION['purchase_message'] != '')
     <div class="row min-vh-80 h-100">
         <div class="col-12">
             <!-- Main Content Start -->
-            <!-- Modal start For Add sales -->
+            <!-- Modal start For Add purchase -->
             <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="staticBackdropLabel">Add Purchase</h5>
+                            <h5 class="modal-title" id="staticBackdropLabel">Add Sales</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            <form action="./command/purchase_sql.php" method="post">
+                            <form action="./command/sales_sql.php" method="post">
                                 <div class="mb-3">
                                     <label class="form-label">User Email</label>
                                     <input type="text" value="<?php echo $email; ?>" class="form-control" name="u_email" readonly style="border: 1px solid gray; padding:5px 5px 5px 5px;">
                                 </div>
                                 <div class="mb-3">
                                     <label class="form-label">User ID</label>
-                                    <input type="text" value="<?php echo $u_id; ?>" class="form-control" name="u_id" readonly style="border: 1px solid gray; padding:5px 5px 5px 5px;">
+                                    <input type="text" value="<?php echo $u_id; ?>" class="form-control" name="u_id" id="user_id" readonly style="border: 1px solid gray; padding:5px 5px 5px 5px;">
                                 </div>
                                 <div class="mb-3">
                                     <label class="form-label">Product Name</label>
-                                    <select id="prod-name" class="form-select" name="prod_name" required style="border: 1px solid gray; padding:5px 5px 5px 5px;">
-                                        <option value="select_product">Select Product</option>
+                                    <select class="form-select" onchange="getbprice(this.value)" name="prod_name" required style="border: 1px solid gray; padding:5px 5px 5px 5px;">
+                                        <option value="">Select Product</option>
                                         <?php while ($row_prod_name = mysqli_fetch_row($result_prod_name)) { ?>
                                             <option value="<?php echo $row_prod_name[0]; ?>"><?php echo $row_prod_name[0]; ?></option>
                                         <?php } ?>
                                     </select>
                                 </div>
+
+                                <div class="mb-3">
+                                    <label class="form-label">Sell Price</label>
+                                    <input type="text" class="form-control" name="b_price" id="sprice" value="" readonly style="border: 1px solid gray; padding:5px 5px 5px 5px;">
+                                </div>
+
                                 <div class="mb-3">
                                     <label class="form-label">Qty</label>
                                     <input type="number" class="form-control" name="p_qty" required style="border: 1px solid gray; padding:5px 5px 5px 5px;">
-                                </div>
-                                <div class="mb-3">
-                                    <label class="form-label">Price</label>
-                                    <input type="number" class="form-control" name="p_price" required style="border: 1px solid gray; padding:5px 5px 5px 5px;">
                                 </div>
                                 <input type="submit" name="btn_purchase_add" class="btn btn-primary" value="Add">
                             </form>
@@ -119,7 +121,7 @@ if (isset($_SESSION['purchase_message']) && $_SESSION['purchase_message'] != '')
                     </div>
                 </div>
             </div>
-            <!-- Modal End For Add sales -->
+            <!-- Modal End For Add Purchase -->
 
             <!-- Table Start -->
             <div class="table_data">
@@ -132,7 +134,7 @@ if (isset($_SESSION['purchase_message']) && $_SESSION['purchase_message'] != '')
                                         <h4>Product Sales
                                             <div class="float-end">
                                                 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-                                                    Sales Product
+                                                    Add Sales
                                                 </button>
                                             </div>
                                         </h4>
@@ -145,23 +147,23 @@ if (isset($_SESSION['purchase_message']) && $_SESSION['purchase_message'] != '')
                                                     <th>ID</th>
                                                     <th>Product Name</th>
                                                     <th>Qty</th>
-                                                    <th>Price</th>
-                                                    <th>Total Cost</th>
+                                                    <th>Total Amount</th>
+                                                    <th>Total Profit</th>
                                                     <th>Date</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
                                                 <?php
-                                                // $query = "select purchase.id,product.product_name,purchase.qty,purchase.price,purchase.total_cost,purchase.time from purchase,product where purchase.user_id='$u_id' AND product.id = purchase.p_id";
+                                                // $query = "select purchase.id,product.product_name,purchase.qty,purchase.total_cost,purchase.time from purchase,product where purchase.user_id='$u_id' AND product.id = purchase.p_id";
                                                 // $product_show_result = mysqli_query($con, $query);
                                                 // while ($row = mysqli_fetch_row($product_show_result)) {
-                                                //     echo "<tr>";
+                                                //     echo "<tr class='text-center'>";
                                                 //     echo "<td>" . $row[0] . "</td>";
                                                 //     echo "<td>" . $row[1] . "</td>";
                                                 //     echo "<td>" . $row[2] . "</td>";
                                                 //     echo "<td>" . $row[3] . "</td>";
                                                 //     echo "<td>" . $row[4] . "</td>";
-                                                //     echo "<td>" . $row[5] . "</td>";
+                                                //     echo "<td>" . $row[4] . "</td>";
                                                 //     echo "</tr>";
                                                 // }
                                                 ?>
@@ -197,6 +199,21 @@ if (isset($_SESSION['purchase_message']) && $_SESSION['purchase_message'] != '')
                         }
                     });
                 });
+
+                function getbprice(pname) {
+                    var uid = $('#user_id').val();
+                    $.ajax({
+                        url: 'class.php',
+                        type: 'POST',
+                        data: {
+                            pname: pname,
+                            uid: uid
+                        },
+                        success: function(results) {
+                            $('#sprice').attr("value", results);
+                        }
+                    })
+                }
             </script>
             <!-- Main Content End -->
         </div>

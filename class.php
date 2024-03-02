@@ -17,3 +17,14 @@ if (isset($_POST['p_name']) && isset($_POST['u_id'])) {
         echo $row[0];
     }
 }
+
+if (isset($_POST['pname']) && isset($_POST['uid'])) {
+    $productName = $_POST['pname'];
+    $uid = $_POST['uid'];
+
+    $q = "select sell_price from product where product_name='$productName' AND user_id='$uid'";
+    $result = mysqli_query($con, $q);
+    while ($row = mysqli_fetch_row($result)) {
+        echo $row[0];
+    }
+}
