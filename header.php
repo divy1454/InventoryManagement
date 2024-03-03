@@ -24,7 +24,6 @@
     <link id="pagestyle" href="assets/css/material-dashboard.min.css" rel="stylesheet" />
     <!-- CDN Sweetalert -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
 </head>
 
 <!-- <body class="g-sidenav-show  bg-gray-200" style="background-color: rgb(77, 69, 69);"> -->
