@@ -127,7 +127,7 @@ if (isset($_SESSION['delete_message']) && $_SESSION['delete_message'] != '') {
             <!-- Main Content Start -->
             <!-- Modal start For Add Product -->
             <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                <div class="modal-dialog">
+                <div class="modal-dialog modal-dialog-scrollable">
                     <div class="modal-content">
                         <div class="modal-header">
                             <h5 class="modal-title" id="staticBackdropLabel">Add Product</h5>
