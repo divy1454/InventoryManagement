@@ -10,6 +10,12 @@ if (isset($_POST['btn_sales_add'])) {
     $prod_name = $_POST['prod_name'];
     $s_qty = $_POST['s_qty'];
     $s_price = $_POST['s_price'];
+    $c_name = $_POST['c_name'];
+
+    $query_cusid = "select id from customer where c_name='$c_name' AND u_id='$u_id'";
+    $result_cusid = mysqli_query($con, $query_cusid);
+    $row_cusid = mysqli_fetch_row($result_cusid);
+    $cid = $row_cusid[0];
 
     $query = "select id,profit,qty from product where product_name='$prod_name' AND user_id='$u_id'";
     $result = mysqli_query($con, $query);
@@ -22,7 +28,7 @@ if (isset($_POST['btn_sales_add'])) {
     $t_profit = $profit * $s_qty;
 
     if ($s_qty < $qty) {
-        $insert_query = "insert into sales (s_qty,total_amount,total_profit,date,pid,uid) values('$s_qty','$total_cost','$t_profit','$date','$p_id','$u_id')";
+        $insert_query = "insert into sales (s_qty,total_amount,total_profit,date,pid,uid,c_id) values('$s_qty','$total_cost','$t_profit','$date','$p_id','$u_id','$cid')";
         $insert_result = mysqli_query($con, $insert_query);
         $row = mysqli_affected_rows($con);
 

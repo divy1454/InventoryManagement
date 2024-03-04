@@ -23,6 +23,9 @@ if ($row >= 0) {
 
 $query_prod_name = "select product_name,id from product where user_id='$u_id'";
 $result_prod_name = mysqli_query($con, $query_prod_name);
+
+$query_cname = "select c_name from customer where u_id='$u_id'";
+$result_c_name = mysqli_query($con, $query_cname);
 ?>
 
 
@@ -75,7 +78,7 @@ if (isset($_SESSION['purchase_message']) && $_SESSION['purchase_message'] != '')
     <div class="row min-vh-80 h-100">
         <div class="col-12">
             <!-- Main Content Start -->
-            <!-- Modal start For Add purchase -->
+            <!-- Modal start For Add Sales -->
             <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
@@ -109,6 +112,16 @@ if (isset($_SESSION['purchase_message']) && $_SESSION['purchase_message'] != '')
                                 </div>
 
                                 <div class="mb-3">
+                                    <label class="form-label">Customer Name</label>
+                                    <select class="form-select" name="c_name" required style="border: 1px solid gray; padding:5px 5px 5px 5px;">
+                                        <option value="">Select Customer</option>
+                                        <?php while ($row_c_name = mysqli_fetch_row($result_c_name)) { ?>
+                                            <option value="<?php echo $row_c_name[0]; ?>"><?php echo $row_c_name[0]; ?></option>
+                                        <?php } ?>
+                                    </select>
+                                </div>
+
+                                <div class="mb-3">
                                     <label class="form-label">Qty</label>
                                     <input type="number" class="form-control" name="s_qty" required style="border: 1px solid gray; padding:5px 5px 5px 5px;">
                                 </div>
@@ -121,7 +134,7 @@ if (isset($_SESSION['purchase_message']) && $_SESSION['purchase_message'] != '')
                     </div>
                 </div>
             </div>
-            <!-- Modal End For Add Purchase -->
+            <!-- Modal End For Add Sales -->
 
             <!-- Table Start -->
             <div class="table_data">
@@ -166,8 +179,6 @@ if (isset($_SESSION['purchase_message']) && $_SESSION['purchase_message'] != '')
                                                     echo "<td>" . $row[5] . "</td>";
                                                     echo "</tr>";
                                                 }
-
-                                                // s_qty,	total_amount,	total_profit,	date,	pid,    uid.
                                                 ?>
                                             </tbody>
                                         </table>
