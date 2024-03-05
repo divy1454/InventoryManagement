@@ -24,7 +24,7 @@ if ($row >= 0) {
 <?php
 // session_start();
 if (isset($_SESSION['product_message']) && $_SESSION['product_message'] != '') {
-    if (isset($_SESSION['product_message']) && $_SESSION['product_message'] == 'Product Added Successfully!') {
+    if (isset($_SESSION['product_message']) && $_SESSION['product_message'] == 'Customer Added Successfully!') {
 ?>
         <script>
             Swal.fire({
@@ -57,7 +57,7 @@ if (isset($_SESSION['product_message']) && $_SESSION['product_message'] != '') {
 
 
 if (isset($_SESSION['message']) && $_SESSION['message'] != '') {
-    if (isset($_SESSION['message']) && $_SESSION['message'] == 'Product Update Successfully!') {
+    if (isset($_SESSION['message']) && $_SESSION['message'] == 'Customer Update Successfully!') {
     ?>
         <script>
             Swal.fire({
@@ -89,7 +89,7 @@ if (isset($_SESSION['message']) && $_SESSION['message'] != '') {
 }
 
 if (isset($_SESSION['delete_message']) && $_SESSION['delete_message'] != '') {
-    if (isset($_SESSION['delete_message']) && $_SESSION['delete_message'] == 'Product Deleted Successfully!') {
+    if (isset($_SESSION['delete_message']) && $_SESSION['delete_message'] == 'Customer Deleted Successfully!') {
     ?>
         <script>
             Swal.fire({

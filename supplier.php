@@ -24,7 +24,7 @@ if ($row >= 0) {
 <?php
 // session_start();
 if (isset($_SESSION['product_message']) && $_SESSION['product_message'] != '') {
-    if (isset($_SESSION['product_message']) && $_SESSION['product_message'] == 'Product Added Successfully!') {
+    if (isset($_SESSION['product_message']) && $_SESSION['product_message'] == 'Supplier Added Successfully!') {
 ?>
         <script>
             Swal.fire({
@@ -57,7 +57,7 @@ if (isset($_SESSION['product_message']) && $_SESSION['product_message'] != '') {
 
 
 if (isset($_SESSION['message']) && $_SESSION['message'] != '') {
-    if (isset($_SESSION['message']) && $_SESSION['message'] == 'Product Update Successfully!') {
+    if (isset($_SESSION['message']) && $_SESSION['message'] == 'Supplier Update Successfully!') {
     ?>
         <script>
             Swal.fire({
@@ -89,7 +89,7 @@ if (isset($_SESSION['message']) && $_SESSION['message'] != '') {
 }
 
 if (isset($_SESSION['delete_message']) && $_SESSION['delete_message'] != '') {
-    if (isset($_SESSION['delete_message']) && $_SESSION['delete_message'] == 'Product Deleted Successfully!') {
+    if (isset($_SESSION['delete_message']) && $_SESSION['delete_message'] == 'Supplier Deleted Successfully!') {
     ?>
         <script>
             Swal.fire({
@@ -136,7 +136,6 @@ if (isset($_SESSION['delete_message']) && $_SESSION['delete_message'] != '') {
                         </div>
                         <div class="modal-body">
                             <form action="./command/supplier_sql.php" method="post">
-                                <!-- S_id , S_name , S_address , S_Phone , S_Company_name , u_id -->
                                 <div class="mb-3">
                                     <!-- <label class="form-label">User Email</label> -->
                                     <input type="text" hidden value="<?php echo $email; ?>" class="form-control" name="u_email" readonly style="border: 1px solid gray; padding:5px 5px 5px 5px;">
@@ -146,18 +145,22 @@ if (isset($_SESSION['delete_message']) && $_SESSION['delete_message'] != '') {
                                     <input type="text" hidden value="<?php echo $u_id; ?>" class="form-control" name="u_id" readonly style="border: 1px solid gray; padding:5px 5px 5px 5px;">
                                 </div>
                                 <div class="mb-3">
+                                    <label class="form-label">Company Name</label>
+                                    <input type="text" class="form-control" name="s_companyName" required style="border: 1px solid gray; padding:5px 5px 5px 5px;">
+                                </div>
+                                <div class="mb-3">
                                     <label class="form-label">Supplier Name</label>
-                                    <input type="text" class="form-control" name="c_name" required style="border: 1px solid gray; padding:5px 5px 5px 5px;">
+                                    <input type="text" class="form-control" name="s_name" required style="border: 1px solid gray; padding:5px 5px 5px 5px;">
                                 </div>
                                 <div class="mb-3">
                                     <label class="form-label">Address</label>
-                                    <input type="text" class="form-control" name="c_address" required style="border: 1px solid gray; padding:5px 5px 5px 5px;">
+                                    <input type="text" class="form-control" name="s_address" required style="border: 1px solid gray; padding:5px 5px 5px 5px;">
                                 </div>
                                 <div class="mb-3">
                                     <label class="form-label">Phone Number</label>
-                                    <input type="number" pattern="[0-9]{10}" class="form-control" name="c_phone" required style="border: 1px solid gray; padding:5px 5px 5px 5px;">
+                                    <input type="number" pattern="[0-9]{10}" class="form-control" name="s_phone" required style="border: 1px solid gray; padding:5px 5px 5px 5px;">
                                 </div>
-                                <input type="submit" name="btn_customer_add" class="btn btn-primary" value="Add">
+                                <input type="submit" name="btn_supplier_add" class="btn btn-primary" value="Add">
                             </form>
                         </div>
                         <div class="modal-footer">
@@ -178,28 +181,32 @@ if (isset($_SESSION['delete_message']) && $_SESSION['delete_message'] != '') {
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            <form action="./command/customer_sql.php" method="post">
+                            <form action="./command/supplier.php" method="post">
                                 <div class="mb-3">
                                     <!-- <label class="form-label">User Email</label> -->
                                     <input type="text" hidden value="<?php echo $email; ?>" class="form-control" name="u_email" readonly style="border: 1px solid gray; padding:5px 5px 5px 5px;">
                                 </div>
                                 <div class="mb-3">
-                                    <label class="form-label">Customer ID</label>
-                                    <input type="text" id="c_id" class="form-control" name="c_id" readonly style="border: 1px solid gray; padding:5px 5px 5px 5px;">
+                                    <label class="form-label">Supplier ID</label>
+                                    <input type="text" id="s_id" class="form-control" name="s_id" readonly style="border: 1px solid gray; padding:5px 5px 5px 5px;">
                                 </div>
                                 <div class="mb-3">
-                                    <label class="form-label">Customer Name</label>
-                                    <input type="text" class="form-control" name="c_name" id="c_name" required style="border: 1px solid gray; padding:5px 5px 5px 5px;">
+                                    <label class="form-label">Company Name</label>
+                                    <input type="text" id="s_company" class="form-control" name="s_companyName" required style="border: 1px solid gray; padding:5px 5px 5px 5px;">
                                 </div>
                                 <div class="mb-3">
-                                    <label class="form-label">Address</label>
-                                    <input type="text" class="form-control" name="c_address" id="c_address" required style="border: 1px solid gray; padding:5px 5px 5px 5px;">
+                                    <label class="form-label">Supplier Name</label>
+                                    <input type="text" id="s_name" class="form-control" name="s_name" required style="border: 1px solid gray; padding:5px 5px 5px 5px;">
                                 </div>
                                 <div class="mb-3">
-                                    <label class="form-label">Phone</label>
-                                    <input type="number" pattern="[0-9]{10}" class="form-control" name="c_phone" id="c_phone" required style="border: 1px solid gray; padding:5px 5px 5px 5px;">
+                                    <label class="form-label">Supplier Address</label>
+                                    <input type="text" id="s_address" class="form-control" name="s_address" required style="border: 1px solid gray; padding:5px 5px 5px 5px;">
                                 </div>
-                                <input type="submit" name="btn_customer_edit" class="btn btn-primary" value="Update Product">
+                                <div class="mb-3">
+                                    <label class="form-label">Supplier Phone</label>
+                                    <input type="number" id="s_phone" pattern="[0-9]{10}" class="form-control" name="s_phone" required style="border: 1px solid gray; padding:5px 5px 5px 5px;">
+                                </div>
+                                <input type="submit" name="btn_supplier_edit" class="btn btn-primary" value="Update Product">
                             </form>
                         </div>
                         <div class="modal-footer">
@@ -216,10 +223,10 @@ if (isset($_SESSION['delete_message']) && $_SESSION['delete_message'] != '') {
                 <div class="modal-dialog">
                     <div class="modal-content">
 
-                        <form action="command/customer_sql.php" method="post">
+                        <form action="command/supplier_sql.php" method="post">
                             <div class="modal-body">
-                                <input type="hidden" name="delete_p_id" id="d_id">
-                                <h4>Are you sure? delete all the purchase and sales record</h4>
+                                <input type="hidden" name="delete_s_id" id="d_id">
+                                <h4>Are you sure? Delete Supplier?</h4>
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
@@ -254,6 +261,7 @@ if (isset($_SESSION['delete_message']) && $_SESSION['delete_message'] != '') {
                                             <thead>
                                                 <tr class="text-center">
                                                     <th>ID</th>
+                                                    <th>Company Name</th>
                                                     <th>Supplier Name</th>
                                                     <th>Address</th>
                                                     <th>Phone</th>
@@ -262,20 +270,21 @@ if (isset($_SESSION['delete_message']) && $_SESSION['delete_message'] != '') {
                                             </thead>
                                             <tbody>
                                                 <?php
-                                                // $query = "select * from customer where u_id='$u_id'";
-                                                // $product_show_result = mysqli_query($con, $query);
-                                                // while ($row = mysqli_fetch_row($product_show_result)) {
-                                                //     echo "<tr>";
-                                                //     echo "<td>" . $row[0] . "</td>";
-                                                //     echo "<td>" . $row[1] . "</td>";
-                                                //     echo "<td>" . $row[2] . "</td>";
-                                                //     echo "<td>" . $row[3] . "</td>";
-                                                //     echo "<td> 
-                                                //     <button type='button' class='btn btn-success btn-sm editbtn' data-bs-toggle='modal' data-bs-target='#edit_product'>Edit</button>
-                                                //     <button type='button' class='btn btn-danger btn-sm deletebtn' data-bs-toggle='modal' data-bs-target='#delete_product'>Delete</button>
-                                                //  </td>";
-                                                //     echo "</tr>";
-                                                // }
+                                                $query = "select * from supplier where user_id='$u_id'";
+                                                $supplier_show_result = mysqli_query($con, $query);
+                                                while ($row = mysqli_fetch_row($supplier_show_result)) {
+                                                    echo "<tr>";
+                                                    echo "<td>" . $row[0] . "</td>";
+                                                    echo "<td>" . $row[4] . "</td>";
+                                                    echo "<td>" . $row[1] . "</td>";
+                                                    echo "<td>" . $row[2] . "</td>";
+                                                    echo "<td>" . $row[3] . "</td>";
+                                                    echo "<td> 
+                                                    <button type='button' class='btn btn-success btn-sm editbtn' data-bs-toggle='modal' data-bs-target='#edit_product'>Edit</button>
+                                                    <button type='button' class='btn btn-danger btn-sm deletebtn' data-bs-toggle='modal' data-bs-target='#delete_product'>Delete</button>
+                                                 </td>";
+                                                    echo "</tr>";
+                                                }
                                                 ?>
                                             </tbody>
                                         </table>
@@ -303,10 +312,11 @@ if (isset($_SESSION['delete_message']) && $_SESSION['delete_message'] != '') {
                         }).get();
 
                         // console.log(data);
-                        $('#c_id').val(data[0]);
-                        $('#c_name').val(data[1]);
-                        $('#c_address').val(data[2]);
-                        $('#c_phone').val(data[3]);
+                        $('#s_id').val(data[0]);
+                        $('#s_company').val(data[1]);
+                        $('#s_name').val(data[2]);
+                        $('#s_address').val(data[3]);
+                        $('#s_phone').val(data[4]);
                     });
 
                     $('.deletebtn').on('click', function() {
