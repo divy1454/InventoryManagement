@@ -24,6 +24,9 @@ if ($row >= 0) {
 
 $query_prod_name = "select product_name,id from product where user_id='$u_id'";
 $result_prod_name = mysqli_query($con, $query_prod_name);
+
+$query_supplier_name = "select supplier_name from supplier where user_id='$u_id'";
+$result_supplier_name = mysqli_query($con, $query_supplier_name);
 ?>
 
 
@@ -110,6 +113,16 @@ if (isset($_SESSION['purchase_message']) && $_SESSION['purchase_message'] != '')
                                 </div>
 
                                 <div class="mb-3">
+                                    <label class="form-label">Supplier Name</label>
+                                    <select class="form-select" name="supplier_name" required style="border: 1px solid gray; padding:5px 5px 5px 5px;">
+                                        <option value="">Select Supplier</option>
+                                        <?php while ($row_supplier_name = mysqli_fetch_row($result_supplier_name)) { ?>
+                                            <option value="<?php echo $row_supplier_name[0]; ?>"><?php echo $row_supplier_name[0]; ?></option>
+                                        <?php } ?>
+                                    </select>
+                                </div>
+
+                                <div class="mb-3">
                                     <label class="form-label">Qty</label>
                                     <input type="number" class="form-control" name="p_qty" required style="border: 1px solid gray; padding:5px 5px 5px 5px;">
                                 </div>
@@ -148,7 +161,6 @@ if (isset($_SESSION['purchase_message']) && $_SESSION['purchase_message'] != '')
                                                     <th>ID</th>
                                                     <th>Product Name</th>
                                                     <th>Qty</th>
-                                                    <!-- <th>Buy Price</th> -->
                                                     <th>Total Cost</th>
                                                     <th>Date</th>
                                                 </tr>

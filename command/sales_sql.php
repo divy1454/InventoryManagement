@@ -27,7 +27,7 @@ if (isset($_POST['btn_sales_add'])) {
     $total_cost = $s_qty * $s_price;
     $t_profit = $profit * $s_qty;
 
-    if ($s_qty < $qty) {
+    if ($s_qty <= $qty) {
         $insert_query = "insert into sales (s_qty,total_amount,total_profit,date,pid,uid,c_id) values('$s_qty','$total_cost','$t_profit','$date','$p_id','$u_id','$cid')";
         $insert_result = mysqli_query($con, $insert_query);
         $row = mysqli_affected_rows($con);
