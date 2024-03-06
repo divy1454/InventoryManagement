@@ -6,11 +6,12 @@ if (isset($_COOKIE['email'])) {
     header("Location: http://localhost/newproject/login/index.php");
 }
 
-$query_uid = "select username from user where email='$email'";
+$query_uid = "select username,image from user where email='$email'";
 $result = mysqli_query($con, $query_uid);
 $row = mysqli_fetch_row($result);
 if ($row > 0) {
     $username = $row[0];
+    $imageprofile = $row[1];
 } else {
     echo "User ID Not found";
 }
@@ -20,7 +21,7 @@ if ($row > 0) {
     <div class="sidenav-header">
         <i class="fas fa-times p-3 cursor-pointer text-white opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
         <a class="navbar-brand m-0" href="../index.php">
-            <img src="assets/images/1.png" class="navbar-brand-img h-100 rounded-circle" alt="main_logo">
+            <img src="assets/images/profile/<?php echo $imageprofile; ?>" class="navbar-brand-img h-100 rounded-circle" alt="main_logo">
             <span class="ms-1 font-weight-bold text-white">Hi, <?php echo $username; ?></span>
         </a>
     </div>

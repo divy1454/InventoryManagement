@@ -5,12 +5,18 @@ use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
 
+
 if (isset($_POST['btn_reg'])) {
   $uname = $_POST['uname'];
   $shop = $_POST['shop'];
   $mail = $_POST['mail'];
   $pass = $_POST['pass'];
   $cpass = $_POST['cpass'];
+  $state = $_POST['state'];
+  $profileimg_signup = $_FILES['profileimg_signup']['name'];
+  $profileimg_signup_tmp = $_FILES['profileimg_signup']['tmp_name'];
+  move_uploaded_file($profileimg_signup_tmp, "../assets/images/profile/" . $profileimg_signup);
+  echo $profileimg_signup;
 
   $hashpassord = password_hash($pass, PASSWORD_DEFAULT);
 
@@ -20,6 +26,8 @@ if (isset($_POST['btn_reg'])) {
   $_SESSION['mail'] = $mail;
   $_SESSION['pass'] = $pass;
   $_SESSION['cpass'] = $cpass;
+  $_SESSION['state'] = $state;
+  $_SESSION['img_profile'] = $profileimg_signup;
 
   if ($pass == $cpass) {
     $query = "select email from user where email='$mail'";

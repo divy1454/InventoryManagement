@@ -68,11 +68,14 @@ if (isset($_POST['btn_verify'])) {
         $mail = $_SESSION['mail'];
         $uname = $_SESSION['uname'];
         $pass = $_SESSION['pass'];
+        $state = $_SESSION['state'];
+        $imgprofile = $_SESSION['img_profile'];
+        echo "<script>alert($imgprofile);</script>";
 
         $hashpassord = password_hash($pass, PASSWORD_DEFAULT);
 
-        $query_insert = "insert into user(shopname,email,username,password) values('$shop','$mail','$uname','$hashpassord')";
-        $result = mysqli_query($con, $query_insert);
+        $query_inserts = "insert into user(shopname,email,username,password,state,image) values('$shop','$mail','$uname','$hashpassord','$state','$imgprofile')";
+        $result = mysqli_query($con, $query_inserts);
         $row = mysqli_affected_rows($con);
 
         if ($row >= 0) {
@@ -81,6 +84,9 @@ if (isset($_POST['btn_verify'])) {
             unset($_SESSION['uname']);
             unset($_SESSION['pass']);
             unset($_SESSION['otp']);
+            unset($_SESSION['state']);
+            unset($_SESSION['img_profile']);
+
             $_SESSION['message'] = "SignUp Successfully...Please Login With Email And Password!";
             $_SESSION['icon'] = "success";
             $_SESSION['title'] = "Success...";
