@@ -16,11 +16,10 @@ if ($row > 0) {
     echo "User ID Not found";
 }
 ?>
-
 <aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3 bg-gradient-dark" id="sidenav-main">
     <div class="sidenav-header">
         <i class="fas fa-times p-3 cursor-pointer text-white opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
-        <a class="navbar-brand m-0" href="../index.php">
+        <a class="navbar-brand m-0" href="index.php">
             <img src="assets/images/profile/<?php echo $imageprofile; ?>" class="navbar-brand-img h-100 rounded-circle" alt="main_logo">
             <span class="ms-1 font-weight-bold text-white">Hi, <?php echo $username; ?></span>
         </a>
@@ -61,13 +60,38 @@ if ($row > 0) {
                 </a>
             </li>
             <li class="nav-item">
+                <a data-bs-toggle="collapse" href="#return" class="nav-link text-white" aria-controls="return" role="button" aria-expanded="false">
+                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                        <i class="material-icons opacity-10">refresh</i>
+                    </div>
+                    <span class="nav-link-text ms-1">Return</span>
+                </a>
+                <div class="collapse" id="return">
+                    <ul class="nav">
+                        <li class="nav-item">
+                            <a class="nav-link text-white ps-4" href="">
+                                <span class="sidenav-mini-icon"><i class="material-icons opacity-10">chevron_right</i></span>
+                                <span class="sidenav-normal  ms-2"> Supplier Return </span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white ps-4" href="">
+                                <span class="sidenav-mini-icon"><i class="material-icons opacity-10">chevron_right</i></span>
+                                <span class="sidenav-normal  ms-2"> Customer Return </span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+            <!-- <li class="nav-item">
                 <a class="nav-link text-white " href="#">
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="material-icons opacity-10">refresh</i>
                     </div>
                     <span class="nav-link-text ms-1">Return</span>
                 </a>
-            </li>
+            </li> -->
+
             <li class="nav-item">
                 <a class="nav-link text-white " href="customer.php">
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
