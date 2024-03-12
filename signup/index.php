@@ -93,19 +93,19 @@
                                     <form class="mx-1 mx-md-4" action="command.php" method="post" enctype="multipart/form-data">
                                         <div class="d-flex flex-row align-items-center mb-4">
                                             <div class="form-outline flex-fill mb-0">
-                                                <?php
-                                                if (isset($_SESSION['img_profile'])) {
-                                                ?>
+                                                <!-- <?php
+                                                        // if (isset($_SESSION['img_profile'])) {
+                                                        ?>
                                                     <img class="rounded-circle" id="profile" width="150px" src="../assets/images/profile/<?php echo $_SESSION['img_profile']; ?>">
 
                                                 <?php
-                                                } else {
-                                                ?>
-                                                    <img class="rounded-circle" id="profile" width="150px" src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg">
+                                                // } else {
+                                                ?> -->
+                                                <img class="rounded-circle" id="profile" width="150px" src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg">
 
-                                                <?php
-                                                }
-                                                ?>
+                                                <!-- <?php
+                                                        // }
+                                                        ?> -->
                                                 <br>
                                                 <span class="btn btn-primary btn-file">Upload image<input type="file" id="inputfile" accept="image/png, image/jpeg" required name="profileimg_signup"></span>
                                                 <span> </span>
@@ -214,7 +214,7 @@
                                         <div class="d-flex flex-row align-items-center mb-4">
                                             <i class="fas fa-city fa-lg me-3 fa-fw"></i>
                                             <div class="form-outline flex-fill mb-0">
-                                                <select class="form-select" name="state" style="border: 1px solid gray; padding:5px 5px 5px 5px;">
+                                                <select class="form-select" name="state" style="border: 1px solid gray; padding:5px 5px 5px 5px;" required>
                                                     <?php
                                                     if (isset($_SESSION['state'])) {
                                                     ?>
