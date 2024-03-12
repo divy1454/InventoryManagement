@@ -23,7 +23,7 @@ if (isset($_POST['btn_supplier_add'])) {
         header("Location: http://localhost/newproject/supplier.php");
         exit();
     } else {
-        // supplier_name	supplier_address	supplier_phone	supplier_companyname	user_id
+        //id supplier_name	supplier_address	supplier_phone	supplier_companyname	user_id
         $query = "insert into supplier(supplier_name,supplier_address,supplier_phone,supplier_companyname,user_id) values('$s_name','$s_address','$s_phone','$s_companyName','$u_id')";
         $result = mysqli_query($con, $query);
         $row = mysqli_affected_rows($con);
