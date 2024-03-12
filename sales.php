@@ -151,86 +151,109 @@ if (isset($_SESSION['purchase_message']) && $_SESSION['purchase_message'] != '')
                                                 </button>
                                             </div>
                                         </h4>
-                                    </div>
-                                    <div class="card-body">
 
-                                        <table id="table_data_search" class="table table-bordered table-striped">
-                                            <thead>
-                                                <tr class="text-center">
-                                                    <th>ID</th>
-                                                    <th>Product Name</th>
-                                                    <th>Qty</th>
-                                                    <th>Total Amount</th>
-                                                    <th>Total Profit</th>
-                                                    <th>Date</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <?php
-                                                $query = "select sales.id,product.product_name,sales.s_qty,sales.total_amount,sales.total_profit,sales.date from sales,product where sales.uid='$u_id' AND product.id = sales.pid";
-                                                $product_show_result = mysqli_query($con, $query);
-                                                while ($row = mysqli_fetch_row($product_show_result)) {
-                                                    echo "<tr class='text-center'>";
-                                                    echo "<td>" . $row[0] . "</td>";
-                                                    echo "<td>" . $row[1] . "</td>";
-                                                    echo "<td>" . $row[2] . "</td>";
-                                                    echo "<td>" . $row[3] . "</td>";
-                                                    echo "<td>" . $row[4] . "</td>";
-                                                    echo "<td>" . $row[5] . "</td>";
-                                                    echo "</tr>";
-                                                }
-                                                ?>
-                                            </tbody>
-                                        </table>
+                                        <div class="p-2 py-4">
+                                            <div class="row mt-3">
+                                                <div class="col-md-3 mt-2">
+                                                    <div class="input-group input-group-static">
+                                                        <label class="labels">First Name </label>
+                                                        <input type="text" class="form-control" name="fname" style="font-weight: bold;">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3 mt-2">
+                                                    <div class="input-group input-group-static">
+                                                        <label class="labels">First Name </label>
+                                                        <input type="text" class="form-control" name="fname" style="font-weight: bold;">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3 mt-2">
+                                                    <div class="input-group input-group-static">
+                                                        <label class="labels">First Name </label>
+                                                        <input type="text" class="form-control" name="fname" style="font-weight: bold;">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="card-body">
+
+                                            <table id="table_data_search" class="table table-bordered table-striped">
+                                                <thead>
+                                                    <tr class="text-center">
+                                                        <th>ID</th>
+                                                        <th>Product Name</th>
+                                                        <th>Qty</th>
+                                                        <th>Total Amount</th>
+                                                        <th>Total Profit</th>
+                                                        <th>Date</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <?php
+                                                    $query = "select sales.id,product.product_name,sales.s_qty,sales.total_amount,sales.total_profit,sales.date from sales,product where sales.uid='$u_id' AND product.id = sales.pid";
+                                                    $product_show_result = mysqli_query($con, $query);
+                                                    while ($row = mysqli_fetch_row($product_show_result)) {
+                                                        echo "<tr class='text-center'>";
+                                                        echo "<td>" . $row[0] . "</td>";
+                                                        echo "<td>" . $row[1] . "</td>";
+                                                        echo "<td>" . $row[2] . "</td>";
+                                                        echo "<td>" . $row[3] . "</td>";
+                                                        echo "<td>" . $row[4] . "</td>";
+                                                        echo "<td>" . $row[5] . "</td>";
+                                                        echo "</tr>";
+                                                    }
+                                                    ?>
+                                                </tbody>
+                                            </table>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <!-- Table End -->
+                <!-- Table End -->
 
-            <script src="https://cdn.datatables.net/1.13.8/js/jquery.dataTables.min.js"></script>
-            <script src="https://cdn.datatables.net/1.13.8/js/dataTables.bootstrap5.min.js"></script>
+                <script src="https://cdn.datatables.net/1.13.8/js/jquery.dataTables.min.js"></script>
+                <script src="https://cdn.datatables.net/1.13.8/js/dataTables.bootstrap5.min.js"></script>
 
-            <script>
-                $(document).ready(function() {
-                    $('#table_data_search').DataTable({
-                        "lengthMenu": [
-                            [5, 10, 15, -1],
-                            [5, 10, 15, "All"]
-                        ],
-                        responsive: true,
-                        language: {
-                            paginate: {
-                                next: '&#8594;',
-                                previous: '&#8592;'
-                            },
-                            search: "_INPUT_",
-                            searchPlaceholder: "Search",
-                        }
+                <script>
+                    $(document).ready(function() {
+                        $('#table_data_search').DataTable({
+                            "lengthMenu": [
+                                [5, 10, 15, -1],
+                                [5, 10, 15, "All"]
+                            ],
+                            responsive: true,
+                            language: {
+                                paginate: {
+                                    next: '&#8594;',
+                                    previous: '&#8592;'
+                                },
+                                search: "_INPUT_",
+                                searchPlaceholder: "Search",
+                            }
+                        });
                     });
-                });
 
-                function getbprice(pname) {
-                    var uid = $('#user_id').val();
-                    $.ajax({
-                        url: 'class.php',
-                        type: 'POST',
-                        data: {
-                            pname: pname,
-                            uid: uid
-                        },
-                        success: function(results) {
-                            $('#sprice').attr("value", results);
-                        }
-                    })
-                }
-            </script>
-            <!-- Main Content End -->
+                    function getbprice(pname) {
+                        var uid = $('#user_id').val();
+                        $.ajax({
+                            url: 'class.php',
+                            type: 'POST',
+                            data: {
+                                pname: pname,
+                                uid: uid
+                            },
+                            success: function(results) {
+                                $('#sprice').attr("value", results);
+                            }
+                        })
+                    }
+                </script>
+                <!-- Main Content End -->
+            </div>
         </div>
     </div>
-</div>
 
-<?php include('footer.php'); ?>
+    <?php include('footer.php'); ?>
