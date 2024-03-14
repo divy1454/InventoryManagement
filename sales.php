@@ -145,35 +145,55 @@ if (isset($_SESSION['purchase_message']) && $_SESSION['purchase_message'] != '')
                                 <div class="table-responsive">
                                     <div class="card-header">
                                         <h4>Product Sales
-                                            <div class="float-end">
+                                            <!-- <div class="float-end">
                                                 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
                                                     Add Sales
                                                 </button>
-                                            </div>
+                                            </div> -->
                                         </h4>
 
                                         <div class="p-2 py-4">
                                             <div class="row mt-3">
                                                 <div class="col-md-3 mt-2">
-                                                    <div class="input-group input-group-static">
-                                                        <label class="labels">First Name </label>
-                                                        <input type="text" class="form-control" name="fname" style="font-weight: bold;">
-                                                    </div>
+                                                    <label class="labels">Product Name </label>
+                                                    <select class="form-select" name="product" style="padding:5px 5px 5px 5px; font-weight: bold;" required>
+                                                        <option value="">Select State</option>
+                                                        <option value="Iphone 15 pro">Iphone 15 pro</option>
+                                                    </select>
                                                 </div>
                                                 <div class="col-md-3 mt-2">
+                                                    <label class="labels">Customer Name </label>
+                                                    <select class="form-select" name="customer" style="padding:5px 5px 5px 5px; font-weight: bold;" required>
+                                                        <option value="">Select State</option>
+                                                        <option value="harsh">Harsh</option>
+                                                    </select>
+                                                </div>
+                                                <div class="col-md-2 mt-2">
                                                     <div class="input-group input-group-static">
-                                                        <label class="labels">First Name </label>
-                                                        <input type="text" class="form-control" name="fname" style="font-weight: bold;">
+                                                        <label class="labels">Qty </label>
+                                                        <input type="text" class="form-control" name="fname" style="font-weight: bold;" disabled>
                                                     </div>
                                                 </div>
-                                                <div class="col-md-3 mt-2">
+                                                <div class="col-md-2 mt-2">
                                                     <div class="input-group input-group-static">
-                                                        <label class="labels">First Name </label>
-                                                        <input type="text" class="form-control" name="fname" style="font-weight: bold;">
+                                                        <label class="labels">Sales Price </label>
+                                                        <input type="text" class="form-control" name="fname" style="font-weight: bold;" disabled>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-2 mt-2">
+                                                    <div class="input-group input-group-static">
+                                                        <label class="labels">Total </label>
+                                                        <input type="text" class="form-control" name="fname" style="font-weight: bold;" disabled>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
+                                        <div class="float-end">
+                                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                                                Add Sales
+                                            </button>
+                                        </div>
+                                        <br>
 
                                         <div class="card-body">
 
