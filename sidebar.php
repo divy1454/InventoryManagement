@@ -71,13 +71,13 @@ if ($row > 0) {
                         <li class="nav-item">
                             <a class="nav-link text-white ps-4" href="">
                                 <span class="sidenav-mini-icon"><i class="material-icons opacity-10">chevron_right</i></span>
-                                <span class="sidenav-normal  ms-2"> Supplier Return </span>
+                                <span class="sidenav-normal  ms-2">To Supplier Return </span>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-white ps-4" href="">
                                 <span class="sidenav-mini-icon"><i class="material-icons opacity-10">chevron_right</i></span>
-                                <span class="sidenav-normal  ms-2"> Customer Return </span>
+                                <span class="sidenav-normal  ms-2">From Customer Return </span>
                             </a>
                         </li>
                     </ul>
