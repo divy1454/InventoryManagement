@@ -69,13 +69,13 @@ if ($row > 0) {
                 <div class="collapse" id="return">
                     <ul class="nav">
                         <li class="nav-item">
-                            <a class="nav-link text-white ps-4" href="">
+                            <a class="nav-link text-white ps-4" href="supplier_return.php">
                                 <span class="sidenav-mini-icon"><i class="material-icons opacity-10">chevron_right</i></span>
                                 <span class="sidenav-normal  ms-2">To Supplier Return </span>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-white ps-4" href="">
+                            <a class="nav-link text-white ps-4" href="#">
                                 <span class="sidenav-mini-icon"><i class="material-icons opacity-10">chevron_right</i></span>
                                 <span class="sidenav-normal  ms-2">From Customer Return </span>
                             </a>
