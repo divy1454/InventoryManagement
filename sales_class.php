@@ -8,10 +8,19 @@ if (isset($_POST['p_name']) && isset($_POST['p_id']) && isset($_POST["c_name"]) 
     $id = $_POST['p_id'];
     if (isset($_SESSION['sales'][$id])) {
         $old = $_SESSION['sales'][$id]['qty'];
-        $_SESSION['sales'][$id] = array("pname" => $_POST['p_name'], "qty" => $old + $_POST['p_qty'], "price" => $_POST['p_price'], "total" => $_POST['p_price'] * ($old + $_POST['p_qty']));
+        $_SESSION['sales'][$id] = array("pid" => $id, "pname" => $_POST['p_name'], "qty" => $old + $_POST['p_qty'], "price" => $_POST['p_price'], "total" => $_POST['p_price'] * ($old + $_POST['p_qty']));
     } else {
-        $_SESSION['sales'][$id] = array("pname" => $_POST['p_name'], "qty" => $_POST['p_qty'], "price" => $_POST['p_price'], "total" => $_POST['p_total']);
+        $_SESSION['sales'][$id] = array("pid" => $id, "pname" => $_POST['p_name'], "qty" => $_POST['p_qty'], "price" => $_POST['p_price'], "total" => $_POST['p_total']);
     }
-} else {
-    echo "<script>alert('Values Not Set')</script>";
+}
+
+
+if (isset($_POST['action'])) {
+    $pName = $_POST['p__name'];
+
+    foreach ($_SESSION['sales'] as $key => $val) {
+        if ($val['pname'] == $pName) {
+            $ID = $val['pid'];
+        }
+    }
 }

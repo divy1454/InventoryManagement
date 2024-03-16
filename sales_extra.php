@@ -164,7 +164,7 @@ if (isset($_SESSION['purchase_message']) && $_SESSION['purchase_message'] != '')
                                             <div class="col-md-6 mt-2">
                                                 <!-- <div class="input-group input-group-static"> -->
                                                 <label class="labels">Product Name </label>
-                                                <select class="form-select" onchange="getbprice(this.value)" id="p_name" name="prod_name" required style="border: 1px solid gray; padding:5px 5px 5px 5px;">
+                                                <select class="form-select" onchange="getbprice(this.value)" id="pname" name="prod_name" required style="border: 1px solid gray; padding:5px 5px 5px 5px;">
                                                     <option value="">Select Product</option>
                                                     <?php while ($row_prod_name = mysqli_fetch_row($result_prod_name)) { ?>
                                                         <option value="<?php echo $row_prod_name[0]; ?>"><?php echo $row_prod_name[0]; ?></option>
@@ -230,6 +230,7 @@ if (isset($_SESSION['purchase_message']) && $_SESSION['purchase_message'] != '')
                                                         <th>Qty</th>
                                                         <th>Price</th>
                                                         <th>Total</th>
+                                                        <th>Action</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody id="result_data">
@@ -242,6 +243,9 @@ if (isset($_SESSION['purchase_message']) && $_SESSION['purchase_message'] != '')
                                                         <td>$val[qty]</td>
                                                         <td>$val[price]</td>
                                                         <td>$val[total]</td>
+                                                        <td> 
+                                                            <button type='button' class='btn btn-danger btn-sm deletebtn'>Delete</button>
+                                                        </td>
                                                     </tr>";
                                                         $i += 1;
                                                     }
@@ -341,6 +345,16 @@ if (isset($_SESSION['purchase_message']) && $_SESSION['purchase_message'] != '')
                         var price = $("#pprice").val();
                         var pqty = $("#pqty").val();
                         $('#ptotal').val(price * pqty);
+                    });
+
+                    $('.deletebtn').click(function() {
+                        $tr = $(this).closest('tr');
+
+                        var data = $tr.children("td").map(function() {
+                            return $(this).text();
+                        }).get();
+
+                        console.log(data);
                     });
                 </script>
                 <!-- Main Content End -->
