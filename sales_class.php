@@ -1,0 +1,17 @@
+<?php
+ob_start();
+include('command/conn.php');
+session_start();
+// session_destroy();
+
+if (isset($_POST['p_name']) && isset($_POST['p_id']) && isset($_POST["c_name"]) && isset($_POST['p_qty']) && isset($_POST['p_price']) && isset($_POST['p_total'])) {
+    $id = $_POST['p_id'];
+    if (isset($_SESSION['sales'][$id])) {
+        $old = $_SESSION['sales'][$id]['qty'];
+        $_SESSION['sales'][$id] = array("pname" => $_POST['p_name'], "qty" => $old + $_POST['p_qty'], "price" => $_POST['p_price'], "total" => $_POST['p_price'] * ($old + $_POST['p_qty']));
+    } else {
+        $_SESSION['sales'][$id] = array("pname" => $_POST['p_name'], "qty" => $_POST['p_qty'], "price" => $_POST['p_price'], "total" => $_POST['p_total']);
+    }
+} else {
+    echo "<script>alert('Values Not Set')</script>";
+}

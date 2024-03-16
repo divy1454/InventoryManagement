@@ -28,3 +28,14 @@ if (isset($_POST['pname']) && isset($_POST['uid'])) {
         echo $row[0];
     }
 }
+
+if (isset($_POST['P_Name']) && isset($_POST['U_Id'])) {
+    $productName = $_POST['P_Name'];
+    $uid = $_POST['U_Id'];
+
+    $q = "select id from product where product_name='$productName' AND user_id='$uid'";
+    $result = mysqli_query($con, $q);
+    while ($row = mysqli_fetch_row($result)) {
+        echo $row[0];
+    }
+}
