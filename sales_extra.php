@@ -252,6 +252,7 @@ if (isset($_SESSION['purchase_message']) && $_SESSION['purchase_message'] != '')
                                                     ?>
                                                 </tbody>
                                             </table>
+                                            <!-- btn -->
                                         </div>
                                     </div>
                                 </div>
@@ -354,7 +355,17 @@ if (isset($_SESSION['purchase_message']) && $_SESSION['purchase_message'] != '')
                             return $(this).text();
                         }).get();
 
-                        console.log(data);
+                        $.ajax({
+                            url: 'sales_class.php',
+                            type: 'POST',
+                            data: {
+                                p__name: data[1],
+                                action: "delete"
+                            },
+                            success: function(data) {
+                                location.reload();
+                            }
+                        })
                     });
                 </script>
                 <!-- Main Content End -->

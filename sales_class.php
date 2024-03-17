@@ -21,6 +21,8 @@ if (isset($_POST['action'])) {
     foreach ($_SESSION['sales'] as $key => $val) {
         if ($val['pname'] == $pName) {
             $ID = $val['pid'];
+            unset($_SESSION['sales'][$key]);
+            $_SESSION['sales'] = array_values($_SESSION['sales']);
         }
     }
 }
