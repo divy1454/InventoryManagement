@@ -394,31 +394,32 @@ if (isset($_SESSION['purchase_message']) && $_SESSION['purchase_message'] != '')
                     });
                 </script>
                 <!-- Main Content End -->
+                <?php
+                function billno($bid1)
+                {
+                    if ($bid1 == "") {
+                        $bid1 = 0;
+                    }
+                    $bid1 = $bid1 + 1;
+
+                    $len = strlen($bid1);
+                    if ($len == 1) {
+                        $bid1 = "0000" . $bid1;
+                    } elseif ($len == 2) {
+                        $bid1 = "000" . $bid1;
+                    } elseif ($len == 3) {
+                        $bid1 = "00" . $bid1;
+                    } elseif ($len == 4) {
+                        $bid1 = "0" . $bid1;
+                    } elseif ($len == 5) {
+                        $bid1 = $bid1;
+                    }
+                    return $bid1;
+                }
+                ?>
             </div>
         </div>
     </div>
 
-    <?php
-    function billno($bid1)
-    {
-        if ($bid1 == "") {
-            $bid1 = 0;
-        }
-        $bid1 = $bid1 + 1;
 
-        $len = strlen($bid1);
-        if ($len == 1) {
-            $bid1 = "0000" . $bid1;
-        } elseif ($len == 2) {
-            $bid1 = "000" . $bid1;
-        } elseif ($len == 3) {
-            $bid1 = "00" . $bid1;
-        } elseif ($len == 4) {
-            $bid1 = "0" . $bid1;
-        } elseif ($len == 5) {
-            $bid1 = $bid1;
-        }
-        return $bid1;
-    }
-    ?>
     <?php include('footer.php'); ?>

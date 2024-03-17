@@ -69,7 +69,7 @@ if ($row > 0) {
                 <div class="collapse" id="return">
                     <ul class="nav">
                         <li class="nav-item">
-                            <a class="nav-link text-white ps-4" href="">
+                            <a class="nav-link text-white ps-4" href="supplier_return.php">
                                 <span class="sidenav-mini-icon"><i class="material-icons opacity-10">chevron_right</i></span>
                                 <span class="sidenav-normal  ms-2"> Supplier Return </span>
                             </a>
@@ -88,7 +88,7 @@ if ($row > 0) {
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="material-icons opacity-10">refresh</i>
                     </div>
-                    <span class="nav-link-text ms-1">Return</span>
+                    <span class="nav-link-text ms-1">Supplier Return</span>
                 </a>
             </li> -->
 
