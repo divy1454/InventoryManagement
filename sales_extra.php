@@ -26,6 +26,14 @@ $result_prod_name = mysqli_query($con, $query_prod_name);
 
 $query_cname = "select c_name from customer where u_id='$u_id'";
 $result_c_name = mysqli_query($con, $query_cname);
+
+
+$query_bill = "select id from billing_header";
+$result_bill = mysqli_query($con, $query_bill);
+$bid = "";
+while ($row = mysqli_fetch_row($result_bill)) {
+    $bid = $row[0];
+}
 ?>
 
 
@@ -161,7 +169,13 @@ if (isset($_SESSION['purchase_message']) && $_SESSION['purchase_message'] != '')
                                         </h4>
 
                                         <div class="row mt-3">
-                                            <div class="col-md-6 mt-2">
+                                            <div class="col-md-3 mt-2">
+                                                <div class="input-group input-group-static">
+                                                    <label class="labels">Bill No </label>
+                                                    <input type="text" class="form-control" name="fname" value="<?php echo billno($bid); ?>" id="bno" style="font-weight: bold;" readonly>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3 mt-2">
                                                 <!-- <div class="input-group input-group-static"> -->
                                                 <label class="labels">Product Name </label>
                                                 <select class="form-select" onchange="getbprice(this.value)" id="pname" name="prod_name" required style="border: 1px solid gray; padding:5px 5px 5px 5px;">
@@ -172,13 +186,13 @@ if (isset($_SESSION['purchase_message']) && $_SESSION['purchase_message'] != '')
                                                 </select>
                                                 <!-- </div> -->
                                             </div>
-                                            <div class="col-md-6 mt-2">
-                                                <div class="input-group input-group-static">
-                                                    <label class="labels">Product ID </label>
-                                                    <input type="text" class="form-control" name="fname" id="pid" style="font-weight: bold;">
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6 mt-2">
+                                            <!-- <div class="col-md-3 mt-2"> -->
+                                            <!-- <div class="input-group input-group-static"> -->
+                                            <!-- <label class="labels">Product ID </label> -->
+                                            <input hidden type="text" class="form-control" name="fname" id="pid" style="font-weight: bold;" readonly>
+                                            <!-- </div> -->
+                                            <!-- </div> -->
+                                            <div class="col-md-3 mt-2">
                                                 <!-- <div class="input-group input-group-static"> -->
                                                 <label class="labels">Customer Name </label>
                                                 <select class="form-select" name="c_name" id="cname" required style="border: 1px solid gray; padding:5px 5px 5px 5px;">
@@ -193,22 +207,22 @@ if (isset($_SESSION['purchase_message']) && $_SESSION['purchase_message'] != '')
                                                 </select>
                                                 <!-- </div> -->
                                             </div>
-                                            <div class="col-md-6 mt-2">
+                                            <div class="col-md-3 mt-2">
                                                 <div class="input-group input-group-static">
                                                     <label class="labels">Qty </label>
-                                                    <input type="text" class="form-control" name="fname" id="pqty" style="font-weight: bold;">
+                                                    <input type="number" class="form-control" name="fname" id="pqty" style="font-weight: bold;">
                                                 </div>
                                             </div>
-                                            <div class="col-md-6 mt-2">
+                                            <div class="col-md-3 mt-2">
                                                 <div class="input-group input-group-static">
                                                     <label class="labels">Price </label>
-                                                    <input type="text" class="form-control" name="fname" id="pprice" style="font-weight: bold;">
+                                                    <input type="text" class="form-control" name="fname" id="pprice" style="font-weight: bold;" readonly>
                                                 </div>
                                             </div>
-                                            <div class="col-md-6 mt-2">
+                                            <div class="col-md-3 mt-2">
                                                 <div class="input-group input-group-static">
                                                     <label class="labels">Total </label>
-                                                    <input type="text" class="form-control" name="fname" id="ptotal" style="font-weight: bold;">
+                                                    <input type="text" class="form-control" name="fname" id="ptotal" style="font-weight: bold;" readonly>
                                                 </div>
                                             </div>
                                         </div>
@@ -235,24 +249,35 @@ if (isset($_SESSION['purchase_message']) && $_SESSION['purchase_message'] != '')
                                                 </thead>
                                                 <tbody id="result_data">
                                                     <?php
-                                                    $i = 1;
-                                                    foreach ($_SESSION['sales'] as $key => $val) {
-                                                        echo "<tr>
+                                                    if (isset($_SESSION['sales'])) {
+                                                        $i = 1;
+                                                        foreach ($_SESSION['sales'] as $key => $val) {
+                                                            echo "<tr class='text-center'>
                                                         <td>$i</td>
                                                         <td>$val[pname]</td>
                                                         <td>$val[qty]</td>
                                                         <td>$val[price]</td>
                                                         <td>$val[total]</td>
                                                         <td> 
-                                                            <button type='button' class='btn btn-danger btn-sm deletebtn'>Delete</button>
+                                                            <button type='button' class='btn btn-danger btn-sm deletebtn'>X</button>
                                                         </td>
                                                     </tr>";
-                                                        $i += 1;
+                                                            $i += 1;
+                                                        }
                                                     }
                                                     ?>
                                                 </tbody>
                                             </table>
                                             <!-- btn -->
+                                            <div class="container">
+                                                <center>
+                                                    <div class="float-center">
+                                                        <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                                                            Create Bill
+                                                        </button>
+                                                    </div>
+                                                </center>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -373,4 +398,27 @@ if (isset($_SESSION['purchase_message']) && $_SESSION['purchase_message'] != '')
         </div>
     </div>
 
+    <?php
+    function billno($bid1)
+    {
+        if ($bid1 == "") {
+            $bid1 = 0;
+        }
+        $bid1 = $bid1 + 1;
+
+        $len = strlen($bid1);
+        if ($len == 1) {
+            $bid1 = "0000" . $bid1;
+        } elseif ($len == 2) {
+            $bid1 = "000" . $bid1;
+        } elseif ($len == 3) {
+            $bid1 = "00" . $bid1;
+        } elseif ($len == 4) {
+            $bid1 = "0" . $bid1;
+        } elseif ($len == 5) {
+            $bid1 = $bid1;
+        }
+        return $bid1;
+    }
+    ?>
     <?php include('footer.php'); ?>

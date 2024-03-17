@@ -33,7 +33,7 @@
 
 </main>
 
-<!-- <script src="assets/js/bootstrap.bundle.min.js"></script> -->
+<script src="assets/js/bootstrap.bundle.min.js"></script>
 <script src="assets/js/perfect-scrollbar.min.js"></script>
 <script src="assets/js/smooth-scrollbar.min.js"></script>
 
@@ -47,9 +47,6 @@
     }
 </script> -->
 <script src="assets/js/material-dashboard.min.js"></script>
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-
 
 
 </body>

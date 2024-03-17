@@ -59,7 +59,7 @@ if ($row > 0) {
                     <span class="nav-link-text ms-1">Sales</span>
                 </a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item ">
                 <a data-bs-toggle="collapse" href="#return" class="nav-link text-white" aria-controls="return" role="button" aria-expanded="false">
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="material-icons opacity-10">refresh</i>
@@ -69,15 +69,15 @@ if ($row > 0) {
                 <div class="collapse" id="return">
                     <ul class="nav">
                         <li class="nav-item">
-                            <a class="nav-link text-white ps-4" href="supplier_return.php">
+                            <a class="nav-link text-white ps-4" href="">
                                 <span class="sidenav-mini-icon"><i class="material-icons opacity-10">chevron_right</i></span>
-                                <span class="sidenav-normal  ms-2">To Supplier Return </span>
+                                <span class="sidenav-normal  ms-2"> Supplier Return </span>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-white ps-4" href="#">
+                            <a class="nav-link text-white ps-4" href="">
                                 <span class="sidenav-mini-icon"><i class="material-icons opacity-10">chevron_right</i></span>
-                                <span class="sidenav-normal  ms-2">From Customer Return </span>
+                                <span class="sidenav-normal  ms-2"> Customer Return </span>
                             </a>
                         </li>
                     </ul>
