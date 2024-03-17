@@ -1,5 +1,6 @@
 <?php
 include('command/conn.php');
+include('fpdf/fpdf.php');
 session_start();
 if (!isset($_COOKIE['email']) && !isset($_COOKIE['pass'])) {
     header("Location: http://localhost/newproject/login/index.php");
@@ -38,4 +39,28 @@ if (isset($_POST['P_Name']) && isset($_POST['U_Id'])) {
     while ($row = mysqli_fetch_row($result)) {
         echo $row[0];
     }
+}
+
+
+if (isset($_POST['btn_bill'])) {
+    $pdf = new FPDF();
+    $pdf->AddPage();
+    $pdf->SetFont('Arial', 'B', 16);
+    $pdf->Cell(40, 10, 'Customer Name :');
+    $pdf->Ln(10);
+    $pdf->Cell(40, 10, $_POST['c_name']);
+
+    foreach ($_SESSION['sales'] as $key => $val) {
+        $pdf->Cell(40, 10, $val['pname']);
+        $pdf->Ln(10);
+        $pdf->Cell(40, 10, $val['qty']);
+        $pdf->Ln(10);
+        $pdf->Cell(40, 10, $val['price']);
+        $pdf->Ln(10);
+        $pdf->Cell(40, 10, $val['total']);
+        $pdf->Ln(10);
+    }
+    $pdf->Output("I", "001.pdf");
+
+    unset($_SESSION['sales']);
 }
