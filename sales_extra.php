@@ -272,7 +272,7 @@ if (isset($_SESSION['purchase_message']) && $_SESSION['purchase_message'] != '')
                                             <div class="container">
                                                 <center>
                                                     <div class="float-center">
-                                                        <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                                                        <button type="button" class="btn btn-info">
                                                             Create Bill
                                                         </button>
                                                     </div>
