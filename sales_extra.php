@@ -330,22 +330,113 @@ if (isset($_SESSION['sale_message']) && $_SESSION['sale_message'] != '') {
                         var pprice = $('#pprice').val();
                         var ptotal = $('#ptotal').val();
 
-                        $.ajax({
-                            url: 'sales_class.php',
-                            type: 'POST',
-                            data: {
-                                p_name: pname,
-                                p_id: pid,
-                                c_name: cname,
-                                p_qty: pqty,
-                                p_price: pprice,
-                                p_total: ptotal
-                            },
-                            success: function(data) {
-                                location.reload();
-                                // $('#result_data').html(data);
-                            }
-                        })
+                        if (pname == '') {
+                            Swal.fire({
+                                icon: 'error',
+                                text: 'please select product name',
+                                showConfirmButton: false,
+                                timer: 2700,
+                                toast: true,
+                                position: "top",
+                                timerProgressBar: true,
+                                didOpen: (toast) => {
+                                    toast.onmouseenter = Swal.stopTimer;
+                                    toast.onmouseleave = Swal.resumeTimer;
+                                }
+                            });
+                        } else if (pid == '') {
+                            Swal.fire({
+                                icon: 'error',
+                                text: 'please set product id',
+                                showConfirmButton: false,
+                                timer: 2700,
+                                toast: true,
+                                position: "top",
+                                timerProgressBar: true,
+                                didOpen: (toast) => {
+                                    toast.onmouseenter = Swal.stopTimer;
+                                    toast.onmouseleave = Swal.resumeTimer;
+                                }
+                            });
+
+                        } else if (cname == '') {
+                            Swal.fire({
+                                icon: 'error',
+                                text: 'please select Customer name',
+                                showConfirmButton: false,
+                                timer: 2700,
+                                toast: true,
+                                position: "top",
+                                timerProgressBar: true,
+                                didOpen: (toast) => {
+                                    toast.onmouseenter = Swal.stopTimer;
+                                    toast.onmouseleave = Swal.resumeTimer;
+                                }
+                            });
+
+                        } else if (pqty == '') {
+                            Swal.fire({
+                                icon: 'error',
+                                text: 'please enter product quantity',
+                                showConfirmButton: false,
+                                timer: 2700,
+                                toast: true,
+                                position: "top",
+                                timerProgressBar: true,
+                                didOpen: (toast) => {
+                                    toast.onmouseenter = Swal.stopTimer;
+                                    toast.onmouseleave = Swal.resumeTimer;
+                                }
+                            });
+
+                        } else if (pprice == '') {
+                            Swal.fire({
+                                icon: 'error',
+                                text: 'please set product price',
+                                showConfirmButton: false,
+                                timer: 2700,
+                                toast: true,
+                                position: "top",
+                                timerProgressBar: true,
+                                didOpen: (toast) => {
+                                    toast.onmouseenter = Swal.stopTimer;
+                                    toast.onmouseleave = Swal.resumeTimer;
+                                }
+                            });
+
+                        } else if (ptotal == '') {
+                            Swal.fire({
+                                icon: 'error',
+                                text: 'please set total amount',
+                                showConfirmButton: false,
+                                timer: 2700,
+                                toast: true,
+                                position: "top",
+                                timerProgressBar: true,
+                                didOpen: (toast) => {
+                                    toast.onmouseenter = Swal.stopTimer;
+                                    toast.onmouseleave = Swal.resumeTimer;
+                                }
+                            });
+
+                        } else {
+                            $.ajax({
+                                url: 'sales_class.php',
+                                type: 'POST',
+                                data: {
+                                    p_name: pname,
+                                    p_id: pid,
+                                    c_name: cname,
+                                    p_qty: pqty,
+                                    p_price: pprice,
+                                    p_total: ptotal
+                                },
+                                success: function(data) {
+                                    location.reload();
+                                    // $('#result_data').html(data);
+                                }
+                            })
+                        }
                     });
 
                     $("#pqty").keyup(function() {

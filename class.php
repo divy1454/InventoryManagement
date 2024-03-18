@@ -54,23 +54,23 @@ if (isset($_POST['btn_bill'])) {
         $pdf->Cell(59, 10, '', 0, 1);
 
         $pdf->SetFont('Arial', 'B', 15);
-        $pdf->Cell(71, 5, 'Shop Name', 0, 0);
+        $pdf->Cell(71, 5, 'Customer Details', 0, 0);
         $pdf->Cell(59, 5, '', 0, 0);
         $pdf->Cell(59, 5, 'Invoice Details', 0, 1);
 
         $pdf->SetFont('Arial', '', 10);
 
-        $pdf->Cell(130, 5, 'Near DAV', 0, 0);
-        $pdf->Cell(25, 5, 'Customer ID:', 0, 0);
-        $pdf->Cell(34, 5, 'ABC', 0, 1);
+        $pdf->Cell(130, 9, 'Name : Patel Harsh N.', 0, 0);
+        // $pdf->Cell(25, 5, 'Customer:', 0, 0);
+        // $pdf->Cell(34, 5, 'ABC', 0, 1);
 
-        $pdf->Cell(130, 5, 'Delhi, 751001', 0, 0);
-        $pdf->Cell(25, 5, 'Invoice Date:', 0, 0);
-        $pdf->Cell(34, 5, date("d-m-Y"), 0, 1);
+        // $pdf->Cell(130, 5, 'Delhi, 751001', 0, 0);
+        $pdf->Cell(25, 9, 'Date:', 0, 0);
+        $pdf->Cell(34, 9, date("d-m-Y"), 0, 1);
 
-        $pdf->Cell(130, 5, '', 0, 0);
-        $pdf->Cell(25, 5, 'Bill No:', 0, 0);
-        $pdf->Cell(34, 5, '00001', 0, 1);
+        $pdf->Cell(130, 9, '', 0, 0);
+        $pdf->Cell(25, 1, 'Bill No:', 0, 0);
+        $pdf->Cell(34, 1, '00001', 0, 1);
 
 
         // $pdf->SetFont('Arial', 'B', 15);
@@ -85,6 +85,7 @@ if (isset($_POST['btn_bill'])) {
         $pdf->Cell(23, 6, 'Qty', 1, 0, 'C');
         $pdf->Cell(30, 6, 'Unit Price', 1, 0, 'C');
         $pdf->Cell(25, 6, 'Total', 1, 1, 'C');
+        $pdf->Line(0,200,);
         $pdf->SetFont('Arial', '', 10);
         $i = 1;
         $total = 0;
