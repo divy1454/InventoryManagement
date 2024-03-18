@@ -43,7 +43,7 @@ if (isset($_POST['P_Name']) && isset($_POST['U_Id'])) {
 
 
 if (isset($_POST['btn_bill'])) {
-    if (isset($_SESSION['sales'])) {
+    if (isset($_SESSION['sales']) && count($_SESSION['sales']) != 0) {
         $pdf = new FPDF();
         $pdf->AddPage();
 
@@ -66,7 +66,7 @@ if (isset($_POST['btn_bill'])) {
 
         $pdf->Cell(130, 5, 'Delhi, 751001', 0, 0);
         $pdf->Cell(25, 5, 'Invoice Date:', 0, 0);
-        $pdf->Cell(34, 5, 'DATE', 0, 1);
+        $pdf->Cell(34, 5, date("d-m-Y"), 0, 1);
 
         $pdf->Cell(130, 5, '', 0, 0);
         $pdf->Cell(25, 5, 'Bill No:', 0, 0);
