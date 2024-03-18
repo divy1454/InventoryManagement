@@ -51,11 +51,19 @@ if (isset($_POST['btn_bill'])) {
 
         $pdf->Cell(0, 10, 'Invoice', 0, 1, 'C');
         $pdf->Line(10, 25, 200, 25);
-        // $pdf->Cell(0, 10, 'Line1', 0, 0, 'L');
+
+        $pdf->Cell(10, 10, '', 0, 1, 'L');
+        $pdf->SetFont('Courier', '', 15);
+        $pdf->Cell(10, 10, 'Customer Details', 0, 1, 'L');
+        $pdf->Cell(10, 10, $_SESSION['cname'], 0, 1, 'L');
+        $pdf->Cell(10, 1, 'Surat', 0, 1, 'L');
+        $pdf->Cell(10, 10, '395017', 0, 1, 'L');
+
+        // $pdf->Cell(0, 10, 'Line1', 0, 1, 'L');
         // $pdf->Cell(0, 10, 'Line1', 0, 1, 'R');
         // $pdf->Cell(0, 10, 'Line1', 0, 1, 'C');
         // $pdf->Cell(0, 10, 'Line1', 0, 1, 'R');
-        // $pdf->Cell(40, 10, $_SESSION['cname']);
+
 
 
         foreach ($_SESSION['sales'] as $key => $val) {
