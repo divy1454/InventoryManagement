@@ -42,46 +42,25 @@ while ($row = mysqli_fetch_row($result_bill)) {
 
 <?php
 // session_start();
-if (isset($_SESSION['purchase_message']) && $_SESSION['purchase_message'] != '') {
-    if (isset($_SESSION['purchase_message']) && $_SESSION['purchase_message'] == 'Product Added Successfully!') {
+if (isset($_SESSION['sale_message']) && $_SESSION['sale_message'] != '') {
 ?>
-        <script>
-            Swal.fire({
-                icon: '<?php echo $_SESSION['icon']; ?>',
-                text: '<?php echo $_SESSION['purchase_message']; ?>',
-                showConfirmButton: false,
-                timer: 3000,
-                toast: true,
-                position: "top",
-                timerProgressBar: true,
-                didOpen: (toast) => {
-                    toast.onmouseenter = Swal.stopTimer;
-                    toast.onmouseleave = Swal.resumeTimer;
-                }
-            });
-        </script>
-    <?php
-        unset($_SESSION['purchase_message']);
-    } else {
-    ?>
-        <script>
-            Swal.fire({
-                icon: '<?php echo $_SESSION['icon']; ?>',
-                text: '<?php echo $_SESSION['purchase_message']; ?>',
-                showConfirmButton: false,
-                timer: 2700,
-                toast: true,
-                position: "top",
-                timerProgressBar: true,
-                didOpen: (toast) => {
-                    toast.onmouseenter = Swal.stopTimer;
-                    toast.onmouseleave = Swal.resumeTimer;
-                }
-            });
-        </script>
+    <script>
+        Swal.fire({
+            icon: '<?php echo $_SESSION['icon']; ?>',
+            text: '<?php echo $_SESSION['sale_message']; ?>',
+            showConfirmButton: false,
+            timer: 2700,
+            toast: true,
+            position: "top",
+            timerProgressBar: true,
+            didOpen: (toast) => {
+                toast.onmouseenter = Swal.stopTimer;
+                toast.onmouseleave = Swal.resumeTimer;
+            }
+        });
+    </script>
 <?php
-        unset($_SESSION['purchase_message']);
-    }
+    unset($_SESSION['sale_message']);
 }
 ?>
 
@@ -206,7 +185,7 @@ if (isset($_SESSION['purchase_message']) && $_SESSION['purchase_message'] != '')
                                                         ?>
                                                             <option value="<?php echo $row_c_name[0];
                                                                             ?>"><?php echo $row_c_name[0];
-                                                                            ?></option>
+                                                                                ?></option>
                                                         <?php }
                                                         ?>
                                                     </select>

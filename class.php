@@ -43,24 +43,39 @@ if (isset($_POST['P_Name']) && isset($_POST['U_Id'])) {
 
 
 if (isset($_POST['btn_bill'])) {
-    $pdf = new FPDF();
-    $pdf->AddPage();
-    $pdf->SetFont('Arial', 'B', 16);
-    $pdf->Cell(40, 10, 'Customer Name :');
-    $pdf->Ln(10);
-    $pdf->Cell(40, 10, $_POST['c_name']);
+    if (isset($_SESSION['sales'])) {
+        $pdf = new FPDF();
 
-    foreach ($_SESSION['sales'] as $key => $val) {
-        $pdf->Cell(40, 10, $val['pname']);
-        $pdf->Ln(10);
-        $pdf->Cell(40, 10, $val['qty']);
-        $pdf->Ln(10);
-        $pdf->Cell(40, 10, $val['price']);
-        $pdf->Ln(10);
-        $pdf->Cell(40, 10, $val['total']);
-        $pdf->Ln(10);
+        $pdf->AddPage();
+        $pdf->SetFont('Arial', 'B', 25);
+
+        $pdf->Cell(0, 10, 'Invoice', 0, 1, 'C');
+        $pdf->Line(10, 25, 200, 25);
+        // $pdf->Cell(0, 10, 'Line1', 0, 0, 'L');
+        // $pdf->Cell(0, 10, 'Line1', 0, 1, 'R');
+        // $pdf->Cell(0, 10, 'Line1', 0, 1, 'C');
+        // $pdf->Cell(0, 10, 'Line1', 0, 1, 'R');
+        // $pdf->Cell(40, 10, $_SESSION['cname']);
+
+
+        foreach ($_SESSION['sales'] as $key => $val) {
+            // $pdf->Cell(40, 10, $val['pname']);
+            // $pdf->Ln(10);
+            // $pdf->Cell(40, 10, $val['qty']);
+            // $pdf->Ln(10);
+            // $pdf->Cell(40, 10, $val['price']);
+            // $pdf->Ln(10);
+            // $pdf->Cell(40, 10, $val['total']);
+            // $pdf->Ln(10);
+        }
+        $pdf->Output("I", "001.pdf");
+        // unset($_SESSION['sales']);
+        // unset($_SESSION['cname']);
+    } else {
+        $_SESSION['sale_message'] = "No any product add for Sale...";
+        $_SESSION['icon'] = "error";
+        $_SESSION['title'] = "Error...";
+        header("Location: http://localhost/newproject/sales_extra.php");
+        exit();
     }
-    $pdf->Output("I", "001.pdf");
-
-    unset($_SESSION['sales']);
 }
