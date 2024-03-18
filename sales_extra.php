@@ -150,93 +150,92 @@ if (isset($_SESSION['sale_message']) && $_SESSION['sale_message'] != '') {
                                             </div> -->
                                         </h4>
 
-                                        <!-- Form start -->
-                                        <form action="class.php" method="post">
-                                            <div class="row mt-3">
-                                                <div class="col-md-3 mt-2">
-                                                    <div class="input-group input-group-static">
-                                                        <label class="labels">Bill No </label>
-                                                        <input type="text" class="form-control" name="fname" value="<?php echo billno($bid); ?>" id="bno" style="font-weight: bold;" readonly>
-                                                    </div>
+
+                                        <div class="row mt-3">
+                                            <div class="col-md-3 mt-2">
+                                                <div class="input-group input-group-static">
+                                                    <label class="labels">Bill No </label>
+                                                    <input type="text" class="form-control" name="fname" value="<?php echo billno($bid); ?>" id="bno" style="font-weight: bold;" readonly>
                                                 </div>
-                                                <div class="col-md-3 mt-2">
-                                                    <!-- <div class="input-group input-group-static"> -->
-                                                    <label class="labels">Product Name </label>
-                                                    <select class="form-select" onchange="getbprice(this.value)" id="pname" name="prod_name" required style="border: 1px solid gray; padding:5px 5px 5px 5px;">
-                                                        <option value="">Select Product</option>
-                                                        <?php while ($row_prod_name = mysqli_fetch_row($result_prod_name)) { ?>
-                                                            <option value="<?php echo $row_prod_name[0]; ?>"><?php echo $row_prod_name[0]; ?></option>
-                                                        <?php } ?>
-                                                    </select>
-                                                    <!-- </div> -->
-                                                </div>
-                                                <!-- <div class="col-md-3 mt-2"> -->
+                                            </div>
+                                            <div class="col-md-3 mt-2">
                                                 <!-- <div class="input-group input-group-static"> -->
-                                                <!-- <label class="labels">Product ID </label> -->
-                                                <input hidden type="text" class="form-control" name="fname" id="pid" style="font-weight: bold;" readonly>
+                                                <label class="labels">Product Name </label>
+                                                <select class="form-select" onchange="getbprice(this.value)" id="pname" name="prod_name" required style="border: 1px solid gray; padding:5px 5px 5px 5px;">
+                                                    <option value="">Select Product</option>
+                                                    <?php while ($row_prod_name = mysqli_fetch_row($result_prod_name)) { ?>
+                                                        <option value="<?php echo $row_prod_name[0]; ?>"><?php echo $row_prod_name[0]; ?></option>
+                                                    <?php } ?>
+                                                </select>
                                                 <!-- </div> -->
+                                            </div>
+                                            <!-- <div class="col-md-3 mt-2"> -->
+                                            <!-- <div class="input-group input-group-static"> -->
+                                            <!-- <label class="labels">Product ID </label> -->
+                                            <input hidden type="text" class="form-control" name="fname" id="pid" style="font-weight: bold;" readonly>
+                                            <!-- </div> -->
+                                            <!-- </div> -->
+                                            <div class="col-md-3 mt-2">
+                                                <!-- <div class="input-group input-group-static"> -->
+                                                <label class="labels">Customer Name </label>
+                                                <select class="form-select" name="c_name" id="cname" required style="border: 1px solid gray; padding:5px 5px 5px 5px;">
+                                                    <option value="">Select Customer</option>
+                                                    <?php while ($row_c_name = mysqli_fetch_row($result_c_name)) {
+                                                    ?>
+                                                        <option value="<?php echo $row_c_name[0];
+                                                                        ?>"><?php echo $row_c_name[0];
+                                                                            ?></option>
+                                                    <?php }
+                                                    ?>
+                                                </select>
                                                 <!-- </div> -->
-                                                <div class="col-md-3 mt-2">
-                                                    <!-- <div class="input-group input-group-static"> -->
-                                                    <label class="labels">Customer Name </label>
-                                                    <select class="form-select" name="c_name" id="cname" required style="border: 1px solid gray; padding:5px 5px 5px 5px;">
-                                                        <option value="">Select Customer</option>
-                                                        <?php while ($row_c_name = mysqli_fetch_row($result_c_name)) {
-                                                        ?>
-                                                            <option value="<?php echo $row_c_name[0];
-                                                                            ?>"><?php echo $row_c_name[0];
-                                                                                ?></option>
-                                                        <?php }
-                                                        ?>
-                                                    </select>
-                                                    <!-- </div> -->
-                                                </div>
-                                                <div class="col-md-3 mt-2">
-                                                    <div class="input-group input-group-static">
-                                                        <label class="labels">Qty </label>
-                                                        <input type="number" class="form-control" name="fname" id="pqty" style="font-weight: bold;">
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-3 mt-2">
-                                                    <div class="input-group input-group-static">
-                                                        <label class="labels">Price </label>
-                                                        <input type="text" class="form-control" name="fname" id="pprice" style="font-weight: bold;" readonly>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-3 mt-2">
-                                                    <div class="input-group input-group-static">
-                                                        <label class="labels">Total </label>
-                                                        <input type="text" class="form-control" name="fname" id="ptotal" style="font-weight: bold;" readonly>
-                                                    </div>
+                                            </div>
+                                            <div class="col-md-3 mt-2">
+                                                <div class="input-group input-group-static">
+                                                    <label class="labels">Qty </label>
+                                                    <input type="number" class="form-control" name="fname" id="pqty" style="font-weight: bold;">
                                                 </div>
                                             </div>
-                                            <br>
-                                            <div class="float-end">
-                                                <button type="button" class="btn btn-primary" id="btn_sales">
-                                                    Add Sales
-                                                </button>
+                                            <div class="col-md-3 mt-2">
+                                                <div class="input-group input-group-static">
+                                                    <label class="labels">Price </label>
+                                                    <input type="text" class="form-control" name="fname" id="pprice" style="font-weight: bold;" readonly>
+                                                </div>
                                             </div>
-                                            <br>
+                                            <div class="col-md-3 mt-2">
+                                                <div class="input-group input-group-static">
+                                                    <label class="labels">Total </label>
+                                                    <input type="text" class="form-control" name="fname" id="ptotal" style="font-weight: bold;" readonly>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <br>
+                                        <div class="float-end">
+                                            <button type="button" class="btn btn-primary" id="btn_sales">
+                                                Add Sales
+                                            </button>
+                                        </div>
+                                        <br>
 
-                                            <div class="card-body">
+                                        <div class="card-body">
 
-                                                <table id="table_data_search" class="table table-bordered table-striped">
-                                                    <thead>
-                                                        <tr class="text-center">
-                                                            <th>ID</th>
-                                                            <th>Product Name</th>
-                                                            <th>Qty</th>
-                                                            <th>Price</th>
-                                                            <th>Total</th>
-                                                            <th>Action</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody id="result_data">
-                                                        <?php
-                                                        if (isset($_SESSION['sales'])) {
-                                                            $i = 1;
-                                                            foreach ($_SESSION['sales'] as $key => $val) {
-                                                                echo "<tr class='text-center'>
+                                            <table id="table_data_search" class="table table-bordered table-striped">
+                                                <thead>
+                                                    <tr class="text-center">
+                                                        <th>ID</th>
+                                                        <th>Product Name</th>
+                                                        <th>Qty</th>
+                                                        <th>Price</th>
+                                                        <th>Total</th>
+                                                        <th>Action</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="result_data">
+                                                    <?php
+                                                    if (isset($_SESSION['sales'])) {
+                                                        $i = 1;
+                                                        foreach ($_SESSION['sales'] as $key => $val) {
+                                                            echo "<tr class='text-center'>
                                                         <td>$i</td>
                                                         <td>$val[pname]</td>
                                                         <td>$val[qty]</td>
@@ -246,177 +245,177 @@ if (isset($_SESSION['sale_message']) && $_SESSION['sale_message'] != '') {
                                                             <button type='button' class='btn btn-danger btn-sm deletebtn'>X</button>
                                                         </td>
                                                     </tr>";
-                                                                $i += 1;
-                                                            }
+                                                            $i += 1;
                                                         }
-                                                        ?>
-                                                    </tbody>
-                                                </table>
-                                                <!-- btn -->
-
+                                                    }
+                                                    ?>
+                                                </tbody>
+                                            </table>
+                                            <!-- btn -->
+                                            <form action="class.php" method="post">
                                                 <div class="container">
                                                     <center>
                                                         <input type="submit" class="btn btn-info" value="Create Bill" name="btn_bill">
                                                     </center>
                                                 </div>
-                                        </form>
+                                            </form>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <!-- Table End -->
+                <!-- Table End -->
 
-            <script src="https://cdn.datatables.net/1.13.8/js/jquery.dataTables.min.js"></script>
-            <script src="https://cdn.datatables.net/1.13.8/js/dataTables.bootstrap5.min.js"></script>
+                <script src="https://cdn.datatables.net/1.13.8/js/jquery.dataTables.min.js"></script>
+                <script src="https://cdn.datatables.net/1.13.8/js/dataTables.bootstrap5.min.js"></script>
 
-            <script>
-                $(document).ready(function() {
-                    $('#table_data_search').DataTable({
-                        "lengthMenu": [
-                            [5, 10, 15, -1],
-                            [5, 10, 15, "All"]
-                        ],
-                        responsive: true,
-                        language: {
-                            paginate: {
-                                next: '&#8594;',
-                                previous: '&#8592;'
-                            },
-                            search: "_INPUT_",
-                            searchPlaceholder: "Search",
-                        }
+                <script>
+                    $(document).ready(function() {
+                        $('#table_data_search').DataTable({
+                            "lengthMenu": [
+                                [5, 10, 15, -1],
+                                [5, 10, 15, "All"]
+                            ],
+                            responsive: true,
+                            language: {
+                                paginate: {
+                                    next: '&#8594;',
+                                    previous: '&#8592;'
+                                },
+                                search: "_INPUT_",
+                                searchPlaceholder: "Search",
+                            }
+                        });
                     });
-                });
 
-                function getbprice(pname) {
-                    var uid = $('#user_id').val();
-                    $.ajax({
-                        url: 'class.php',
-                        type: 'POST',
-                        data: {
-                            pname: pname,
-                            uid: uid
-                        },
-                        success: function(results) {
-                            $('#sprice').attr("value", results);
-                            $('#pprice').attr("value", results);
-                            getID(pname);
-                        }
-                    })
+                    function getbprice(pname) {
+                        var uid = $('#user_id').val();
+                        $.ajax({
+                            url: 'class.php',
+                            type: 'POST',
+                            data: {
+                                pname: pname,
+                                uid: uid
+                            },
+                            success: function(results) {
+                                $('#sprice').attr("value", results);
+                                $('#pprice').attr("value", results);
+                                getID(pname);
+                            }
+                        })
+                    }
+
+                    function getID(pname) {
+                        var uid = $('#user_id').val();
+                        $.ajax({
+                            url: 'class.php',
+                            type: 'POST',
+                            data: {
+                                P_Name: pname,
+                                U_Id: uid
+                            },
+                            success: function(results) {
+                                $('#pid').attr("value", results);
+                            }
+                        })
+                    }
+
+                    $('#btn_sales').click(function() {
+                        var pname = $('#pname').val();
+                        var pid = $('#pid').val();
+                        var cname = $('#cname').val();
+                        var pqty = $('#pqty').val();
+                        var pprice = $('#pprice').val();
+                        var ptotal = $('#ptotal').val();
+
+                        $.ajax({
+                            url: 'sales_class.php',
+                            type: 'POST',
+                            data: {
+                                p_name: pname,
+                                p_id: pid,
+                                c_name: cname,
+                                p_qty: pqty,
+                                p_price: pprice,
+                                p_total: ptotal
+                            },
+                            success: function(data) {
+                                location.reload();
+                                // $('#result_data').html(data);
+                            }
+                        })
+                    });
+
+                    $("#pqty").keyup(function() {
+                        var price = $("#pprice").val();
+                        var pqty = $("#pqty").val();
+                        $('#ptotal').val(price * pqty);
+                    });
+
+                    $('.deletebtn').click(function() {
+                        $tr = $(this).closest('tr');
+
+                        var data = $tr.children("td").map(function() {
+                            return $(this).text();
+                        }).get();
+
+                        $.ajax({
+                            url: 'sales_class.php',
+                            type: 'POST',
+                            data: {
+                                p__name: data[1],
+                                action: "delete"
+                            },
+                            success: function(data) {
+                                location.reload();
+                            }
+                        })
+                    });
+                </script>
+
+                <script>
+                    $('.bill_create').click(function() {
+                        $.ajax({
+                            url: 'class.php',
+                            type: 'POST',
+                            data: {
+                                Bill: "bill"
+                            },
+                            success: function(data) {
+                                window.location.href = data;
+                            }
+                        })
+                    });
+                </script>
+                <!-- Main Content End -->
+                <?php
+                function billno($bid1)
+                {
+                    if ($bid1 == "") {
+                        $bid1 = 0;
+                    }
+                    $bid1 = $bid1 + 1;
+
+                    $len = strlen($bid1);
+                    if ($len == 1) {
+                        $bid1 = "0000" . $bid1;
+                    } elseif ($len == 2) {
+                        $bid1 = "000" . $bid1;
+                    } elseif ($len == 3) {
+                        $bid1 = "00" . $bid1;
+                    } elseif ($len == 4) {
+                        $bid1 = "0" . $bid1;
+                    } elseif ($len == 5) {
+                        $bid1 = $bid1;
+                    }
+                    return $bid1;
                 }
-
-                function getID(pname) {
-                    var uid = $('#user_id').val();
-                    $.ajax({
-                        url: 'class.php',
-                        type: 'POST',
-                        data: {
-                            P_Name: pname,
-                            U_Id: uid
-                        },
-                        success: function(results) {
-                            $('#pid').attr("value", results);
-                        }
-                    })
-                }
-
-                $('#btn_sales').click(function() {
-                    var pname = $('#pname').val();
-                    var pid = $('#pid').val();
-                    var cname = $('#cname').val();
-                    var pqty = $('#pqty').val();
-                    var pprice = $('#pprice').val();
-                    var ptotal = $('#ptotal').val();
-
-                    $.ajax({
-                        url: 'sales_class.php',
-                        type: 'POST',
-                        data: {
-                            p_name: pname,
-                            p_id: pid,
-                            c_name: cname,
-                            p_qty: pqty,
-                            p_price: pprice,
-                            p_total: ptotal
-                        },
-                        success: function(data) {
-                            location.reload();
-                            // $('#result_data').html(data);
-                        }
-                    })
-                });
-
-                $("#pqty").keyup(function() {
-                    var price = $("#pprice").val();
-                    var pqty = $("#pqty").val();
-                    $('#ptotal').val(price * pqty);
-                });
-
-                $('.deletebtn').click(function() {
-                    $tr = $(this).closest('tr');
-
-                    var data = $tr.children("td").map(function() {
-                        return $(this).text();
-                    }).get();
-
-                    $.ajax({
-                        url: 'sales_class.php',
-                        type: 'POST',
-                        data: {
-                            p__name: data[1],
-                            action: "delete"
-                        },
-                        success: function(data) {
-                            location.reload();
-                        }
-                    })
-                });
-            </script>
-
-            <script>
-                $('.bill_create').click(function() {
-                    $.ajax({
-                        url: 'class.php',
-                        type: 'POST',
-                        data: {
-                            Bill: "bill"
-                        },
-                        success: function(data) {
-                            window.location.href = data;
-                        }
-                    })
-                });
-            </script>
-            <!-- Main Content End -->
-            <?php
-            function billno($bid1)
-            {
-                if ($bid1 == "") {
-                    $bid1 = 0;
-                }
-                $bid1 = $bid1 + 1;
-
-                $len = strlen($bid1);
-                if ($len == 1) {
-                    $bid1 = "0000" . $bid1;
-                } elseif ($len == 2) {
-                    $bid1 = "000" . $bid1;
-                } elseif ($len == 3) {
-                    $bid1 = "00" . $bid1;
-                } elseif ($len == 4) {
-                    $bid1 = "0" . $bid1;
-                } elseif ($len == 5) {
-                    $bid1 = $bid1;
-                }
-                return $bid1;
-            }
-            ?>
+                ?>
+            </div>
         </div>
     </div>
-</div>
 
 
-<?php include('footer.php'); ?>
+    <?php include('footer.php'); ?>
