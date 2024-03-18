@@ -329,6 +329,7 @@ if (isset($_SESSION['sale_message']) && $_SESSION['sale_message'] != '') {
                         var pqty = $('#pqty').val();
                         var pprice = $('#pprice').val();
                         var ptotal = $('#ptotal').val();
+                        var bno = $('#bno').val();
 
                         if (pname == '') {
                             Swal.fire({
@@ -429,7 +430,8 @@ if (isset($_SESSION['sale_message']) && $_SESSION['sale_message'] != '') {
                                     c_name: cname,
                                     p_qty: pqty,
                                     p_price: pprice,
-                                    p_total: ptotal
+                                    p_total: ptotal,
+                                    bill_no: bno
                                 },
                                 success: function(data) {
                                     location.reload();

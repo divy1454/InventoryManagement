@@ -58,9 +58,9 @@ if (isset($_POST['btn_bill'])) {
         $pdf->Cell(59, 5, '', 0, 0);
         $pdf->Cell(59, 5, 'Invoice Details', 0, 1);
 
-        $pdf->SetFont('Arial', '', 10);
+        $pdf->SetFont('Courier', '', 12);
 
-        $pdf->Cell(130, 9, 'Name : Patel Harsh N.', 0, 0);
+        $pdf->Cell(130, 9, 'Name : ' . $_SESSION['cname'], 0, 0);
         // $pdf->Cell(25, 5, 'Customer:', 0, 0);
         // $pdf->Cell(34, 5, 'ABC', 0, 1);
 
@@ -68,9 +68,10 @@ if (isset($_POST['btn_bill'])) {
         $pdf->Cell(25, 9, 'Date:', 0, 0);
         $pdf->Cell(34, 9, date("d-m-Y"), 0, 1);
 
+        $billNo = $_SESSION['bill_no'];
         $pdf->Cell(130, 9, '', 0, 0);
         $pdf->Cell(25, 1, 'Bill No:', 0, 0);
-        $pdf->Cell(34, 1, '00001', 0, 1);
+        $pdf->Cell(34, 1, $billNo, 0, 1);
 
 
         // $pdf->SetFont('Arial', 'B', 15);
@@ -79,33 +80,31 @@ if (isset($_POST['btn_bill'])) {
 
         $pdf->Cell(50, 10, '', 0, 1);
 
-        $pdf->SetFont('Arial', 'B', 10);
-        $pdf->Cell(10, 6, 'Sr', 1, 0, 'C');
-        $pdf->Cell(80, 6, 'Product Name', 1, 0, 'C');
-        $pdf->Cell(23, 6, 'Qty', 1, 0, 'C');
-        $pdf->Cell(30, 6, 'Unit Price', 1, 0, 'C');
-        $pdf->Cell(25, 6, 'Total', 1, 1, 'C');
-        $pdf->Line(0,200,);
-        $pdf->SetFont('Arial', '', 10);
+        $pdf->SetFont('Courier', 'B', 12);
+        $pdf->Cell(10, 6, 'Sr', 0, 0, 'C');
+        $pdf->Cell(80, 6, 'Product Name', 0, 0, 'C');
+        $pdf->Cell(23, 6, 'Qty', 0, 0, 'C');
+        $pdf->Cell(30, 6, 'Unit Price', 0, 0, 'C');
+        $pdf->Cell(25, 6, 'Total', 0, 1, 'C');
+        $pdf->SetFont('Courier', '', 12);
         $i = 1;
         $total = 0;
         foreach ($_SESSION['sales'] as $key => $val) {
-            $pdf->Cell(10, 6, $i, 1, 0);
-            $pdf->Cell(80, 6, $val['pname'], 1, 0);
-            $pdf->Cell(23, 6, $val['qty'], 1, 0, 'R');
-            $pdf->Cell(30, 6, $val['price'], 1, 0, 'R');
-            $pdf->Cell(25, 6, $val['total'], 1, 1, 'R');
+            $pdf->Cell(10, 6, $i, 0, 0, 'C');
+            $pdf->Cell(80, 6, $val['pname'], 0, 0, 'C');
+            $pdf->Cell(23, 6, $val['qty'], 0, 0, 'C');
+            $pdf->Cell(30, 6, $val['price'], 0, 0, 'C');
+            $pdf->Cell(25, 6, $val['total'], 0, 1, 'C');
             $total = $total + $val['total'];
             $i++;
         }
 
 
         $pdf->Cell(118, 6, '', 0, 0);
-        $pdf->Cell(25, 6, 'Subtotal', 0, 0);
-        $pdf->Cell(25, 6, $total, 1, 1, 'R');
+        $pdf->Cell(25, 6, 'Total', 1, 0, 'C');
+        $pdf->Cell(25, 6, $total, 1, 1, 'C');
 
-
-        // $pdf->Output("001.pdf");
+        $pdf->Line(10, 61, 178, 61);
 
         $pdf->Output("I", "001.pdf");
         // unset($_SESSION['sales']);
