@@ -438,21 +438,6 @@ if (isset($_SESSION['sale_message']) && $_SESSION['sale_message'] != '') {
                             });
 
                         } else {
-                            // if (product_qty < prod_qty) {
-                            //     Swal.fire({
-                            //         icon: 'error',
-                            //         text: 'Quantity Is not available!!',
-                            //         showConfirmButton: false,
-                            //         timer: 2700,
-                            //         toast: true,
-                            //         position: "top",
-                            //         timerProgressBar: true,
-                            //         didOpen: (toast) => {
-                            //             toast.onmouseenter = Swal.stopTimer;
-                            //             toast.onmouseleave = Swal.resumeTimer;
-                            //         }
-                            //     });
-                            // } else {
                             $.ajax({
                                 url: 'sales_class.php',
                                 type: 'POST',
