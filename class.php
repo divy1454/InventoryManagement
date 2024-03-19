@@ -57,13 +57,6 @@ if (isset($_POST['PName']) && isset($_POST['UId'])) {
 
 if (isset($_POST['btn_bill'])) {
     if (isset($_SESSION['sales']) && count($_SESSION['sales']) != 0) {
-        foreach ($_SESSION['sales'] as $key => $val) {
-            $ID = $val['pid'];
-            $qty = $val['qty'];
-            $update_query = "update product set qty=qty-'$qty' where id='$ID'";
-            $update_result = mysqli_query($con, $update_query);
-            $update_row = mysqli_affected_rows($con);
-        }
         $pdf = new FPDF();
         $pdf->AddPage();
 
@@ -127,8 +120,8 @@ if (isset($_POST['btn_bill'])) {
         $pdf->Line(10, 61, 178, 61);
 
         $pdf->Output("I", "001.pdf");
-        // unset($_SESSION['sales']);
-        // unset($_SESSION['cname']);
+        unset($_SESSION['sales']);
+        unset($_SESSION['cname']);
     } else {
         $_SESSION['sale_message'] = "No any product add for Sale...";
         $_SESSION['icon'] = "error";

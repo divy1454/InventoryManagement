@@ -43,8 +43,14 @@ if (isset($_POST['bill_no']) && isset($_POST['p_name']) && isset($_POST['p_id'])
         if (isset($_SESSION['sales'][$id])) {
             $old = $_SESSION['sales'][$id]['qty'];
             $_SESSION['sales'][$id] = array("pid" => $id, "pname" => $_POST['p_name'], "qty" => $old + $_POST['p_qty'], "price" => $_POST['p_price'], "total" => $_POST['p_price'] * ($old + $_POST['p_qty']));
+            $update_query = "update product set qty=qty-'$pqty' where id='$id'";
+            $update_result = mysqli_query($con, $update_query);
+            $update_row = mysqli_affected_rows($con);
         } else {
             $_SESSION['sales'][$id] = array("pid" => $id, "pname" => $_POST['p_name'], "qty" => $_POST['p_qty'], "price" => $_POST['p_price'], "total" => $_POST['p_total']);
+            $update_query = "update product set qty=qty-'$pqty' where id='$id'";
+            $update_result = mysqli_query($con, $update_query);
+            $update_row = mysqli_affected_rows($con);
         }
     } else {
         echo "<script>
@@ -52,7 +58,7 @@ if (isset($_POST['bill_no']) && isset($_POST['p_name']) && isset($_POST['p_id'])
             icon: 'error',
             text: 'Quantity not available...',
             showConfirmButton: false,
-            timer: 2700,
+            timer: 1500,
             toast: true,
             position: 'top',
             timerProgressBar: true,
@@ -72,6 +78,10 @@ if (isset($_POST['action'])) {
     foreach ($_SESSION['sales'] as $key => $val) {
         if ($val['pname'] == $pName) {
             $ID = $val['pid'];
+            $pqty = $val['qty'];
+            $update_query = "update product set qty=qty+'$pqty' where id='$ID'";
+            $update_result = mysqli_query($con, $update_query);
+            $update_row = mysqli_affected_rows($con);
             unset($_SESSION['sales'][$key]);
             $_SESSION['sales'] = array_values($_SESSION['sales']);
         }

@@ -455,7 +455,7 @@ if (isset($_SESSION['sale_message']) && $_SESSION['sale_message'] != '') {
                                         icon: 'info',
                                         text: 'Please wait..',
                                         showConfirmButton: false,
-                                        timer: 2700,
+                                        timer: 1500,
                                         toast: true,
                                         position: 'top',
                                         timerProgressBar: true,
@@ -465,7 +465,7 @@ if (isset($_SESSION['sale_message']) && $_SESSION['sale_message'] != '') {
                                         }
                                     });
                                     $('#result_data').html(data);
-                                    setTimeout(refresh, 3000);
+                                    setTimeout(refresh, 1500);
                                 }
                             })
 
