@@ -41,9 +41,29 @@ if (isset($_POST['P_Name']) && isset($_POST['U_Id'])) {
     }
 }
 
+if (isset($_POST['PName']) && isset($_POST['UId'])) {
+    $productName = $_POST['PName'];
+    $uid = $_POST['UId'];
+
+    $q = "select qty from product where product_name='$productName' AND user_id='$uid'";
+    $result = mysqli_query($con, $q);
+    while ($row = mysqli_fetch_row($result)) {
+        echo $row[0];
+    }
+}
+
+
+
 
 if (isset($_POST['btn_bill'])) {
     if (isset($_SESSION['sales']) && count($_SESSION['sales']) != 0) {
+        foreach ($_SESSION['sales'] as $key => $val) {
+            $ID = $val['pid'];
+            $qty = $val['qty'];
+            $update_query = "update product set qty=qty-'$qty' where id='$ID'";
+            $update_result = mysqli_query($con, $update_query);
+            $update_row = mysqli_affected_rows($con);
+        }
         $pdf = new FPDF();
         $pdf->AddPage();
 
