@@ -7,6 +7,12 @@ if (!isset($_COOKIE['email']) && !isset($_COOKIE['pass'])) {
     exit;
 }
 
+$u_email = $_COOKIE['email'];
+
+$query_uid = "select id from user where email='$u_email'";
+$result = mysqli_query($con, $query_uid);
+$row = mysqli_fetch_row($result);
+$user_ID = $row[0];
 
 if (isset($_POST['p_name']) && isset($_POST['u_id'])) {
     $productName = $_POST['p_name'];
@@ -57,6 +63,20 @@ if (isset($_POST['PName']) && isset($_POST['UId'])) {
 
 if (isset($_POST['btn_bill'])) {
     if (isset($_SESSION['sales']) && count($_SESSION['sales']) != 0) {
+        date_default_timezone_set("Asia/Kolkata");
+        $date = date("Y-m-d h:i:sa", time());
+        $cname = $_SESSION['cname'];
+        $bill_no = $_SESSION['bill_no'];
+        $query = "insert into billing_header(customer_name,date,bill_no,user_id) values('$cname','$date','$bill_no','$user_ID')";
+        $result_insert_bill = mysqli_query($con, $query);
+        foreach ($_SESSION['sales'] as $key => $val) {
+            $pname = $val['pname'];
+            $pqty = $val['qty'];
+            $pprice = $val['price'];
+            $ptotal = $val['total'];
+            $query_insert_bill_details = "insert into billing_details(bill_no,product_name,product_qty,product_price,total,user_id) values('$bill_no','$pname','$pqty','$pprice','$ptotal','$user_ID')";
+            $result_bill_details = mysqli_query($con, $query_insert_bill_details);
+        }
         $pdf = new FPDF();
         $pdf->AddPage();
 
