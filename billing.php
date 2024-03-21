@@ -291,7 +291,7 @@ if (isset($_SESSION['delete_message']) && $_SESSION['delete_message'] != '') {
                                                     echo "<td>" . $row[1] . "</td>";
                                                     echo "<td>" . $row[2] . "</td>";
                                                     echo "<td> 
-                                                    <a href='#'><button type='button' class='btn btn-success btn-sm view'>View</button></a>
+                                                    <a href='bill_show.php?b_no=$row[2]'><button type='button' name='view_btn' class='btn btn-success btn-sm view'>View</button></a>
                                                  </td>";
                                                     echo "</tr>";
                                                     $id++;
