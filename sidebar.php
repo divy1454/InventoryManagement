@@ -25,8 +25,8 @@ if ($row > 0) {
         </a>
     </div>
     <hr class="horizontal light mt-0 mb-2">
-    <div class="collapse navbar-collapse w-auto h-auto ps" id="sidenav-collapse-main">
-        <!-- <div class="collapse navbar-collapse  w-auto  max-height-vh-100" id="sidenav-collapse-main"> -->
+    <!-- <div class="collapse navbar-collapse w-auto ps" id="sidenav-collapse-main"> -->
+    <div class="collapse navbar-collapse  w-auto  max-height-vh-100" id="sidenav-collapse-main">
         <ul class="navbar-nav">
             <li class="nav-item">
                 <a class="nav-link text-white " href="index.php">
@@ -107,6 +107,14 @@ if ($row > 0) {
                         <i class="material-icons opacity-10">store</i>
                     </div>
                     <span class="nav-link-text ms-1">Supplier</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-white " href="billing.php">
+                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                        <i class="material-icons opacity-10">receipt_long</i>
+                    </div>
+                    <span class="nav-link-text ms-1">Billing</span>
                 </a>
             </li>
 
