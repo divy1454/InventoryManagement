@@ -150,3 +150,13 @@ if (isset($_POST['btn_bill'])) {
         exit();
     }
 }
+
+
+if (isset($_GET['b_no']) && $_GET['pname']) {
+    $query_get_pdetails = "select product_name,product_qty,product_price,total from billing_details where bill_no='$_GET[b_no]' AND product_name='$_GET[pname]'";
+    $result_get_ddetails = mysqli_query($con, $query_get_pdetails);
+    while ($row = mysqli_fetch_row($result_bill_details)) {
+        $productname = "";
+    }
+    $query = "insert into return(product_name,qty,price,total,user_id) values('','','','','')";
+}

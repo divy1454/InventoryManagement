@@ -243,7 +243,7 @@ while ($row = mysqli_fetch_row($result_bill)) {
                                                         echo "<td>" . $val[1] . "</td>";
                                                         echo "<td>" . $val[2] . "</td>";
                                                         echo "<td>" . $val[3] . "</td>";
-                                                        echo "<td><a href='bill_show.php?b_no=$val[4]&pname=$val[0]'><button type='button' name='view_btn' class='btn btn-warning btn-sm view'><i class='material-icons opacity-10' style='font-size: large;'>refresh</i></button></a></td>";
+                                                        echo "<td><a href='class.php?b_no=$val[4]&pname=$val[0]'><button type='button' name='view_btn' class='btn btn-warning btn-sm view'><i class='material-icons opacity-10' style='font-size: large;'>refresh</i></button></a></td>";
                                                         echo "</tr>";
                                                         $i = $i + 1;
                                                     }
