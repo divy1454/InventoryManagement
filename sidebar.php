@@ -53,7 +53,7 @@ if ($row > 0) {
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link text-white " href="sales.php">
+                <a class="nav-link text-white " href="sales_extra.php">
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="material-icons opacity-10">storefront</i>
                     </div>
@@ -70,13 +70,13 @@ if ($row > 0) {
                 <div class="collapse" id="return">
                     <ul class="nav">
                         <li class="nav-item">
-                            <a class="nav-link text-white ps-4" href="supplier_return.php">
+                            <a class="nav-link text-white ps-4" href="return.php">
                                 <span class="sidenav-mini-icon"><i class="material-icons opacity-10">chevron_right</i></span>
                                 <span class="sidenav-normal  ms-2"> Supplier Return </span>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-white ps-4" href="">
+                            <a class="nav-link text-white ps-4" href="#">
                                 <span class="sidenav-mini-icon"><i class="material-icons opacity-10">chevron_right</i></span>
                                 <span class="sidenav-normal  ms-2"> Customer Return </span>
                             </a>
