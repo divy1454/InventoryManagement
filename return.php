@@ -47,9 +47,14 @@ if (isset($_SESSION['return_message']) && $_SESSION['return_message'] != '') {
                 icon: '<?php echo $_SESSION['icon']; ?>',
                 text: '<?php echo $_SESSION['return_message']; ?>',
                 showConfirmButton: false,
-                timer: 2500,
+                timer: 1500,
                 toast: true,
                 position: "top",
+                timerProgressBar: true,
+                didOpen: (toast) => {
+                    toast.onmouseenter = Swal.stopTimer;
+                    toast.onmouseleave = Swal.resumeTimer;
+                },
             });
         </script>
     <?php
@@ -61,9 +66,14 @@ if (isset($_SESSION['return_message']) && $_SESSION['return_message'] != '') {
                 icon: '<?php echo $_SESSION['icon']; ?>',
                 text: '<?php echo $_SESSION['return_message']; ?>',
                 showConfirmButton: false,
-                timer: 2700,
+                timer: 1500,
                 toast: true,
                 position: "top",
+                timerProgressBar: true,
+                didOpen: (toast) => {
+                    toast.onmouseenter = Swal.stopTimer;
+                    toast.onmouseleave = Swal.resumeTimer;
+                },
             });
         </script>
 <?php
@@ -138,7 +148,26 @@ if (isset($_SESSION['return_message']) && $_SESSION['return_message'] != '') {
                                                             $i = $i + 1;
                                                         }
                                                     } else {
-                                                        echo "Already All product returned!!!";
+                                                    ?>
+                                                        <script>
+                                                            Swal.fire({
+                                                                icon: 'error',
+                                                                text: 'Already All product returned!!',
+                                                                showConfirmButton: false,
+                                                                timer: 1500,
+                                                                toast: true,
+                                                                position: "top",
+                                                                timerProgressBar: true,
+                                                                didOpen: (toast) => {
+                                                                    toast.onmouseenter = Swal.stopTimer;
+                                                                    toast.onmouseleave = Swal.resumeTimer;
+                                                                },
+                                                            }).then(function() {
+                                                                window.location.href = "http://localhost/newproject/billing.php";
+                                                                exit();
+                                                            });
+                                                        </script>
+                                                    <?php
                                                     }
                                                     ?>
                                                 </tbody>
@@ -200,7 +229,7 @@ if (isset($_SESSION['return_message']) && $_SESSION['return_message'] != '') {
             icon: 'error',
             text: 'Something Wrong!',
             showConfirmButton: false,
-            timer: 2000,
+            timer: 1500,
             toast: true,
             position: "top",
             timerProgressBar: true,

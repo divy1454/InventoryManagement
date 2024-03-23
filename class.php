@@ -59,7 +59,7 @@ if (isset($_POST['PName']) && isset($_POST['UId'])) {
 }
 
 
-
+// Create a bill as PDF
 if (isset($_POST['btn_bill'])) {
     if (isset($_SESSION['sales']) && count($_SESSION['sales']) != 0) {
         date_default_timezone_set("Asia/Kolkata");
@@ -150,7 +150,7 @@ if (isset($_POST['btn_bill'])) {
     }
 }
 
-
+// Product Delete and Insert into Return Table
 if (isset($_GET['b_no']) && $_GET['pname']) {
     $bno = $_GET['b_no'];
     $pname = $_GET['pname'];
@@ -175,6 +175,9 @@ if (isset($_GET['b_no']) && $_GET['pname']) {
         header("Location: http://localhost/newproject/return.php?r_bno=" . $bno);
         exit();
     } else {
-        echo "Not Deleted...";
+        $_SESSION['return_message'] = "Product Not Return! Please try again..";
+        $_SESSION['icon'] = "error";
+        header("Location: http://localhost/newproject/return.php?r_bno=" . $bno);
+        exit();
     }
 }
