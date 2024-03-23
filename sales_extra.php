@@ -191,12 +191,7 @@ if (isset($_SESSION['sale_message']) && $_SESSION['sale_message'] != '') {
                                                 <?php } else {
                                                 ?>
                                                     <select class="form-select" name="c_name" id="cname" required style="border: 1px solid gray; padding:5px 5px 5px 5px;">
-                                                        <!-- <option value="">Select Customer</option> -->
-                                                        <?php //while ($row_c_name = mysqli_fetch_row($result_c_name)) {
-                                                        ?>
                                                         <option value="<?php echo $_SESSION['cname']; ?>"><?php echo $_SESSION['cname']; ?></option>
-                                                        <?php //}
-                                                        ?>
                                                     </select>
                                                 <?php
                                                 } ?>

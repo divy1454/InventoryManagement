@@ -24,7 +24,7 @@ $t_purchase = mysqli_num_rows($result_purchase);
 
 $query_count_sales = "select * from billing_details where user_id='$uid'";
 $result_sales = mysqli_query($con, $query_count_sales);
-$t_sales = mysqli_num_rows($result_sales);
+$total_sales = mysqli_num_rows($result_sales);
 
 $query_count_customer = "select * from customer where u_id='$uid'";
 $result_customer = mysqli_query($con, $query_count_customer);
@@ -37,6 +37,10 @@ $t_supplier = mysqli_num_rows($result_supplier);
 $query_count_return = "select * from product_return where user_id='$uid'";
 $result_return = mysqli_query($con, $query_count_return);
 $t_return = mysqli_num_rows($result_return);
+
+
+
+$t_sales = $t_return + $total_sales;
 ?>
 
 <!-- Slider Start -->
