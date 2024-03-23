@@ -147,6 +147,7 @@ if (isset($_SESSION['delete_message']) && $_SESSION['delete_message'] != '') {
                                                     <th>Qty</th>
                                                     <th>Price</th>
                                                     <th>Total</th>
+                                                    <th>Customer Name</th>
                                                     <th>Date</th>
                                                 </tr>
                                             </thead>
@@ -163,6 +164,7 @@ if (isset($_SESSION['delete_message']) && $_SESSION['delete_message'] != '') {
                                                     echo "<td>" . $row[3] . "</td>";
                                                     echo "<td>" . $row[4] . "</td>";
                                                     echo "<td>" . $row[5] . "</td>";
+                                                    echo "<td>" . $row[6] . "</td>";
                                                     echo "</tr>";
                                                     $i++;
                                                 }

@@ -169,13 +169,10 @@ if (isset($_SESSION['sale_message']) && $_SESSION['sale_message'] != '') {
                                                 </select>
                                                 <!-- </div> -->
                                             </div>
-                                            <!-- <div class="col-md-3 mt-2"> -->
-                                            <!-- <div class="input-group input-group-static"> -->
-                                            <!-- <label class="labels">Product ID </label> -->
+
                                             <input hidden type="text" class="form-control" name="pid" id="pid" style="font-weight: bold;" readonly>
                                             <input hidden type="text" class="form-control" name="p_qty" id="product_qty" style="font-weight: bold;" readonly>
-                                            <!-- </div> -->
-                                            <!-- </div> -->
+
                                             <div class="col-md-3 mt-2">
                                                 <!-- <div class="input-group input-group-static"> -->
                                                 <label class="labels">Customer Name </label>

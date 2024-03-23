@@ -143,7 +143,7 @@ if (isset($_SESSION['return_message']) && $_SESSION['return_message'] != '') {
                                                             echo "<td>" . $val[1] . "</td>";
                                                             echo "<td>" . $val[2] . "</td>";
                                                             echo "<td>" . $val[3] . "</td>";
-                                                            echo "<td><a href='class.php?b_no=$val[4]&pname=$val[0]'><button type='button' name='view_btn' class='btn btn-warning btn-sm view'><i class='material-icons opacity-10' style='font-size: large;'>refresh</i></button></a></td>";
+                                                            echo "<td><a href='class.php?b_no=$val[4]&pname=$val[0]&cname=$cname'><button type='button' name='view_btn' class='btn btn-warning btn-sm view'><i class='material-icons opacity-10' style='font-size: large;'>refresh</i></button></a></td>";
                                                             echo "</tr>";
                                                             $i = $i + 1;
                                                         }

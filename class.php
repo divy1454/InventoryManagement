@@ -154,6 +154,7 @@ if (isset($_POST['btn_bill'])) {
 if (isset($_GET['b_no']) && $_GET['pname']) {
     $bno = $_GET['b_no'];
     $pname = $_GET['pname'];
+    $customer_name = $_GET['cname'];
     $query_get_pdetails = "select product_name,product_qty,product_price,total from billing_details where bill_no='$bno' AND product_name='$pname'";
     $result_get_ddetails = mysqli_query($con, $query_get_pdetails);
     while ($row = mysqli_fetch_row($result_get_ddetails)) {
@@ -165,7 +166,7 @@ if (isset($_GET['b_no']) && $_GET['pname']) {
 
     date_default_timezone_set("Asia/Kolkata");
     $date = date("Y-m-d h:i:sa", time());
-    $query_insert_return = "insert into product_return(product_name,qty,price,total,date,user_id) values('$productname','$productQty','$productPrice','$total','$date','$user_ID')";
+    $query_insert_return = "insert into product_return(product_name,qty,price,total,customer_name,date,user_id) values('$productname','$productQty','$productPrice','$total','$customer_name','$date','$user_ID')";
     $result_return = mysqli_query($con, $query_insert_return);
 
 
