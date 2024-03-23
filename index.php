@@ -22,7 +22,7 @@ $query_count_purchase = "select * from purchase where user_id='$uid'";
 $result_purchase = mysqli_query($con, $query_count_purchase);
 $t_purchase = mysqli_num_rows($result_purchase);
 
-$query_count_sales = "select * from sales where uid='$uid'";
+$query_count_sales = "select * from billing_details where user_id='$uid'";
 $result_sales = mysqli_query($con, $query_count_sales);
 $t_sales = mysqli_num_rows($result_sales);
 
@@ -33,6 +33,10 @@ $t_customer = mysqli_num_rows($result_customer);
 $query_count_supplier = "select * from supplier where user_id='$uid'";
 $result_supplier = mysqli_query($con, $query_count_supplier);
 $t_supplier = mysqli_num_rows($result_supplier);
+
+$query_count_return = "select * from product_return where user_id='$uid'";
+$result_return = mysqli_query($con, $query_count_return);
+$t_return = mysqli_num_rows($result_return);
 ?>
 
 <!-- Slider Start -->
@@ -145,7 +149,7 @@ $t_supplier = mysqli_num_rows($result_supplier);
                     </div>
                     <div class="text-end pt-1">
                         <p class="text-sm mb-0 text-capitalize ">Total Returns</p>
-                        <h4 class="mb-0 ">Panding</h4>
+                        <h4 class="mb-0 "><?php echo $t_return; ?></h4>
                     </div>
                 </div>
             </div>

@@ -179,16 +179,27 @@ if (isset($_SESSION['sale_message']) && $_SESSION['sale_message'] != '') {
                                             <div class="col-md-3 mt-2">
                                                 <!-- <div class="input-group input-group-static"> -->
                                                 <label class="labels">Customer Name </label>
-                                                <select class="form-select" name="c_name" id="cname" required style="border: 1px solid gray; padding:5px 5px 5px 5px;">
-                                                    <option value="">Select Customer</option>
-                                                    <?php while ($row_c_name = mysqli_fetch_row($result_c_name)) {
-                                                    ?>
-                                                        <option value="<?php echo $row_c_name[0];
-                                                                        ?>"><?php echo $row_c_name[0];
-                                                                            ?></option>
-                                                    <?php }
-                                                    ?>
-                                                </select>
+                                                <?php if (!isset($_SESSION['cname'])) { ?>
+                                                    <select class="form-select" name="c_name" id="cname" required style="border: 1px solid gray; padding:5px 5px 5px 5px;">
+                                                        <option value="">Select Customer</option>
+                                                        <?php while ($row_c_name = mysqli_fetch_row($result_c_name)) {
+                                                        ?>
+                                                            <option value="<?php echo $row_c_name[0]; ?>"><?php echo $row_c_name[0]; ?></option>
+                                                        <?php }
+                                                        ?>
+                                                    </select>
+                                                <?php } else {
+                                                ?>
+                                                    <select class="form-select" name="c_name" id="cname" required style="border: 1px solid gray; padding:5px 5px 5px 5px;">
+                                                        <!-- <option value="">Select Customer</option> -->
+                                                        <?php //while ($row_c_name = mysqli_fetch_row($result_c_name)) {
+                                                        ?>
+                                                        <option value="<?php echo $_SESSION['cname']; ?>"><?php echo $_SESSION['cname']; ?></option>
+                                                        <?php //}
+                                                        ?>
+                                                    </select>
+                                                <?php
+                                                } ?>
                                                 <!-- </div> -->
                                             </div>
                                             <div class="col-md-3 mt-2">

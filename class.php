@@ -163,8 +163,11 @@ if (isset($_GET['b_no']) && $_GET['pname']) {
         $total = $row[3];
     }
 
-    $query_insert_return = "insert into product_return(product_name,qty,price,total,user_id) values('$productname','$productQty','$productPrice','$total','$user_ID')";
+    date_default_timezone_set("Asia/Kolkata");
+    $date = date("Y-m-d h:i:sa", time());
+    $query_insert_return = "insert into product_return(product_name,qty,price,total,date,user_id) values('$productname','$productQty','$productPrice','$total','$date','$user_ID')";
     $result_return = mysqli_query($con, $query_insert_return);
+
 
     $query_delete = "delete from billing_details where bill_no='$bno' AND product_name='$pname' AND user_id='$user_ID'";
     $result_delete = mysqli_query($con, $query_delete);
