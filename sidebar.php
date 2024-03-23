@@ -60,7 +60,7 @@ if ($row > 0) {
                     <span class="nav-link-text ms-1">Sales</span>
                 </a>
             </li>
-            <li class="nav-item">
+            <!-- <li class="nav-item">
                 <a data-bs-toggle="collapse" href="#return" class="nav-link text-white" aria-controls="return" role="button" aria-expanded="false">
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="material-icons opacity-10">refresh</i>
@@ -83,15 +83,15 @@ if ($row > 0) {
                         </li>
                     </ul>
                 </div>
-            </li>
-            <!-- <li class="nav-item">
+            </li> -->
+            <li class="nav-item">
                 <a class="nav-link text-white " href="#">
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="material-icons opacity-10">refresh</i>
                     </div>
-                    <span class="nav-link-text ms-1">Supplier Return</span>
+                    <span class="nav-link-text ms-1">Return</span>
                 </a>
-            </li> -->
+            </li>
 
             <li class="nav-item">
                 <a class="nav-link text-white " href="customer.php">

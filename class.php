@@ -60,7 +60,6 @@ if (isset($_POST['PName']) && isset($_POST['UId'])) {
 
 
 
-
 if (isset($_POST['btn_bill'])) {
     if (isset($_SESSION['sales']) && count($_SESSION['sales']) != 0) {
         date_default_timezone_set("Asia/Kolkata");
@@ -153,10 +152,29 @@ if (isset($_POST['btn_bill'])) {
 
 
 if (isset($_GET['b_no']) && $_GET['pname']) {
-    $query_get_pdetails = "select product_name,product_qty,product_price,total from billing_details where bill_no='$_GET[b_no]' AND product_name='$_GET[pname]'";
+    $bno = $_GET['b_no'];
+    $pname = $_GET['pname'];
+    $query_get_pdetails = "select product_name,product_qty,product_price,total from billing_details where bill_no='$bno' AND product_name='$pname'";
     $result_get_ddetails = mysqli_query($con, $query_get_pdetails);
-    while ($row = mysqli_fetch_row($result_bill_details)) {
-        $productname = "";
+    while ($row = mysqli_fetch_row($result_get_ddetails)) {
+        $productname = $row[0];
+        $productQty = $row[1];
+        $productPrice = $row[2];
+        $total = $row[3];
     }
-    $query = "insert into return(product_name,qty,price,total,user_id) values('','','','','')";
+
+    $query_insert_return = "insert into product_return(product_name,qty,price,total,user_id) values('$productname','$productQty','$productPrice','$total','$user_ID')";
+    $result_return = mysqli_query($con, $query_insert_return);
+
+    $query_delete = "delete from billing_details where bill_no='$bno' AND product_name='$pname' AND user_id='$user_ID'";
+    $result_delete = mysqli_query($con, $query_delete);
+    $delete = mysqli_affected_rows($con);
+    if ($delete > 0) {
+        $_SESSION['return_message'] = "Product Returned!";
+        $_SESSION['icon'] = "success";
+        header("Location: http://localhost/newproject/return.php?r_bno=" . $bno);
+        exit();
+    } else {
+        echo "Not Deleted...";
+    }
 }
