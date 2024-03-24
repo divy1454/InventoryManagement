@@ -548,6 +548,7 @@ if (isset($_SESSION['sale_message']) && $_SESSION['sale_message'] != '') {
             </div>
         </div>
     </div>
+</div>
 
 
-    <?php include('footer.php'); ?>
+<?php include('footer.php'); ?>
