@@ -36,30 +36,30 @@ if (!isset($_COOKIE['email']) && !isset($_COOKIE['pass'])) {
                             <div class="card">
                                 <div class="table-responsive">
                                     <div class="card-header">
-                                        <h4>Product Sales</h4>
+                                        <h4>Report</h4>
 
                                         <div class="row mt-3">
                                             <div class="col-md-3 mt-2">
                                                 <label class="labels">Report Type </label>
-                                                <select class="form-select" onchange="getbprice(this.value)" id="pname" name="prod_name" required style="border: 1px solid gray; padding:5px 5px 5px 5px;">
+                                                <select class="form-select" id="type" name="report_type" required style="border: 1px solid gray; padding:5px 5px 5px 5px;">
                                                     <option value="">Select Type</option>
-                                                    <option value="purchase_report">Purchase Report</option>
-                                                    <option value="sales_report">Sales Report</option>
-                                                    <option value="return_report">Return Report</option>
+                                                    <option value="Purchase Report">Purchase Report</option>
+                                                    <option value="Sales Report">Sales Report</option>
+                                                    <option value="Return Report">Return Report</option>
                                                 </select>
                                             </div>
                                             <div class="col-md-3 mt-2">
                                                 <label class="labels">Start Date </label>
-                                                <input type="text" id="calendar-selectrange" name="daterange" placeholder="Please Select Start Date">
+                                                <input type="text" id="calendar-selectrange" name="start_date" placeholder="Please Select Start Date">
                                             </div>
                                             <div class="col-md-3 mt-2">
                                                 <label class="labels">End Date </label>
-                                                <input type="text" id="calendar-selectrange1" name="daterange" placeholder="Please Select End Date">
+                                                <input type="text" id="calendar-selectrange1" name="end_date" placeholder="Please Select End Date">
                                             </div>
                                         </div>
                                         <br>
                                         <div class="float-end">
-                                            <button type="button" class="btn btn-primary" id="btn_sales">
+                                            <button type="button" class="btn btn-primary" id="btn_report">
                                                 Show Report
                                             </button>
                                         </div>
@@ -103,6 +103,33 @@ if (!isset($_COOKIE['email']) && !isset($_COOKIE['pass'])) {
     const end_date = flatpickr("#calendar-selectrange1", {
         dateFormat: 'Y-m-d',
         "maxDate": "today"
+    });
+
+    $('#btn_report').click(function() {
+        var type = $('#type').val();
+        var start_date = $('#calendar-selectrange').val();
+        var end_date = $('#calendar-selectrange1').val();
+
+        if (type == '') {
+
+        } else if (start_date == '') {
+
+        } else if (end_date == '') {
+
+        } else {
+
+            $.ajax({
+                url: 'command/report_sql.php',
+                type: 'POST',
+                data: {
+                    sd: start_date,
+                    ed: end_date
+                },
+                success: function(data) {
+                    alert(data);
+                }
+            })
+        }
     });
 </script>
 
