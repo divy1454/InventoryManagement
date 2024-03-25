@@ -63,7 +63,7 @@ if (isset($_POST['PName']) && isset($_POST['UId'])) {
 if (isset($_POST['btn_bill'])) {
     if (isset($_SESSION['sales']) && count($_SESSION['sales']) != 0) {
         date_default_timezone_set("Asia/Kolkata");
-        $date = date("Y-m-d h:i:sa", time());
+        $date = date("Y-m-d");
         $cname = $_SESSION['cname'];
         $bill_no = $_SESSION['bill_no'];
         $query = "insert into billing_header(customer_name,date,bill_no,user_id) values('$cname','$date','$bill_no','$user_ID')";
@@ -165,7 +165,7 @@ if (isset($_GET['b_no']) && $_GET['pname']) {
     }
 
     date_default_timezone_set("Asia/Kolkata");
-    $date = date("Y-m-d h:i:sa", time());
+    $date = date("Y-m-d");
     $query_insert_return = "insert into product_return(product_name,qty,price,total,customer_name,date,user_id) values('$productname','$productQty','$productPrice','$total','$customer_name','$date','$user_ID')";
     $result_return = mysqli_query($con, $query_insert_return);
 

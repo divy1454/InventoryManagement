@@ -65,7 +65,8 @@ if (!isset($_COOKIE['email']) && !isset($_COOKIE['pass'])) {
                                         </div>
                                         <br>
 
-                                        <div class="card-body">
+                                        <div class="card-body" id="tablesdata">
+
                                         </div>
                                     </div>
                                 </div>
@@ -111,24 +112,92 @@ if (!isset($_COOKIE['email']) && !isset($_COOKIE['pass'])) {
         var end_date = $('#calendar-selectrange1').val();
 
         if (type == '') {
-
+            Swal.fire({
+                icon: 'error',
+                text: 'Please Select report type...',
+                showConfirmButton: false,
+                timer: 2700,
+                toast: true,
+                position: "top",
+                timerProgressBar: true,
+                didOpen: (toast) => {
+                    toast.onmouseenter = Swal.stopTimer;
+                    toast.onmouseleave = Swal.resumeTimer;
+                }
+            });
         } else if (start_date == '') {
+            Swal.fire({
+                icon: 'error',
+                text: 'Please Select Start Date...',
+                showConfirmButton: false,
+                timer: 2700,
+                toast: true,
+                position: "top",
+                timerProgressBar: true,
+                didOpen: (toast) => {
+                    toast.onmouseenter = Swal.stopTimer;
+                    toast.onmouseleave = Swal.resumeTimer;
+                }
+            });
 
         } else if (end_date == '') {
-
-        } else {
-
-            $.ajax({
-                url: 'command/report_sql.php',
-                type: 'POST',
-                data: {
-                    sd: start_date,
-                    ed: end_date
-                },
-                success: function(data) {
-                    alert(data);
+            Swal.fire({
+                icon: 'error',
+                text: 'Please Select End Date...',
+                showConfirmButton: false,
+                timer: 2700,
+                toast: true,
+                position: "top",
+                timerProgressBar: true,
+                didOpen: (toast) => {
+                    toast.onmouseenter = Swal.stopTimer;
+                    toast.onmouseleave = Swal.resumeTimer;
                 }
-            })
+            });
+        } else {
+            if (type == 'Purchase Report') {
+                $.ajax({
+                    url: 'command/report_sql.php',
+                    type: 'POST',
+                    data: {
+                        sd: start_date,
+                        ed: end_date,
+                        action: 'purchase'
+                    },
+                    success: function(data) {
+                        $('#tablesdata').html(data);
+                    }
+                })
+            } else if (type == 'Sales Report') {
+                $.ajax({
+                    url: 'command/report_sql.php',
+                    type: 'POST',
+                    data: {
+                        sd: start_date,
+                        ed: end_date,
+                        action: 'sales'
+                    },
+                    success: function(data) {
+                        alert(data);
+                    }
+                })
+
+            } else if (type == 'Return Report') {
+                $.ajax({
+                    url: 'command/report_sql.php',
+                    type: 'POST',
+                    data: {
+                        sd: start_date,
+                        ed: end_date,
+                        action: 'return'
+                    },
+                    success: function(data) {
+                        alert(data);
+                    }
+                })
+
+            }
+
         }
     });
 </script>
