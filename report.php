@@ -178,7 +178,7 @@ if (!isset($_COOKIE['email']) && !isset($_COOKIE['pass'])) {
                         action: 'sales'
                     },
                     success: function(data) {
-                        alert(data);
+                        $('#tablesdata').html(data);
                     }
                 })
 
@@ -192,7 +192,7 @@ if (!isset($_COOKIE['email']) && !isset($_COOKIE['pass'])) {
                         action: 'return'
                     },
                     success: function(data) {
-                        alert(data);
+                        $('#tablesdata').html(data);
                     }
                 })
 

@@ -73,7 +73,7 @@ if (isset($_POST['btn_bill'])) {
             $pqty = $val['qty'];
             $pprice = $val['price'];
             $ptotal = $val['total'];
-            $query_insert_bill_details = "insert into billing_details(bill_no,product_name,product_qty,product_price,total,user_id) values('$bill_no','$pname','$pqty','$pprice','$ptotal','$user_ID')";
+            $query_insert_bill_details = "insert into billing_details(bill_no,product_name,product_qty,product_price,date,total,user_id) values('$bill_no','$pname','$pqty','$pprice','$date','$ptotal','$user_ID')";
             $result_bill_details = mysqli_query($con, $query_insert_bill_details);
         }
         $pdf = new FPDF();
