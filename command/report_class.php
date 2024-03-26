@@ -17,9 +17,11 @@ $user_ID = $row[0];
 
 
 <?php
-if (isset($_POST['s_d']) && isset($_POST['e_d']) && isset($_POST['u_id']) && $_POST['action'] == 'purchase_pdf') {
-    $sdate = $_POST['s_d'];
-    $edate = $_POST['e_d'];
+// if (isset($_POST['s_d']) && isset($_POST['e_d']) && isset($_POST['u_id']) && $_POST['action'] == 'purchase_pdf') {
+if (isset($_POST['btn_pdf'])) {
+    $sdate = $_POST['start_date'];
+    $edate = $_POST['end_date'];
+    $user_ID = $_POST['userID'];
     $pdf = new FPDF();
     $pdf->AddPage();
 
@@ -30,26 +32,22 @@ if (isset($_POST['s_d']) && isset($_POST['e_d']) && isset($_POST['u_id']) && $_P
     $pdf->Cell(59, 10, '', 0, 1);
 
     $pdf->SetFont('Arial', 'B', 15);
-    $pdf->Cell(71, 5, 'Customer Details', 0, 0);
+    $pdf->Cell(71, 5, '', 0, 0);
     $pdf->Cell(59, 5, '', 0, 0);
-    $pdf->Cell(59, 5, 'Invoice Details', 0, 1);
+    $pdf->Cell(59, 5, '', 0, 1);
 
     $pdf->SetFont('Courier', '', 12);
 
-    $pdf->Cell(130, 9, 'Name : ', 0, 0);
-    // $pdf->Cell(25, 5, 'Customer:', 0, 0);
-    // $pdf->Cell(34, 5, 'ABC', 0, 1);
+    $pdf->Cell(25, 9, 'From : ' . $sdate, 0, 0);
+    $pdf->Cell(34, 9, '', 0, 1);
 
-    // $pdf->Cell(130, 5, 'Delhi, 751001', 0, 0);
-    $pdf->Cell(25, 9, 'Date:', 0, 0);
-    $pdf->Cell(34, 9, date("d-m-Y"), 0, 1);
+    $pdf->Cell(25, 9, 'To : ' . $edate, 0, 0);
+    $pdf->Cell(34, 9, '', 0, 1);
 
     $pdf->Cell(130, 9, '', 0, 0);
-    $pdf->Cell(25, 1, 'Bill No:', 0, 0);
-    $pdf->Cell(34, 1, '00004', 0, 1);
+    $pdf->Cell(25, 1, 'Report Date:' . date("d-m-Y"), 0, 0);
+    $pdf->Cell(34, 1, '', 0, 1);
 
-
-    // $pdf->SetFont('Arial', 'B', 15);
     $pdf->SetFont('Arial', 'B', 10);
     $pdf->Cell(189, 10, '', 0, 1);
 
@@ -76,11 +74,7 @@ if (isset($_POST['s_d']) && isset($_POST['e_d']) && isset($_POST['u_id']) && $_P
     }
 
 
-    $pdf->Cell(118, 6, '', 0, 0);
-    $pdf->Cell(25, 6, 'Total', 1, 0, 'C');
-    $pdf->Cell(25, 6, '123', 1, 1, 'C');
-
-    $pdf->Line(10, 61, 178, 61);
+    $pdf->Line(10, 61, 200, 61);
 
     $pdf->Output("D", "001.pdf");
 }

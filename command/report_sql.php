@@ -1,6 +1,7 @@
 <?php
 
 include('conn.php');
+require('../fpdf/fpdf.php');
 session_start();
 if (!isset($_COOKIE['email']) && !isset($_COOKIE['pass'])) {
     header("Location: http://localhost/newproject/login/index.php");
@@ -72,29 +73,39 @@ if (isset($_POST['sd']) && isset($_POST['ed']) && $_POST['action'] == 'purchase'
             } ?>
         </tbody>
     </table>
-    <div class="container">
-        <center>
-            <input type="submit" class="btn btn-info" id="btn_pdf" value="Download PDF">
-        </center>
-    </div>
+    <form action="./command/report_class.php" method="post">
+        <div class="container">
+            <center>
+                <input hidden type="text" name="start_date" id="start_date" value="<?php echo $st_date; ?>">
+                <input hidden type="text" name="end_date" id="end_date" value="<?php echo $end_date; ?>">
+                <input hidden type="text" name="userID" id="userID" value="<?php echo $u_id; ?>">
+                <input type="submit" class="btn btn-info" name="btn_pdf" id="btn_pdf" value="Download PDF">
+            </center>
+        </div>
+    </form>
+
+
     <script>
-        $('#btn_pdf').click(function() {
-            var sd = $('#start_date').val();
-            var ed = $('#end_date').val();
-            var uid = $('#userID').val();
+        // $('#btn_pdf').click(function() {
+        //     var sd = $('#start_date').val();
+        //     var ed = $('#end_date').val();
+        //     var uid = $('#userID').val();
 
-            $.ajax({
-                url: './command/report_class.php',
-                type: 'POST',
-                data: {
-                    s_d: sd,
-                    e_d: ed,
-                    u_id: uid,
-                    action: 'purchase_pdf'
-                }
-            })
+        //     $.ajax({
+        //         url: 'report_class.php',
+        //         type: 'POST',
+        //         data: {
+        //             s_d: sd,
+        //             e_d: ed,
+        //             u_id: uid,
+        //             action: "purchase_pdf"
+        //         },
+        //         success: function(data) {
+        //             window.location.href = data;
+        //         }
+        //     })
 
-        });
+        // });
     </script>
 <?php
 }
