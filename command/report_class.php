@@ -75,7 +75,7 @@ if (isset($_POST['purchase_btn_pdf'])) {
 
     $pdf->Line(10, 50, 200, 50);
 
-    $pdf->Output("D", $sdate . "-" . $edate . "purchase.pdf");
+    $pdf->Output("D", $sdate . " to " . $edate . "purchase.pdf");
 }
 
 if (isset($_POST['sales_btn_pdf'])) {
@@ -138,7 +138,7 @@ if (isset($_POST['sales_btn_pdf'])) {
 
     $pdf->Line(10, 50, 200, 50);
 
-    $pdf->Output("D", $sdate . "-" . $edate . " sales.pdf");
+    $pdf->Output("D", $sdate . " to " . $edate . " sales.pdf");
 }
 
 if (isset($_POST['return_btn_pdf'])) {
@@ -203,5 +203,5 @@ if (isset($_POST['return_btn_pdf'])) {
 
     $pdf->Line(10, 50, 200, 50);
 
-    $pdf->Output("D", $sdate . "-" . $edate . " return.pdf");
+    $pdf->Output("D", $sdate . " to " . $edate . " return.pdf");
 }
