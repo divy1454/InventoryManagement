@@ -17,8 +17,7 @@ $user_ID = $row[0];
 
 
 <?php
-// if (isset($_POST['s_d']) && isset($_POST['e_d']) && isset($_POST['u_id']) && $_POST['action'] == 'purchase_pdf') {
-if (isset($_POST['btn_pdf'])) {
+if (isset($_POST['purchase_btn_pdf'])) {
     $sdate = $_POST['start_date'];
     $edate = $_POST['end_date'];
     $user_ID = $_POST['userID'];
@@ -38,14 +37,14 @@ if (isset($_POST['btn_pdf'])) {
 
     $pdf->SetFont('Courier', '', 12);
 
-    $pdf->Cell(25, 9, 'From : ' . $sdate, 0, 0);
+    $pdf->Cell(25, 9, 'From: ' . $sdate, 0, 0);
     $pdf->Cell(34, 9, '', 0, 1);
 
-    $pdf->Cell(25, 9, 'To : ' . $edate, 0, 0);
+    $pdf->Cell(25, 9, 'To:   ' . $edate, 0, 0);
     $pdf->Cell(34, 9, '', 0, 1);
 
     $pdf->Cell(130, 9, '', 0, 0);
-    $pdf->Cell(25, 1, 'Report Date:' . date("d-m-Y"), 0, 0);
+    $pdf->Cell(25, 1, 'Report Date:  ' . date("d-m-Y"), 0, 0);
     $pdf->Cell(34, 1, '', 0, 1);
 
     $pdf->SetFont('Arial', 'B', 10);
@@ -74,7 +73,135 @@ if (isset($_POST['btn_pdf'])) {
     }
 
 
-    $pdf->Line(10, 61, 200, 61);
+    $pdf->Line(10, 50, 200, 50);
 
-    $pdf->Output("D", "001.pdf");
+    $pdf->Output("D", $sdate . "-" . $edate . "purchase.pdf");
+}
+
+if (isset($_POST['sales_btn_pdf'])) {
+    $sdate = $_POST['start_date'];
+    $edate = $_POST['end_date'];
+    $user_ID = $_POST['userID'];
+    $pdf = new FPDF();
+    $pdf->AddPage();
+
+    $pdf->SetFont('Arial', 'B', 20);
+
+    $pdf->Cell(71, 10, '', 0, 0);
+    $pdf->Cell(59, 5, 'Sales Report', 0, 0);
+    $pdf->Cell(59, 10, '', 0, 1);
+
+    $pdf->SetFont('Arial', 'B', 15);
+    $pdf->Cell(71, 5, '', 0, 0);
+    $pdf->Cell(59, 5, '', 0, 0);
+    $pdf->Cell(59, 5, '', 0, 1);
+
+    $pdf->SetFont('Courier', '', 12);
+
+    $pdf->Cell(25, 9, 'From: ' . $sdate, 0, 0);
+    $pdf->Cell(34, 9, '', 0, 1);
+
+    $pdf->Cell(25, 9, 'To:   ' . $edate, 0, 0);
+    $pdf->Cell(34, 9, '', 0, 1);
+
+    $pdf->Cell(130, 9, '', 0, 0);
+    $pdf->Cell(25, 1, 'Report Date:  ' . date("d-m-Y"), 0, 0);
+    $pdf->Cell(34, 1, '', 0, 1);
+
+    $pdf->SetFont('Arial', 'B', 10);
+    $pdf->Cell(189, 10, '', 0, 1);
+
+    $pdf->Cell(50, 10, '', 0, 1);
+
+    $pdf->SetFont('Courier', 'B', 12);
+    $pdf->Cell(10, 6, 'Sr', 0, 0, 'C');
+    $pdf->Cell(60, 6, 'Product Name', 0, 0, 'C');
+    $pdf->Cell(15, 6, 'Qty', 0, 0, 'C');
+    $pdf->Cell(32, 6, 'Unit Price', 0, 0, 'C');
+    $pdf->Cell(35, 6, 'Total', 0, 0, 'C');
+    $pdf->Cell(45, 6, 'Date', 0, 1, 'C');
+    $pdf->SetFont('Courier', '', 12);
+    $i = 1;
+
+    $query = "select product_name,product_qty,product_price,total,date from billing_details where user_id='$user_ID' AND date>='$sdate' AND date<='$edate'";
+    $product_show_result = mysqli_query($con, $query);
+    while ($val = mysqli_fetch_row($product_show_result)) {
+        $pdf->Cell(10, 6, $i, 0, 0, 'C');
+        $pdf->Cell(60, 6, $val[0], 0, 0, 'C');
+        $pdf->Cell(15, 6, $val[1], 0, 0, 'C');
+        $pdf->Cell(32, 6, $val[2], 0, 0, 'C');
+        $pdf->Cell(35, 6, $val[3], 0, 0, 'C');
+        $pdf->Cell(45, 6, $val[4], 0, 1, 'C');
+        $i++;
+    }
+
+
+    $pdf->Line(10, 50, 200, 50);
+
+    $pdf->Output("D", $sdate . "-" . $edate . " sales.pdf");
+}
+
+if (isset($_POST['return_btn_pdf'])) {
+    $sdate = $_POST['start_date'];
+    $edate = $_POST['end_date'];
+    $user_ID = $_POST['userID'];
+    $pdf = new FPDF();
+    $pdf->AddPage();
+
+    $pdf->SetFont('Arial', 'B', 20);
+
+    $pdf->Cell(71, 10, '', 0, 0);
+    $pdf->Cell(59, 5, 'Return Report', 0, 0);
+    $pdf->Cell(59, 10, '', 0, 1);
+
+    $pdf->SetFont('Arial', 'B', 15);
+    $pdf->Cell(71, 5, '', 0, 0);
+    $pdf->Cell(59, 5, '', 0, 0);
+    $pdf->Cell(59, 5, '', 0, 1);
+
+    $pdf->SetFont('Courier', '', 12);
+
+    $pdf->Cell(25, 9, 'From: ' . $sdate, 0, 0);
+    $pdf->Cell(34, 9, '', 0, 1);
+
+    $pdf->Cell(25, 9, 'To:   ' . $edate, 0, 0);
+    $pdf->Cell(34, 9, '', 0, 1);
+
+    $pdf->Cell(130, 9, '', 0, 0);
+    $pdf->Cell(25, 1, 'Report Date:  ' . date("d-m-Y"), 0, 0);
+    $pdf->Cell(34, 1, '', 0, 1);
+
+    $pdf->SetFont('Arial', 'B', 10);
+    $pdf->Cell(189, 10, '', 0, 1);
+
+    $pdf->Cell(50, 10, '', 0, 1);
+
+    $pdf->SetFont('Courier', 'B', 12);
+    $pdf->Cell(10, 6, 'Sr', 0, 0, 'C');
+    $pdf->Cell(40, 6, 'Product Name', 0, 0, 'C');
+    $pdf->Cell(15, 6, 'Qty', 0, 0, 'C');
+    $pdf->Cell(32, 6, 'Unit Price', 0, 0, 'C');
+    $pdf->Cell(30, 6, 'Total', 0, 0, 'C');
+    $pdf->Cell(35, 6, 'Customer Name', 0, 0, 'C');
+    $pdf->Cell(30, 6, 'Date', 0, 1, 'C');
+    $pdf->SetFont('Courier', '', 12);
+    $i = 1;
+
+    $query = "select product_name,qty,price,total,customer_name,date from product_return where user_id='$user_ID' AND date>='$sdate' AND date<='$edate'";
+    $product_show_result = mysqli_query($con, $query);
+    while ($val = mysqli_fetch_row($product_show_result)) {
+        $pdf->Cell(10, 6, $i, 0, 0, 'C');
+        $pdf->Cell(40, 6, $val[0], 0, 0, 'C');
+        $pdf->Cell(15, 6, $val[1], 0, 0, 'C');
+        $pdf->Cell(32, 6, $val[2], 0, 0, 'C');
+        $pdf->Cell(30, 6, $val[3], 0, 0, 'C');
+        $pdf->Cell(35, 6, $val[4], 0, 0, 'C');
+        $pdf->Cell(30, 6, $val[5], 0, 1, 'C');
+        $i++;
+    }
+
+
+    $pdf->Line(10, 50, 200, 50);
+
+    $pdf->Output("D", $sdate . "-" . $edate . " return.pdf");
 }

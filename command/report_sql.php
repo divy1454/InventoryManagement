@@ -23,9 +23,6 @@ if (isset($_POST['sd']) && isset($_POST['ed']) && $_POST['action'] == 'purchase'
     $st_date = $_POST['sd'];
     $end_date = $_POST['ed'];
 ?>
-    <input hidden type="text" id="start_date" value="<?php echo $st_date; ?>">
-    <input hidden type="text" id="end_date" value="<?php echo $end_date; ?>">
-    <input hidden type="text" id="userID" value="<?php echo $u_id; ?>">
 
     <table id='table_data_search' class='table table-bordered table-striped'>
         <thead>
@@ -79,34 +76,10 @@ if (isset($_POST['sd']) && isset($_POST['ed']) && $_POST['action'] == 'purchase'
                 <input hidden type="text" name="start_date" id="start_date" value="<?php echo $st_date; ?>">
                 <input hidden type="text" name="end_date" id="end_date" value="<?php echo $end_date; ?>">
                 <input hidden type="text" name="userID" id="userID" value="<?php echo $u_id; ?>">
-                <input type="submit" class="btn btn-info" name="btn_pdf" id="btn_pdf" value="Download PDF">
+                <input type="submit" class="btn btn-info" name="purchase_btn_pdf" id="btn_pdf" value="Download PDF">
             </center>
         </div>
     </form>
-
-
-    <script>
-        // $('#btn_pdf').click(function() {
-        //     var sd = $('#start_date').val();
-        //     var ed = $('#end_date').val();
-        //     var uid = $('#userID').val();
-
-        //     $.ajax({
-        //         url: 'report_class.php',
-        //         type: 'POST',
-        //         data: {
-        //             s_d: sd,
-        //             e_d: ed,
-        //             u_id: uid,
-        //             action: "purchase_pdf"
-        //         },
-        //         success: function(data) {
-        //             window.location.href = data;
-        //         }
-        //     })
-
-        // });
-    </script>
 <?php
 }
 
@@ -162,16 +135,16 @@ if (isset($_POST['sd']) && isset($_POST['ed']) && $_POST['action'] == 'sales') {
             } ?>
         </tbody>
     </table>
-    <div class="container">
-        <center>
-            <input type="submit" class="btn btn-info" value="Create PDF" id="btn_pdf">
-        </center>
-    </div>
-    <script>
-        $('#btn_pdf').click(function() {
-            alert('Btn clicked!!!');
-        });
-    </script>
+    <form action="./command/report_class.php" method="post">
+        <div class="container">
+            <center>
+                <input hidden type="text" name="start_date" id="start_date" value="<?php echo $st_date; ?>">
+                <input hidden type="text" name="end_date" id="end_date" value="<?php echo $end_date; ?>">
+                <input hidden type="text" name="userID" id="userID" value="<?php echo $u_id; ?>">
+                <input type="submit" class="btn btn-info" name="sales_btn_pdf" id="btn_pdf" value="Download PDF">
+            </center>
+        </div>
+    </form>
 <?php
 }
 
@@ -229,15 +202,15 @@ if (isset($_POST['sd']) && isset($_POST['ed']) && $_POST['action'] == 'return') 
             } ?>
         </tbody>
     </table>
-    <div class="container">
-        <center>
-            <input type="submit" class="btn btn-info" value="Create PDF" id="btn_pdf">
-        </center>
-    </div>
-    <script>
-        $('#btn_pdf').click(function() {
-            alert('Btn clicked!!!');
-        });
-    </script>
+    <form action="./command/report_class.php" method="post">
+        <div class="container">
+            <center>
+                <input hidden type="text" name="start_date" id="start_date" value="<?php echo $st_date; ?>">
+                <input hidden type="text" name="end_date" id="end_date" value="<?php echo $end_date; ?>">
+                <input hidden type="text" name="userID" id="userID" value="<?php echo $u_id; ?>">
+                <input type="submit" class="btn btn-info" name="return_btn_pdf" id="btn_pdf" value="Download PDF">
+            </center>
+        </div>
+    </form>
 <?php
 }
