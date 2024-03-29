@@ -1,3 +1,14 @@
+<?php
+include('../command/conn.php');
+session_start();
+
+if (!isset($_SESSION['mail'])) {
+    header("Location: http://localhost/newproject/forgotpass/");
+    exit();
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -17,14 +28,13 @@
 
 <body>
     <?php
-    session_start();
-    if (isset($_SESSION['email_message']) && $_SESSION['email_message'] != '') {
-        if (isset($_SESSION['email_message']) && $_SESSION['email_message'] == 'Email Is Not Found..') {
+    if (isset($_SESSION['cpass_message']) && $_SESSION['cpass_message'] != '') {
+        if (isset($_SESSION['cpass_message']) && $_SESSION['cpass_message'] == 'Confirm Password Is not match') {
     ?>
             <script>
                 Swal.fire({
                     icon: '<?php echo $_SESSION['icon']; ?>',
-                    text: '<?php echo $_SESSION['email_message']; ?>',
+                    text: '<?php echo $_SESSION['cpass_message']; ?>',
                     showConfirmButton: false,
                     timer: 2500,
                     toast: true,
@@ -32,7 +42,7 @@
                 });
             </script>
     <?php
-            unset($_SESSION['email_message']);
+            unset($_SESSION['cpass_message']);
         }
     }
     ?>
@@ -49,16 +59,24 @@
 
                                     <form class="mx-1 mx-md-4" action="sql.php" method="post">
                                         <div class="d-flex flex-row align-items-center mb-4">
-                                            <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
+                                            <i class="fas fa-lock fa-lg me-3 fa-fw"></i>
                                             <div class="form-outline flex-fill mb-0">
-                                                <input type="email" id="form3Example3c" name="mail" value="" class="form-control" required />
-                                                <!-- <input type="email" id="form3Example3c" name="mail" class="form-control" required /> -->
-                                                <label class="form-label" for="form3Example3c">Email</label>
+                                                <input type="password" id="form3Example4c" class="form-control" value="" name="passs" required />
+                                                <!-- <input type="password" id="form3Example4c" class="form-control" name="passs" required /> -->
+                                                <label class="form-label" for="form3Example4c">Password</label>
+                                            </div>
+                                        </div>
+                                        <div class="d-flex flex-row align-items-center mb-4">
+                                            <i class="fas fa-lock fa-lg me-3 fa-fw"></i>
+                                            <div class="form-outline flex-fill mb-0">
+                                                <input type="password" id="form3Example4c" class="form-control" value="" name="cpasss" required />
+                                                <!-- <input type="password" id="form3Example4c" class="form-control" name="passs" required /> -->
+                                                <label class="form-label" for="form3Example4c">Confirm Password</label>
                                             </div>
                                         </div>
 
                                         <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
-                                            <button type="submit" class="btn btn-primary btn-lg" name="loginbtn">Get Otp</button>
+                                            <button type="submit" class="btn btn-primary btn-lg" name="updatebtn">Update Password</button>
                                         </div>
 
                                     </form>
@@ -76,7 +94,6 @@
 
     <!-- Script CDN Bootstrap -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
-
 </body>
 
 </html>

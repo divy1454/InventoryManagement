@@ -50,7 +50,7 @@ if (!isset($_SESSION['mail'])) {
 
 <?php
 
-if (isset($_POST['btn_verify'])) {
+if (isset($_POST['btn_verify']) && isset($_SESSION['shop'])) {
     $u_otp = $_POST['1'] . $_POST['2'] . $_POST['3'] . $_POST['4'];
     $otp = $_SESSION['otp'];
     if ($otp == $u_otp) {
@@ -100,6 +100,27 @@ if (isset($_POST['btn_verify'])) {
                 icon: 'error',
                 title: 'Error...',
                 text: 'Incorrect OTP...Please enter valid OTP',
+            });
+        </script>
+    <?php
+    }
+}
+
+
+
+if (isset($_POST['btn_verify'])) {
+    $u_otp = $_POST['1'] . $_POST['2'] . $_POST['3'] . $_POST['4'];
+    $otp = $_SESSION['otp'];
+    if ($otp == $u_otp) {
+        header("Location: http://localhost/newproject/forgotpass/forgotpassword.php");
+        exit();
+    } else {
+    ?>
+        <script>
+            Swal.fire({
+                icon: 'error',
+                title: 'Error....',
+                text: 'Otp Incorrect...',
             });
         </script>
 <?php

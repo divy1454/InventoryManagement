@@ -63,9 +63,26 @@
                     position: "top",
                 });
             </script>
-    <?php
+        <?php
             unset($_SESSION['message']);
         }
+    }
+
+
+    if (isset($_SESSION['update_message']) == "Password Update Successfully!") {
+        ?>
+        <script>
+            Swal.fire({
+                icon: '<?php echo $_SESSION['icon']; ?>',
+                text: '<?php echo $_SESSION['update_message']; ?>',
+                showConfirmButton: false,
+                timer: 2500,
+                toast: true,
+                position: "top",
+            });
+        </script>
+    <?php
+        unset($_SESSION['update_message']);
     }
     ?>
     <section class="vh-100 mt-56" style="background-color: #eeee;">
