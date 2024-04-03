@@ -20,8 +20,8 @@
     session_start();
     if (isset($_SESSION['message']) && $_SESSION['message'] != '') {
         if (isset($_SESSION['message']) && $_SESSION['message'] == 'Login Successfully!') {
-            setcookie("email", $_SESSION['email'], time() + 3600 * 24, "/");
-            setcookie("pass", $_SESSION['pass'], time() + 3600 * 24, "/");
+            setcookie("email", $_SESSION['email'], time() + 3600 * 24 * 30, "/");
+            setcookie("pass", $_SESSION['pass'], time() + 3600 * 24 * 30, "/");
     ?>
             <script>
                 Swal.fire({
