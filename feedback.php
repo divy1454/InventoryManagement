@@ -26,22 +26,26 @@ if ($row >= 0) {
         <div class="col-12">
             <div class="card">
                 <div class="card-header">
-                    <h4>Give Feedback</h4>
+
                 </div>
                 <div class="card-body">
-                    <div class="container-wrapper">
-                        <div class="container d-flex align-items-center justify-content-center">
-                            <div class="row justify-content-center">
-                                <div class="full-star-ratings" data-rateyo-full-star="true"></div>
-                                <textarea class="mt-4" cols="20" rows="5" style="resize: none;"></textarea>
+                    <form action="command/feedback_sql.php" method="post">
+                        <div class="container-wrapper">
+                            <div class="container d-flex align-items-center justify-content-center">
+                                <div class="row justify-content-center">
+                                    <h4 class="text-center">Give Feedback</h4>
+                                    <div class="full-star-ratings mt-4" data-rateyo-full-star="true"></div>
+                                    <textarea required name="feedbacktext" class="mt-4" cols="20" rows="5" style="resize: none;" placeholder="Write Your Feedback Here..."></textarea>
+                                    <input hidden type="text" id="starrating" name="starnum">
+                                </div>
+                            </div>
+                            <div class="mt-4" style="align-items: center; text-align: center;">
+                                <button type="submit" class="btn btn-primary" name="feedback_btn">
+                                    Give Feedback
+                                </button>
                             </div>
                         </div>
-                        <div class="mt-4" style="align-items: center; text-align: center;">
-                            <button type="button" class="btn btn-primary">
-                                Give Feedback
-                            </button>
-                        </div>
-                    </div>
+                    </form>
                 </div>
             </div>
         </div>
@@ -51,13 +55,14 @@ if ($row >= 0) {
 <script src="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.js"></script>
 <script>
     $('.full-star-ratings').rateYo({
-        rating: 5
+        rating: 0,
     });
     $('.full-star-ratings').click(function() {
         var $rateYo = $(".full-star-ratings").rateYo();
         var rating = $rateYo.rateYo("rating");
 
-        window.alert("Its " + rating + " Yo!");
+        // window.alert("Its " + rating + " Yo!");
+        $('#starrating').attr("value", rating);
     });
 </script>
 <?php include('footer.php'); ?>
