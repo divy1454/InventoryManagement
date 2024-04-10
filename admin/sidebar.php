@@ -13,7 +13,7 @@
         </div>
         <div class="navbar-nav w-100">
             <a href="index.php" class="nav-item nav-link"><i class="bi bi-house-door-fill me-2"></i>Home</a>
-            <a href="!#" class="nav-item nav-link"><i class="bi bi-house-door-fill me-2"></i>User</a>
+            <a href="!#" class="nav-item nav-link"><i class="bi bi-person-fill me-2"></i>User</a>
             <a href="feedback.php" class="nav-item nav-link"><i class="bi bi-chat-quote-fill me-2"></i>Feedback</a>
         </div>
     </nav>
