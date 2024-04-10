@@ -44,9 +44,9 @@ include('command/conn.php');
 
     <div class="col-12">
         <div class="bg-light rounded h-100 p-4">
-            <h6 class="mb-4">User Feedback's</h6>
+            <h2 class="mb-4 text-center">User Feedback's</h2>
             <?php
-            $query = "select id,text,star,user_ID from feedback";
+            $query = "select feedback.id,feedback.text,feedback.star,feedback.user_ID,user.username from feedback,user where user.id=feedback.user_ID";
             $result = mysqli_query($con, $query);
             while ($row = mysqli_fetch_row($result)) {
             ?>
@@ -55,8 +55,10 @@ include('command/conn.php');
                         <b> Sr : </b><?php echo $row[0]; ?>
                         <br>
                         <b> User Name : </b>
+                        <?php echo $row[4]; ?>
                         <br>
                         <b> Message : </b>
+                        <p><?php echo $row[1]; ?></p>
                         <div class="rateYo-<?php echo $row[0]; ?>" data-rateyo-full-star="true"></div><br>
                         <script>
                             $('.rateYo-<?php echo $row[0]; ?>').rateYo({
@@ -65,6 +67,7 @@ include('command/conn.php');
                                 readOnly: true
                             });
                         </script>
+                        <hr>
                     </div>
                 </div>
             <?php }
