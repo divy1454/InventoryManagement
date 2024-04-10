@@ -1,3 +1,16 @@
+<?php
+include('command/conn.php');
+$uemail = $_COOKIE['email'];
+$query = "select id from user where email='$uemail'";
+$result = mysqli_query($con, $query);
+$row = mysqli_fetch_row($result);
+$uid = $row[0];
+date_default_timezone_set("Asia/Kolkata");
+$date = date('d/m/Y h:i:s a', time());
+$query_last_login = "update user set last_login='$date' where id='$uid'";
+$result_last_login = mysqli_query($con, $query_last_login);
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
