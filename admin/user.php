@@ -1,8 +1,42 @@
 <?php
 include('header.php');
 include('command/conn.php');
+session_start();
 ?>
 
+<?php
+if (isset($_SESSION['message']) && $_SESSION['message'] != '') {
+    if (isset($_SESSION['message']) && $_SESSION['message'] == 'User Update Successfully!') {
+?>
+        <script>
+            Swal.fire({
+                icon: '<?php echo $_SESSION['icon']; ?>',
+                text: '<?php echo $_SESSION['message']; ?>',
+                showConfirmButton: false,
+                timer: 2500,
+                toast: true,
+                position: "top",
+            });
+        </script>
+    <?php
+        unset($_SESSION['message']);
+    } else {
+    ?>
+        <script>
+            Swal.fire({
+                icon: '<?php echo $_SESSION['icon']; ?>',
+                text: '<?php echo $_SESSION['message']; ?>',
+                showConfirmButton: false,
+                timer: 2700,
+                toast: true,
+                position: "top",
+            });
+        </script>
+<?php
+        unset($_SESSION['message']);
+    }
+}
+?>
 
 <div class="container-fluid vh-100 h-100">
     <div class="row min-vh-80 h-100">
