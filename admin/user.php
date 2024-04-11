@@ -1,7 +1,12 @@
 <?php
+ob_start();
 include('header.php');
 include('command/conn.php');
 session_start();
+if (!isset($_COOKIE['email']) && !isset($_COOKIE['pass'])) {
+    header("Location:http://localhost/newproject/admin/signin.php");
+    exit();
+}
 ?>
 
 <?php
