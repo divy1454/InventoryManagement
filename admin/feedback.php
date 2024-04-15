@@ -50,7 +50,7 @@ if (!isset($_COOKIE['email']) && !isset($_COOKIE['pass'])) {
 
     <div class="col-12">
         <div class="bg-light rounded h-100 p-4">
-            <h2 class="mb-4 text-center">User Feedback's</h2>
+            <h2 class="mb-4 text-center">User's Feedback</h2>
             <?php
             $query = "select feedback.id,feedback.text,feedback.star,feedback.user_ID,user.username from feedback,user where user.id=feedback.user_ID";
             $result = mysqli_query($con, $query);

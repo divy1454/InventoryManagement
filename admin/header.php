@@ -1,3 +1,16 @@
+<?php
+include('command/conn.php');
+date_default_timezone_set("Asia/Kolkata");
+$date = date('d/m/Y h:i:s a', time());
+$query = "update admin set last_login='$date'";
+$result = mysqli_query($con, $query);
+
+
+$select_query = "select last_login from admin";
+$result = mysqli_query($con, $select_query);
+$row = mysqli_fetch_row($result);
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -52,6 +65,8 @@
                             <span class="d-none d-lg-inline-flex">Admin</span>
                         </a>
                         <div class="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom m-0">
+                            <label><b>Last Login :</b> <?php echo $row[0]; ?></label>
+                            <hr>
                             <a href="logout.php" class="dropdown-item">Log Out</a>
                         </div>
                     </div>
