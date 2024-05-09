@@ -154,7 +154,7 @@ if (isset($_SESSION['delete_message']) && $_SESSION['delete_message'] != '') {
                                 </div>
                                 <div class="mb-3">
                                     <label class="form-label">Phone Number</label>
-                                    <input type="number" pattern="[0-9]{10}" class="form-control" name="c_phone" required style="border: 1px solid gray; padding:5px 5px 5px 5px;">
+                                    <input type="text" maxlength="10" minlength="10" pattern="[0-9]{10}" class="form-control" name="c_phone" required style="border: 1px solid gray; padding:5px 5px 5px 5px;">
                                 </div>
                                 <input type="submit" name="btn_customer_add" class="btn btn-primary" value="Add">
                             </form>
@@ -196,7 +196,7 @@ if (isset($_SESSION['delete_message']) && $_SESSION['delete_message'] != '') {
                                 </div>
                                 <div class="mb-3">
                                     <label class="form-label">Phone</label>
-                                    <input type="number" pattern="[0-9]{10}" class="form-control" name="c_phone" id="c_phone" required style="border: 1px solid gray; padding:5px 5px 5px 5px;">
+                                    <input type="text" maxlength="10" minlength="10" pattern="[0-9]{10}" class="form-control" name="c_phone" id="c_phone" required style="border: 1px solid gray; padding:5px 5px 5px 5px;">
                                 </div>
                                 <input type="submit" name="btn_customer_edit" class="btn btn-primary" value="Update Product">
                             </form>

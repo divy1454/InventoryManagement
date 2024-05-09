@@ -181,7 +181,7 @@ if (isset($_SESSION['delete_message']) && $_SESSION['delete_message'] != '') {
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            <form action="./command/supplier.php" method="post">
+                            <form action="./command/supplier_sql.php" method="post">
                                 <div class="mb-3">
                                     <!-- <label class="form-label">User Email</label> -->
                                     <input type="text" hidden value="<?php echo $email; ?>" class="form-control" name="u_email" readonly style="border: 1px solid gray; padding:5px 5px 5px 5px;">
@@ -204,7 +204,7 @@ if (isset($_SESSION['delete_message']) && $_SESSION['delete_message'] != '') {
                                 </div>
                                 <div class="mb-3">
                                     <label class="form-label">Supplier Phone</label>
-                                    <input type="number" id="s_phone" pattern="[0-9]{10}" class="form-control" name="s_phone" required style="border: 1px solid gray; padding:5px 5px 5px 5px;">
+                                    <input type="text" maxlength="10" minlength="10" pattern="[0-9]{10}" id="s_phone" class="form-control" name="s_phone" required style="border: 1px solid gray; padding:5px 5px 5px 5px;">
                                 </div>
                                 <input type="submit" name="btn_supplier_edit" class="btn btn-primary" value="Update Product">
                             </form>
