@@ -19,11 +19,13 @@ include('command/conn.php');
 session_start();
 // session_destroy();
 
-if (isset($_POST['bill_no']) && isset($_POST['p_name']) && isset($_POST['p_id']) && isset($_POST['c_name']) && isset($_POST['p_qty']) && isset($_POST['p_price']) && isset($_POST['p_total'])) {
+if (isset($_POST['bill_no']) && isset($_POST['p_name']) && isset($_POST['p_id']) && isset($_POST['c_name']) && isset($_POST['p_qty']) && isset($_POST['p_price']) && isset($_POST['p_total']) && isset($_POST['gst'])) {
     $id = $_POST['p_id'];
     $pqty = $_POST['p_qty'];
     $u_email = $_COOKIE['email'];
     $prod_name = $_POST['p_name'];
+    $gst_amount = $_POST['gst'];
+    $gst_per = $_POST['gst_per'];
     $_SESSION['cname'] = $_POST['c_name'];
     $_SESSION['pid'] = $id;
     $_SESSION['bill_no'] = $_POST['bill_no'];
@@ -42,12 +44,13 @@ if (isset($_POST['bill_no']) && isset($_POST['p_name']) && isset($_POST['p_id'])
     if ($pqty <= $p_qty) {
         if (isset($_SESSION['sales'][$id])) {
             $old = $_SESSION['sales'][$id]['qty'];
-            $_SESSION['sales'][$id] = array("pid" => $id, "pname" => $_POST['p_name'], "qty" => $old + $_POST['p_qty'], "price" => $_POST['p_price'], "total" => $_POST['p_price'] * ($old + $_POST['p_qty']));
+            $old_gst = $_SESSION['sales'][$id]['gst'];
+            $_SESSION['sales'][$id] = array("pid" => $id, "pname" => $_POST['p_name'], "qty" => $old + $_POST['p_qty'], "price" => $_POST['p_price'], "gst" => ($_POST['gst'] + $old_gst), "total" => ($_POST['p_price'] * ($old + $_POST['p_qty'])) + ($_POST['gst'] + $old_gst));
             $update_query = "update product set qty=qty-'$pqty' where id='$id'";
             $update_result = mysqli_query($con, $update_query);
             $update_row = mysqli_affected_rows($con);
         } else {
-            $_SESSION['sales'][$id] = array("pid" => $id, "pname" => $_POST['p_name'], "qty" => $_POST['p_qty'], "price" => $_POST['p_price'], "total" => $_POST['p_total']);
+            $_SESSION['sales'][$id] = array("pid" => $id, "pname" => $_POST['p_name'], "qty" => $_POST['p_qty'], "price" => $_POST['p_price'], "gst" => $_POST['gst'], "total" => $_POST['p_total']);
             $update_query = "update product set qty=qty-'$pqty' where id='$id'";
             $update_result = mysqli_query($con, $update_query);
             $update_row = mysqli_affected_rows($con);

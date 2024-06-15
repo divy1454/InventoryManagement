@@ -36,6 +36,17 @@ if (isset($_POST['pname']) && isset($_POST['uid'])) {
     }
 }
 
+if (isset($_POST['gst_pname']) && isset($_POST['gst_uid'])) {
+    $productName = $_POST['gst_pname'];
+    $uid = $_POST['gst_uid'];
+
+    $q = "select gst from product where product_name='$productName' AND user_id='$uid'";
+    $result = mysqli_query($con, $q);
+    while ($row = mysqli_fetch_row($result)) {
+        echo $row[0];
+    }
+}
+
 if (isset($_POST['P_Name']) && isset($_POST['U_Id'])) {
     $productName = $_POST['P_Name'];
     $uid = $_POST['U_Id'];
@@ -73,7 +84,8 @@ if (isset($_POST['btn_bill'])) {
             $pqty = $val['qty'];
             $pprice = $val['price'];
             $ptotal = $val['total'];
-            $query_insert_bill_details = "insert into billing_details(bill_no,product_name,product_qty,product_price,date,total,user_id) values('$bill_no','$pname','$pqty','$pprice','$date','$ptotal','$user_ID')";
+            $gst_amount = $val['gst'];
+            $query_insert_bill_details = "insert into billing_details(bill_no,product_name,product_qty,product_price,gst_amount,date,total,user_id) values('$bill_no','$pname','$pqty','$pprice','$gst_amount','$date','$ptotal','$user_ID')";
             $result_bill_details = mysqli_query($con, $query_insert_bill_details);
         }
         $pdf = new FPDF();
@@ -114,29 +126,31 @@ if (isset($_POST['btn_bill'])) {
 
         $pdf->SetFont('Courier', 'B', 12);
         $pdf->Cell(10, 6, 'Sr', 0, 0, 'C');
-        $pdf->Cell(80, 6, 'Product Name', 0, 0, 'C');
+        $pdf->Cell(75, 6, 'Product Name', 0, 0, 'C');
         $pdf->Cell(23, 6, 'Qty', 0, 0, 'C');
         $pdf->Cell(30, 6, 'Unit Price', 0, 0, 'C');
-        $pdf->Cell(25, 6, 'Total', 0, 1, 'C');
+        $pdf->Cell(25, 6, 'GST', 0, 0, 'C');
+        $pdf->Cell(35, 6, 'Total', 0, 1, 'C');
         $pdf->SetFont('Courier', '', 12);
         $i = 1;
         $total = 0;
         foreach ($_SESSION['sales'] as $key => $val) {
             $pdf->Cell(10, 6, $i, 0, 0, 'C');
-            $pdf->Cell(80, 6, $val['pname'], 0, 0, 'C');
+            $pdf->Cell(75, 6, $val['pname'], 0, 0, 'C');
             $pdf->Cell(23, 6, $val['qty'], 0, 0, 'C');
             $pdf->Cell(30, 6, $val['price'], 0, 0, 'C');
-            $pdf->Cell(25, 6, $val['total'], 0, 1, 'C');
+            $pdf->Cell(25, 6, $val['gst'], 0, 0, 'C');
+            $pdf->Cell(35, 6, $val['total'], 0, 1, 'C');
             $total = $total + $val['total'];
             $i++;
         }
 
-
-        $pdf->Cell(118, 6, '', 0, 0);
+        $pdf->Ln(5);
+        $pdf->Cell(145, 6, '', 0, 0);
         $pdf->Cell(25, 6, 'Total', 1, 0, 'C');
         $pdf->Cell(25, 6, $total, 1, 1, 'C');
 
-        $pdf->Line(10, 61, 178, 61);
+        $pdf->Line(10, 61, 200, 61);
 
         $pdf->Output("I", "001.pdf");
         unset($_SESSION['sales']);

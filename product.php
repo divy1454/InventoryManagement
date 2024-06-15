@@ -164,6 +164,16 @@ if (isset($_SESSION['delete_message']) && $_SESSION['delete_message'] != '') {
                                         <option value="liter">Liter</option>
                                     </select>
                                 </div>
+                                <div class="mb-3">
+                                    <label class="form-label">GST</label>
+                                    <select class="form-select" name="p_gst" required style="border: 1px solid gray; padding:5px 5px 5px 5px;">
+                                        <option value="0" selected>0%</option>
+                                        <option value="5">5%</option>
+                                        <option value="12">12%</option>
+                                        <option value="18">18%</option>
+                                        <option value="28">28%</option>
+                                    </select>
+                                </div>
                                 <input type="submit" name="btn_product_add" class="btn btn-primary" value="Add">
                             </form>
                         </div>
@@ -216,6 +226,16 @@ if (isset($_SESSION['delete_message']) && $_SESSION['delete_message'] != '') {
                                         <option value="pieces" selected>Pieces</option>
                                         <option value="kg">K.g</option>
                                         <option value="liter">Liter</option>
+                                    </select>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">GST</label>
+                                    <select class="form-select" name="p_gst" id="p_gst" required style="border: 1px solid gray; padding:5px 5px 5px 5px;">
+                                        <option value="0" selected>0%</option>
+                                        <option value="5">5%</option>
+                                        <option value="12">12%</option>
+                                        <option value="18">18%</option>
+                                        <option value="28">28%</option>
                                     </select>
                                 </div>
                                 <input type="submit" name="btn_product_edit" class="btn btn-primary" value="Update Product">
@@ -278,12 +298,13 @@ if (isset($_SESSION['delete_message']) && $_SESSION['delete_message'] != '') {
                                                     <th>Type</th>
                                                     <th>Buy Price</th>
                                                     <th>Sell Price</th>
+                                                    <th>GST</th>
                                                     <th>Action</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
                                                 <?php
-                                                $query = "select id,product_name,qty,typeofsell,buy_price,sell_price from product where user_id='$u_id'";
+                                                $query = "select id,product_name,qty,typeofsell,buy_price,sell_price,gst from product where user_id='$u_id'";
                                                 $product_show_result = mysqli_query($con, $query);
                                                 while ($row = mysqli_fetch_row($product_show_result)) {
                                                     echo "<tr>";
@@ -293,6 +314,7 @@ if (isset($_SESSION['delete_message']) && $_SESSION['delete_message'] != '') {
                                                     echo "<td>" . $row[3] . "</td>";
                                                     echo "<td>" . $row[4] . "</td>";
                                                     echo "<td>" . $row[5] . "</td>";
+                                                    echo "<td>" . $row[6] . "</td>";
                                                     echo "<td> 
                                                     <button type='button' class='btn btn-success btn-sm editbtn' data-bs-toggle='modal' data-bs-target='#edit_product'>Edit</button>
                                                     <button type='button' class='btn btn-danger btn-sm deletebtn' data-bs-toggle='modal' data-bs-target='#delete_product'>Delete</button>
@@ -331,6 +353,7 @@ if (isset($_SESSION['delete_message']) && $_SESSION['delete_message'] != '') {
                         $('#p_type').val(data[3]);
                         $('#b_price').val(data[4]);
                         $('#s_price').val(data[5]);
+                        $('#p_gst').val(data[6]);
                     });
 
                     $('.deletebtn').on('click', function() {

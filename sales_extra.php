@@ -30,7 +30,7 @@ $query_cname = "select c_name from customer where u_id='$u_id'";
 $result_c_name = mysqli_query($con, $query_cname);
 
 
-$query_bill = "select id from billing_header";
+$query_bill = "select bill_no from billing_header where user_id='$u_id'";
 $result_bill = mysqli_query($con, $query_bill);
 $bid = "";
 while ($row = mysqli_fetch_row($result_bill)) {
@@ -208,6 +208,14 @@ if (isset($_SESSION['sale_message']) && $_SESSION['sale_message'] != '') {
                                             </div>
                                             <div class="col-md-3 mt-2">
                                                 <div class="input-group input-group-static">
+                                                    <label class="labels">GST </label>
+                                                    <input type="text" class="form-control" name="fname" id="pgst" style="font-weight: bold;" readonly>
+                                                    <input type="hidden" class="form-control" id="pgst_hidden" style="font-weight: bold;" readonly>
+                                                    <input type="hidden" class="form-control" id="gstamount_hidden" style="font-weight: bold;" readonly>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3 mt-2">
+                                                <div class="input-group input-group-static">
                                                     <label class="labels">Total </label>
                                                     <input type="text" class="form-control" name="fname" id="ptotal" style="font-weight: bold;" readonly>
                                                 </div>
@@ -230,6 +238,7 @@ if (isset($_SESSION['sale_message']) && $_SESSION['sale_message'] != '') {
                                                         <th>Product Name</th>
                                                         <th>Qty</th>
                                                         <th>Price</th>
+                                                        <th>GST</th>
                                                         <th>Total</th>
                                                         <th>Action</th>
                                                     </tr>
@@ -244,6 +253,7 @@ if (isset($_SESSION['sale_message']) && $_SESSION['sale_message'] != '') {
                                                         <td>$val[pname]</td>
                                                         <td>$val[qty]</td>
                                                         <td>$val[price]</td>
+                                                        <td>$val[gst]</td>
                                                         <td>$val[total]</td>
                                                         <td> 
                                                             <button type='button' class='btn btn-danger btn-sm deletebtn'>X</button>
@@ -306,7 +316,24 @@ if (isset($_SESSION['sale_message']) && $_SESSION['sale_message'] != '') {
                             success: function(results) {
                                 $('#sprice').attr("value", results);
                                 $('#pprice').attr("value", results);
+                                getgst(pname);
                                 getID(pname);
+                            }
+                        })
+                    }
+
+                    function getgst(pname) {
+                        var uid = $('#user_id').val();
+                        $.ajax({
+                            url: 'class.php',
+                            type: 'POST',
+                            data: {
+                                gst_pname: pname,
+                                gst_uid: uid
+                            },
+                            success: function(results) {
+                                $('#pgst').attr("value", results + "%");
+                                $('#pgst_hidden').attr("value", results);
                             }
                         })
                     }
@@ -350,6 +377,8 @@ if (isset($_SESSION['sale_message']) && $_SESSION['sale_message'] != '') {
                         var ptotal = $('#ptotal').val();
                         var bno = $('#bno').val();
                         var product_qty = $('#product_qty').val();
+                        var gst_amount = $('#gstamount_hidden').val();
+                        var gst_per = $('#pgst').val();
 
                         if (pname == '') {
                             Swal.fire({
@@ -451,7 +480,9 @@ if (isset($_SESSION['sale_message']) && $_SESSION['sale_message'] != '') {
                                     p_qty: prod_qty,
                                     p_price: pprice,
                                     p_total: ptotal,
-                                    bill_no: bno
+                                    bill_no: bno,
+                                    gst: gst_amount,
+                                    gst_per: gst_per
                                 },
                                 success: function(data) {
                                     Swal.fire({
@@ -483,7 +514,12 @@ if (isset($_SESSION['sale_message']) && $_SESSION['sale_message'] != '') {
                     $("#pqty").keyup(function() {
                         var price = $("#pprice").val();
                         var pqty = $("#pqty").val();
-                        $('#ptotal').val(price * pqty);
+                        var gst = $("#pgst_hidden").val();
+
+                        var total = price * pqty;
+                        var gst_amount = (total * gst) / 100;
+                        $('#ptotal').val(total + gst_amount);
+                        $('#gstamount_hidden').val(gst_amount);
                     });
 
                     $('.deletebtn').click(function() {

@@ -6,6 +6,7 @@ if (isset($_POST['btn_product_add'])) {
     $u_id = $_POST['u_id'];
     $pname = $_POST['p_name'];
     $mos = $_POST['p_mos'];
+    $gst = $_POST['p_gst'];
     $b_price = $_POST['b_price'];
     $s_price = $_POST['s_price'];
     $profit = $s_price - $b_price;
@@ -26,7 +27,7 @@ if (isset($_POST['btn_product_add'])) {
         exit();
     } else {
         if ($s_price >= $b_price) {
-            $query = "insert into product(product_name,qty,typeofsell,buy_price,sell_price,profit,user_id) values('$pname','0','$mos','$b_price','$s_price','$profit','$u_id')";
+            $query = "insert into product(product_name,qty,typeofsell,buy_price,sell_price,profit,gst,user_id) values('$pname','0','$mos','$b_price','$s_price','$profit','$gst','$u_id')";
             $result = mysqli_query($con, $query);
             $row = mysqli_affected_rows($con);
 
@@ -64,13 +65,14 @@ if (isset($_POST['btn_product_edit'])) {
     $p_id = $_POST['p_id'];
     $pname = $_POST['p_name'];
     $mos = $_POST['p_mos'];
+    $gst = $_POST['p_gst'];
     $b_price = $_POST['b_price'];
     $s_price = $_POST['s_price'];
     $profit = $s_price - $b_price;
 
     session_start();
 
-    $query_edit = "update product set product_name='$pname',typeofsell='$mos',buy_price='$b_price',sell_price='$s_price',profit='$profit' where id='$p_id'";
+    $query_edit = "update product set product_name='$pname',typeofsell='$mos',buy_price='$b_price',sell_price='$s_price',profit='$profit',gst='$gst' where id='$p_id'";
     $result = mysqli_query($con, $query_edit);
     $row = mysqli_affected_rows($con);
 
