@@ -69,13 +69,24 @@ if (isset($_POST['PName']) && isset($_POST['UId'])) {
     }
 }
 
+if (isset($_SESSION['cname'])) {
+    $cid = $_SESSION['cname'];
+    $query_cname = "select c_name,c_add,c_phone from customer where id='$cid'";
+    $result_c_name = mysqli_query($con, $query_cname);
+    while ($row_c_name = mysqli_fetch_row($result_c_name)) {
+        $c_name = $row_c_name[0];
+        $c_add = $row_c_name[1];
+        $c_phone = $row_c_name[2];
+    }
+}
+
 
 // Create a bill as PDF
 if (isset($_POST['btn_bill'])) {
     if (isset($_SESSION['sales']) && count($_SESSION['sales']) != 0) {
         date_default_timezone_set("Asia/Kolkata");
         $date = date("Y-m-d");
-        $cname = $_SESSION['cname'];
+        $cname = $c_name;
         $bill_no = $_SESSION['bill_no'];
         $query = "insert into billing_header(customer_name,date,bill_no,user_id) values('$cname','$date','$bill_no','$user_ID')";
         $result_insert_bill = mysqli_query($con, $query);
@@ -91,68 +102,79 @@ if (isset($_POST['btn_bill'])) {
         $pdf = new FPDF();
         $pdf->AddPage();
 
-        $pdf->SetFont('Arial', 'B', 20);
+        // Add Logo
+        $pdf->Image('assets\images\favicon-32x32.png', 10, 6, 30);
 
-        $pdf->Cell(71, 10, '', 0, 0);
-        $pdf->Cell(59, 5, 'Invoice', 0, 0);
-        $pdf->Cell(59, 10, '', 0, 1);
-
+        // Company Details
         $pdf->SetFont('Arial', 'B', 15);
-        $pdf->Cell(71, 5, 'Customer Details', 0, 0);
-        $pdf->Cell(59, 5, '', 0, 0);
-        $pdf->Cell(59, 5, 'Invoice Details', 0, 1);
+        $pdf->Cell(80);
+        $pdf->Cell(30, 10, 'MARUTI FABRICS', 0, 1, 'C');
 
-        $pdf->SetFont('Courier', '', 12);
-
-        $pdf->Cell(130, 9, 'Name : ' . $_SESSION['cname'], 0, 0);
-        // $pdf->Cell(25, 5, 'Customer:', 0, 0);
-        // $pdf->Cell(34, 5, 'ABC', 0, 1);
-
-        // $pdf->Cell(130, 5, 'Delhi, 751001', 0, 0);
-        $pdf->Cell(25, 9, 'Date:', 0, 0);
-        $pdf->Cell(34, 9, date("d-m-Y"), 0, 1);
+        $pdf->SetFont('Arial', '', 8);
+        $pdf->Cell(0, 10, 'Plot No. 20-21/A, Sahaj Ind. Society, Bamroli, Surat.', 0, 1, 'C');
+        $pdf->Cell(0, 10, 'Mobile: 9328210985   GSTIN: 24BCOPP6008E1ZN', 0, 1, 'C');
+        $pdf->Ln(10);
 
         $billNo = $_SESSION['bill_no'];
-        $pdf->Cell(130, 9, '', 0, 0);
-        $pdf->Cell(25, 1, 'Bill No:', 0, 0);
-        $pdf->Cell(34, 1, $billNo, 0, 1);
+        // Invoice Details
+        $pdf->SetFont('Arial', '', 12);
+        $pdf->Cell(95, 10, 'Invoice No.: ' . $billNo, 1);
+        $pdf->Cell(95, 10, 'Invoice Date: ' . date("d-m-Y"), 1, 1);
+        $pdf->Cell(95, 10, 'Bill To :', 1);
+        $pdf->Cell(95, 10, 'Ship To :', 1, 1);
 
+        // Customer Information
+        $pdf->SetFont('Arial', '', 10);
+        $customerInfo = "Customer Name : " . $c_name . "\n";
+        $customerInfo .= "Address : " . $c_add . "\n";
 
-        // $pdf->SetFont('Arial', 'B', 15);
+        $extraInfo = "Mobile: " . $c_phone . "\n";
+
+        $pdf->MultiCell(95, 5, $customerInfo, 1);
+        $pdf->SetXY(105, 70); // Adjust position to match the "Ship To" section
+        $pdf->MultiCell(95, 5, $customerInfo, 1);
+        $pdf->Ln(5);
+        $pdf->MultiCell(95, 5, $extraInfo, 0);
+        $pdf->Ln(10);
+
+        // Items Table Header
         $pdf->SetFont('Arial', 'B', 10);
-        $pdf->Cell(189, 10, '', 0, 1);
+        $pdf->Cell(10, 10, 'Sr.', 1);
+        $pdf->Cell(60, 10, 'Product Name', 1);
+        $pdf->Cell(20, 10, 'Qty', 1);
+        $pdf->Cell(30, 10, 'Rate', 1);
+        $pdf->Cell(30, 10, 'Tax', 1);
+        $pdf->Cell(30, 10, 'Amount', 1, 1);
 
-        $pdf->Cell(50, 10, '', 0, 1);
-
-        $pdf->SetFont('Courier', 'B', 12);
-        $pdf->Cell(10, 6, 'Sr', 0, 0, 'C');
-        $pdf->Cell(75, 6, 'Product Name', 0, 0, 'C');
-        $pdf->Cell(23, 6, 'Qty', 0, 0, 'C');
-        $pdf->Cell(30, 6, 'Unit Price', 0, 0, 'C');
-        $pdf->Cell(25, 6, 'GST', 0, 0, 'C');
-        $pdf->Cell(35, 6, 'Total', 0, 1, 'C');
-        $pdf->SetFont('Courier', '', 12);
+        // Items Data
         $i = 1;
         $total = 0;
+        $rs = "RS. ";
         foreach ($_SESSION['sales'] as $key => $val) {
-            $pdf->Cell(10, 6, $i, 0, 0, 'C');
-            $pdf->Cell(75, 6, $val['pname'], 0, 0, 'C');
-            $pdf->Cell(23, 6, $val['qty'], 0, 0, 'C');
-            $pdf->Cell(30, 6, $val['price'], 0, 0, 'C');
-            $pdf->Cell(25, 6, $val['gst'], 0, 0, 'C');
-            $pdf->Cell(35, 6, $val['total'], 0, 1, 'C');
+            $pdf->SetFont('Arial', '', 10);
+            $pdf->Cell(10, 10, $i, 1);
+            $pdf->Cell(60, 10, $val['pname'], 1);
+            $pdf->Cell(20, 10, $val['qty'], 1);
+            $pdf->Cell(30, 10, number_format($val['price']), 1);
+            $pdf->Cell(30, 10, number_format($val['gst']) . " (" . ($val['gstper']) . ") ", 1);
+            $pdf->Cell(30, 10, number_format($val['total']), 1, 1);
             $total = $total + $val['total'];
             $i++;
         }
 
+        // Summary
+        $pdf->SetFont('Arial', 'B', 10);
+        $pdf->Cell(150, 10, 'TOTAL', 1);
+        $pdf->Cell(30, 10, $rs . number_format($total), 1, 1);
         $pdf->Ln(5);
-        $pdf->Cell(145, 6, '', 0, 0);
-        $pdf->Cell(25, 6, 'Total', 1, 0, 'C');
-        $pdf->Cell(25, 6, $total, 1, 1, 'C');
 
-        $pdf->Line(10, 61, 200, 61);
+        // Terms and Conditions
+        $pdf->Cell(190, 10, 'TERMS AND CONDITIONS', 0, 1);
+        $pdf->SetFont('Arial', '', 8);
+        $pdf->MultiCell(190, 5, "1. Goods once sold will not be taken back or exchanged\n2. All disputes are subject to [ENTER_YOUR_CITY_NAME] jurisdiction only", 0, 1);
+        $pdf->Ln(5);
 
-        $pdf->Output("I", "001.pdf");
+        $pdf->Output("I", $billNo . ".pdf");
         unset($_SESSION['sales']);
         unset($_SESSION['cname']);
     } else {

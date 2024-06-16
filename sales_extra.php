@@ -26,7 +26,7 @@ if ($row >= 0) {
 $query_prod_name = "select product_name,id from product where user_id='$u_id'";
 $result_prod_name = mysqli_query($con, $query_prod_name);
 
-$query_cname = "select c_name from customer where u_id='$u_id'";
+$query_cname = "select c_name,id from customer where u_id='$u_id'";
 $result_c_name = mysqli_query($con, $query_cname);
 
 
@@ -176,22 +176,26 @@ if (isset($_SESSION['sale_message']) && $_SESSION['sale_message'] != '') {
                                             <div class="col-md-3 mt-2">
                                                 <!-- <div class="input-group input-group-static"> -->
                                                 <label class="labels">Customer Name </label>
-                                                <?php if (!isset($_SESSION['cname'])) { ?>
-                                                    <select class="form-select" name="c_name" id="cname" required style="border: 1px solid gray; padding:5px 5px 5px 5px;">
-                                                        <option value="">Select Customer</option>
-                                                        <?php while ($row_c_name = mysqli_fetch_row($result_c_name)) {
-                                                        ?>
-                                                            <option value="<?php echo $row_c_name[0]; ?>"><?php echo $row_c_name[0]; ?></option>
-                                                        <?php }
-                                                        ?>
-                                                    </select>
-                                                <?php } else {
+                                                <?php //if (!isset($_SESSION['cname'])) {
                                                 ?>
-                                                    <select class="form-select" name="c_name" id="cname" required style="border: 1px solid gray; padding:5px 5px 5px 5px;">
-                                                        <option value="<?php echo $_SESSION['cname']; ?>"><?php echo $_SESSION['cname']; ?></option>
-                                                    </select>
+                                                <select class="form-select" name="c_name" id="cname" required style="border: 1px solid gray; padding:5px 5px 5px 5px;">
+                                                    <option value="">Select Customer</option>
+                                                    <?php while ($row_c_name = mysqli_fetch_row($result_c_name)) {
+                                                    ?>
+                                                        <option value="<?php echo $row_c_name[1]; ?>"><?php echo $row_c_name[0]; ?></option>
+                                                    <?php }
+                                                    ?>
+                                                </select>
+                                                <?php //} //else {
+                                                ?>
+                                                <!-- <select class="form-select" name="c_name" id="cname" required style="border: 1px solid gray; padding:5px 5px 5px 5px;">
+                                                        <option value="<?php //echo $_SESSION['cname']; 
+                                                                        ?>"><?php //echo $_SESSION['cname']; 
+                                                                            ?></option>
+                                                    </select> -->
                                                 <?php
-                                                } ?>
+                                                //} 
+                                                ?>
                                                 <!-- </div> -->
                                             </div>
                                             <div class="col-md-3 mt-2">
@@ -253,7 +257,7 @@ if (isset($_SESSION['sale_message']) && $_SESSION['sale_message'] != '') {
                                                         <td>$val[pname]</td>
                                                         <td>$val[qty]</td>
                                                         <td>$val[price]</td>
-                                                        <td>$val[gst]</td>
+                                                        <td>$val[gst]($val[gstper])</td>
                                                         <td>$val[total]</td>
                                                         <td> 
                                                             <button type='button' class='btn btn-danger btn-sm deletebtn'>X</button>

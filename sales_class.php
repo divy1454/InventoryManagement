@@ -45,12 +45,12 @@ if (isset($_POST['bill_no']) && isset($_POST['p_name']) && isset($_POST['p_id'])
         if (isset($_SESSION['sales'][$id])) {
             $old = $_SESSION['sales'][$id]['qty'];
             $old_gst = $_SESSION['sales'][$id]['gst'];
-            $_SESSION['sales'][$id] = array("pid" => $id, "pname" => $_POST['p_name'], "qty" => $old + $_POST['p_qty'], "price" => $_POST['p_price'], "gst" => ($_POST['gst'] + $old_gst), "total" => ($_POST['p_price'] * ($old + $_POST['p_qty'])) + ($_POST['gst'] + $old_gst));
+            $_SESSION['sales'][$id] = array("pid" => $id, "pname" => $_POST['p_name'], "qty" => $old + $_POST['p_qty'], "price" => $_POST['p_price'], "gst" => ($_POST['gst'] + $old_gst), "gstper" => $gst_per, "total" => ($_POST['p_price'] * ($old + $_POST['p_qty'])) + ($_POST['gst'] + $old_gst));
             $update_query = "update product set qty=qty-'$pqty' where id='$id'";
             $update_result = mysqli_query($con, $update_query);
             $update_row = mysqli_affected_rows($con);
         } else {
-            $_SESSION['sales'][$id] = array("pid" => $id, "pname" => $_POST['p_name'], "qty" => $_POST['p_qty'], "price" => $_POST['p_price'], "gst" => $_POST['gst'], "total" => $_POST['p_total']);
+            $_SESSION['sales'][$id] = array("pid" => $id, "pname" => $_POST['p_name'], "qty" => $_POST['p_qty'], "price" => $_POST['p_price'], "gst" => $_POST['gst'], "gstper" => $gst_per, "total" => $_POST['p_total']);
             $update_query = "update product set qty=qty-'$pqty' where id='$id'";
             $update_result = mysqli_query($con, $update_query);
             $update_row = mysqli_affected_rows($con);
