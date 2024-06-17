@@ -112,7 +112,7 @@ if (isset($_POST['btn_bill'])) {
 
         $pdf->SetFont('Arial', '', 8);
         $pdf->Cell(0, 10, 'Plot No. 20-21/A, Sahaj Ind. Society, Bamroli, Surat.', 0, 1, 'C');
-        $pdf->Cell(0, 10, 'Mobile: 9328210985   GSTIN: 24BCOPP6008E1ZN', 0, 1, 'C');
+        $pdf->Cell(0, 2, 'Mobile: 9328210985   GSTIN: 24BCOPP6008E1ZN', 0, 1, 'C');
         $pdf->Ln(10);
 
         $billNo = $_SESSION['bill_no'];

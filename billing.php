@@ -293,7 +293,6 @@ if (isset($_SESSION['delete_message']) && $_SESSION['delete_message'] != '') {
                                                     echo "<td> 
                                                     <a href='bill_show.php?b_no=$row[2]'><button type='button' name='view_btn' class='btn btn-success btn-sm view'><i class='material-icons opacity-10' style='font-size: large;'>visibility</i></button></a>
                                                     <a href='bill_show.php?d_bno=$row[2]'><button type='button' name='view_btn' class='btn btn-info btn-sm view'><i class='material-icons opacity-10' style='font-size: large;'>download</i></button></a>
-                                                    <a href='return.php?r_bno=$row[2]'><button type='button' name='view_btn' class='btn btn-warning btn-sm view'><i class='material-icons opacity-10' style='font-size: large;'>refresh</i></button></a>
                                                  </td>";
                                                     echo "</tr>";
                                                     $id++;

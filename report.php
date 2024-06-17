@@ -45,7 +45,7 @@ if (!isset($_COOKIE['email']) && !isset($_COOKIE['pass'])) {
                                                     <option value="">Select Type</option>
                                                     <option value="Purchase Report">Purchase Report</option>
                                                     <option value="Sales Report">Sales Report</option>
-                                                    <option value="Return Report">Return Report</option>
+                                                    <!-- <option value="Return Report">Return Report</option> -->
                                                 </select>
                                             </div>
                                             <div class="col-md-3 mt-2">
