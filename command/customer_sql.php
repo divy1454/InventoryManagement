@@ -8,13 +8,16 @@ if (isset($_POST['btn_customer_add'])) {
     $c_add = $_POST['c_address'];
     $c_phone = $_POST['c_phone'];
 
-    $query_duplicate = "select * from customer where u_id='$u_id'";
+    // $query_duplicate = "select * from customer where u_id='$u_id'";
+    $query_duplicate = "select c_name from customer where u_id='$u_id' and c_name='$c_name'";
     $result_duplicate = mysqli_query($con, $query_duplicate);
-    $row_duplicate = mysqli_fetch_row($result_duplicate);
+    // $row_duplicate = mysqli_fetch_row($result_duplicate);
+    while ($row_duplicate = mysqli_fetch_row($result_duplicate)) {
+        // $row_cphone = $row_duplicate[3];
+        $row_cphone = $row_duplicate[0];
+    }
 
-    $row_cphone = $row_duplicate[3];
-
-    if ($row_cphone == $c_phone) {
+    if ($row_cphone > 0) {
         session_start();
         $_SESSION['product_message'] = "Customer Already Exist...Please Check";
         $_SESSION['icon'] = "error";

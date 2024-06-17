@@ -314,7 +314,7 @@ if (isset($_SESSION['delete_message']) && $_SESSION['delete_message'] != '') {
                                                     echo "<td>" . $row[3] . "</td>";
                                                     echo "<td>" . $row[4] . "</td>";
                                                     echo "<td>" . $row[5] . "</td>";
-                                                    echo "<td>" . $row[6] . "</td>";
+                                                    echo "<td>" . $row[6] . "%" . "</td>";
                                                     echo "<td> 
                                                     <button type='button' class='btn btn-success btn-sm editbtn' data-bs-toggle='modal' data-bs-target='#edit_product'>Edit</button>
                                                     <button type='button' class='btn btn-danger btn-sm deletebtn' data-bs-toggle='modal' data-bs-target='#delete_product'>Delete</button>

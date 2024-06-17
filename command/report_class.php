@@ -62,6 +62,7 @@ if (isset($_POST['purchase_btn_pdf'])) {
 
     // Items Data
     $i = 1;
+    $total = 0;
     $query = "select purchase.id,product.product_name,purchase.qty,purchase.total_cost,purchase.time from purchase,product where purchase.user_id='$user_ID' AND product.id = purchase.p_id AND purchase.time>='$sdate' AND purchase.time<='$edate'";
     $product_show_result = mysqli_query($con, $query);
     while ($val = mysqli_fetch_row($product_show_result)) {
@@ -71,8 +72,15 @@ if (isset($_POST['purchase_btn_pdf'])) {
         $pdf->Cell(20, 10, $val[2], 1);
         $pdf->Cell(30, 10, number_format($val[3]), 1);
         $pdf->Cell(30, 10, $val[4], 1, 1);
+        $total = $total + $val[3];
         $i++;
     }
+
+    $pdf->Cell(10, 10, '', 0);
+    $pdf->Cell(70, 10, '', 0);
+    $pdf->Cell(20, 10, 'Total', 1);
+    $pdf->Cell(30, 10, number_format($total), 1);
+    // $pdf->Cell(30, 10, number_format($total), 1);
 
     $pdf->Output("D", $sdate . " to " . $edate . "purchase.pdf");
 }

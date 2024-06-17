@@ -22,69 +22,90 @@ if (isset($bno)) {
         $dt = $row[1];
         $date = strstr($dt, ' ', true);
     }
+
+    $query_cdetails = "select c_add,c_phone from customer where c_name='$customerName'";
+    $result_cdetails = mysqli_query($con, $query_cdetails);
+    while ($row = mysqli_fetch_row($result_cdetails)) {
+        $customer_add = $row[0];
+        $customer_phone = $row[1];
+    }
+
     $pdf = new FPDF();
     $pdf->AddPage();
 
-    $pdf->SetFont('Arial', 'B', 20);
+    // Add Logo
+    $pdf->Image('assets\images\favicon-32x32.png', 10, 6, 30);
 
-    $pdf->Cell(71, 10, '', 0, 0);
-    $pdf->Cell(59, 5, 'Invoice', 0, 0);
-    $pdf->Cell(59, 10, '', 0, 1);
-
+    // Company Details
     $pdf->SetFont('Arial', 'B', 15);
-    $pdf->Cell(71, 5, 'Customer Details', 0, 0);
-    $pdf->Cell(59, 5, '', 0, 0);
-    $pdf->Cell(59, 5, 'Invoice Details', 0, 1);
+    $pdf->Cell(80);
+    $pdf->Cell(30, 10, 'MARUTI FABRICS', 0, 1, 'C');
 
-    $pdf->SetFont('Courier', '', 12);
+    $pdf->SetFont('Arial', '', 8);
+    $pdf->Cell(0, 10, 'Plot No. 20-21/A, Sahaj Ind. Society, Bamroli, Surat.', 0, 1, 'C');
+    $pdf->Cell(0, 2, 'Mobile: 9328210985   GSTIN: 24BCOPP6008E1ZN', 0, 1, 'C');
+    $pdf->Ln(18);
 
-    $pdf->Cell(130, 9, 'Name : ' . $customerName, 0, 0);
-    // $pdf->Cell(25, 5, 'Customer:', 0, 0);
-    // $pdf->Cell(34, 5, 'ABC', 0, 1);
+    $billNo = $_SESSION['bill_no'];
+    // Invoice Details
+    $pdf->SetFont('Arial', '', 12);
+    $pdf->Cell(95, 10, 'Invoice No.: ' . $bno, 1);
+    $pdf->Cell(95, 10, 'Invoice Date: ' . $date, 1, 1);
+    $pdf->Cell(95, 10, 'Bill To :', 1);
+    $pdf->Cell(95, 10, 'Ship To :', 1, 1);
 
-    // $pdf->Cell(130, 5, 'Delhi, 751001', 0, 0);
-    $pdf->Cell(25, 9, 'Date:', 0, 0);
-    $pdf->Cell(34, 9, $date, 0, 1);
+    // Customer Information
+    $pdf->SetFont('Arial', '', 10);
+    $customerInfo = "Customer Name : " . $customerName . "\n";
+    $customerInfo .= "Address : " . $customer_add . "\n";
 
-    $pdf->Cell(130, 9, '', 0, 0);
-    $pdf->Cell(25, 1, 'Bill No:', 0, 0);
-    $pdf->Cell(34, 1, $bno, 0, 1);
+    $extraInfo = "Mobile: " . $customer_phone . "\n";
 
+    $pdf->MultiCell(95, 5, $customerInfo, 1);
+    $pdf->SetXY(105, 70); // Adjust position to match the "Ship To" section
+    $pdf->MultiCell(95, 5, $customerInfo, 1);
+    $pdf->Ln(5);
+    $pdf->MultiCell(95, 5, $extraInfo, 0);
+    $pdf->Ln(10);
 
-    // $pdf->SetFont('Arial', 'B', 15);
+    // Items Table Header
     $pdf->SetFont('Arial', 'B', 10);
-    $pdf->Cell(189, 10, '', 0, 1);
+    $pdf->Cell(10, 10, 'Sr.', 1);
+    $pdf->Cell(60, 10, 'Product Name', 1);
+    $pdf->Cell(20, 10, 'Qty', 1);
+    $pdf->Cell(30, 10, 'Rate', 1);
+    $pdf->Cell(30, 10, 'Tax', 1);
+    $pdf->Cell(30, 10, 'Amount', 1, 1);
 
-    $pdf->Cell(50, 10, '', 0, 1);
-
-    $pdf->SetFont('Courier', 'B', 12);
-    $pdf->Cell(10, 6, 'Sr', 0, 0, 'C');
-    $pdf->Cell(80, 6, 'Product Name', 0, 0, 'C');
-    $pdf->Cell(23, 6, 'Qty', 0, 0, 'C');
-    $pdf->Cell(30, 6, 'Unit Price', 0, 0, 'C');
-    $pdf->Cell(25, 6, 'Total', 0, 1, 'C');
-    $pdf->SetFont('Courier', '', 12);
+    // Items Data
     $i = 1;
     $total = 0;
-
-    $query_bill_detail = "select product_name,product_qty,product_price,total from billing_details where bill_no='$bno'";
+    $rs = "RS. ";
+    $query_bill_detail = "select product_name,product_qty,product_price,total,gst_amount from billing_details where bill_no='$bno'";
     $result_bill_detail = mysqli_query($con, $query_bill_detail);
     while ($val = mysqli_fetch_row($result_bill_detail)) {
-        $pdf->Cell(10, 6, $i, 0, 0, 'C');
-        $pdf->Cell(80, 6, $val[0], 0, 0, 'C');
-        $pdf->Cell(23, 6, $val[1], 0, 0, 'C');
-        $pdf->Cell(30, 6, $val[2], 0, 0, 'C');
-        $pdf->Cell(25, 6, $val[3], 0, 1, 'C');
+        $pdf->SetFont('Arial', '', 10);
+        $pdf->Cell(10, 10, $i, 1);
+        $pdf->Cell(60, 10, $val[0], 1);
+        $pdf->Cell(20, 10, $val[1], 1);
+        $pdf->Cell(30, 10, number_format($val[2]), 1);
+        $pdf->Cell(30, 10, number_format($val[4]), 1);
+        $pdf->Cell(30, 10, number_format($val[3]), 1, 1);
         $total = $total + $val[3];
         $i++;
     }
 
+    // Summary
+    $pdf->SetFont('Arial', 'B', 10);
+    $pdf->Cell(150, 10, 'TOTAL', 1);
+    $pdf->Cell(30, 10, $rs . number_format($total), 1, 1);
+    $pdf->Ln(5);
 
-    $pdf->Cell(118, 6, '', 0, 0);
-    $pdf->Cell(25, 6, 'Total', 1, 0, 'C');
-    $pdf->Cell(25, 6, $total, 1, 1, 'C');
-
-    $pdf->Line(10, 61, 178, 61);
+    // Terms and Conditions
+    $pdf->Cell(190, 10, 'TERMS AND CONDITIONS', 0, 1);
+    $pdf->SetFont('Arial', '', 8);
+    $pdf->MultiCell(190, 5, "1. Goods once sold will not be taken back or exchanged\n2. All disputes are subject to [ENTER_YOUR_CITY_NAME] jurisdiction only", 0, 1);
+    $pdf->Ln(5);
 
     $pdf->Output("I", $bno . ".pdf");
 }
@@ -101,69 +122,90 @@ if (isset($download)) {
         $dt = $row[1];
         $date = strstr($dt, ' ', true);
     }
+
+    $query_cdetails = "select c_add,c_phone from customer where c_name='$customerName'";
+    $result_cdetails = mysqli_query($con, $query_cdetails);
+    while ($row = mysqli_fetch_row($result_cdetails)) {
+        $customer_add = $row[0];
+        $customer_phone = $row[1];
+    }
+
     $pdf = new FPDF();
     $pdf->AddPage();
 
-    $pdf->SetFont('Arial', 'B', 20);
+    // Add Logo
+    $pdf->Image('assets\images\favicon-32x32.png', 10, 6, 30);
 
-    $pdf->Cell(71, 10, '', 0, 0);
-    $pdf->Cell(59, 5, 'Invoice', 0, 0);
-    $pdf->Cell(59, 10, '', 0, 1);
-
+    // Company Details
     $pdf->SetFont('Arial', 'B', 15);
-    $pdf->Cell(71, 5, 'Customer Details', 0, 0);
-    $pdf->Cell(59, 5, '', 0, 0);
-    $pdf->Cell(59, 5, 'Invoice Details', 0, 1);
+    $pdf->Cell(80);
+    $pdf->Cell(30, 10, 'MARUTI FABRICS', 0, 1, 'C');
 
-    $pdf->SetFont('Courier', '', 12);
+    $pdf->SetFont('Arial', '', 8);
+    $pdf->Cell(0, 10, 'Plot No. 20-21/A, Sahaj Ind. Society, Bamroli, Surat.', 0, 1, 'C');
+    $pdf->Cell(0, 2, 'Mobile: 9328210985   GSTIN: 24BCOPP6008E1ZN', 0, 1, 'C');
+    $pdf->Ln(18);
 
-    $pdf->Cell(130, 9, 'Name : ' . $customerName, 0, 0);
-    // $pdf->Cell(25, 5, 'Customer:', 0, 0);
-    // $pdf->Cell(34, 5, 'ABC', 0, 1);
+    $billNo = $_SESSION['bill_no'];
+    // Invoice Details
+    $pdf->SetFont('Arial', '', 12);
+    $pdf->Cell(95, 10, 'Invoice No.: ' . $download, 1);
+    $pdf->Cell(95, 10, 'Invoice Date: ' . $date, 1, 1);
+    $pdf->Cell(95, 10, 'Bill To :', 1);
+    $pdf->Cell(95, 10, 'Ship To :', 1, 1);
 
-    // $pdf->Cell(130, 5, 'Delhi, 751001', 0, 0);
-    $pdf->Cell(25, 9, 'Date:', 0, 0);
-    $pdf->Cell(34, 9, $date, 0, 1);
+    // Customer Information
+    $pdf->SetFont('Arial', '', 10);
+    $customerInfo = "Customer Name : " . $customerName . "\n";
+    $customerInfo .= "Address : " . $customer_add . "\n";
 
-    $pdf->Cell(130, 9, '', 0, 0);
-    $pdf->Cell(25, 1, 'Bill No:', 0, 0);
-    $pdf->Cell(34, 1, $download, 0, 1);
+    $extraInfo = "Mobile: " . $customer_phone . "\n";
 
+    $pdf->MultiCell(95, 5, $customerInfo, 1);
+    $pdf->SetXY(105, 70); // Adjust position to match the "Ship To" section
+    $pdf->MultiCell(95, 5, $customerInfo, 1);
+    $pdf->Ln(5);
+    $pdf->MultiCell(95, 5, $extraInfo, 0);
+    $pdf->Ln(10);
 
-    // $pdf->SetFont('Arial', 'B', 15);
+    // Items Table Header
     $pdf->SetFont('Arial', 'B', 10);
-    $pdf->Cell(189, 10, '', 0, 1);
+    $pdf->Cell(10, 10, 'Sr.', 1);
+    $pdf->Cell(60, 10, 'Product Name', 1);
+    $pdf->Cell(20, 10, 'Qty', 1);
+    $pdf->Cell(30, 10, 'Rate', 1);
+    $pdf->Cell(30, 10, 'Tax', 1);
+    $pdf->Cell(30, 10, 'Amount', 1, 1);
 
-    $pdf->Cell(50, 10, '', 0, 1);
-
-    $pdf->SetFont('Courier', 'B', 12);
-    $pdf->Cell(10, 6, 'Sr', 0, 0, 'C');
-    $pdf->Cell(80, 6, 'Product Name', 0, 0, 'C');
-    $pdf->Cell(23, 6, 'Qty', 0, 0, 'C');
-    $pdf->Cell(30, 6, 'Unit Price', 0, 0, 'C');
-    $pdf->Cell(25, 6, 'Total', 0, 1, 'C');
-    $pdf->SetFont('Courier', '', 12);
+    // Items Data
     $i = 1;
     $total = 0;
-
-    $query_bill_detail = "select product_name,product_qty,product_price,total from billing_details where bill_no='$download'";
+    $rs = "RS. ";
+    $query_bill_detail = "select product_name,product_qty,product_price,total,gst_amount from billing_details where bill_no='$download'";
     $result_bill_detail = mysqli_query($con, $query_bill_detail);
     while ($val = mysqli_fetch_row($result_bill_detail)) {
-        $pdf->Cell(10, 6, $i, 0, 0, 'C');
-        $pdf->Cell(80, 6, $val[0], 0, 0, 'C');
-        $pdf->Cell(23, 6, $val[1], 0, 0, 'C');
-        $pdf->Cell(30, 6, $val[2], 0, 0, 'C');
-        $pdf->Cell(25, 6, $val[3], 0, 1, 'C');
+        $pdf->SetFont('Arial', '', 10);
+        $pdf->Cell(10, 10, $i, 1);
+        $pdf->Cell(60, 10, $val[0], 1);
+        $pdf->Cell(20, 10, $val[1], 1);
+        $pdf->Cell(30, 10, number_format($val[2]), 1);
+        $pdf->Cell(30, 10, number_format($val[4]), 1);
+        $pdf->Cell(30, 10, number_format($val[3]), 1, 1);
         $total = $total + $val[3];
         $i++;
     }
 
+    // Summary
+    $pdf->SetFont('Arial', 'B', 10);
+    $pdf->Cell(150, 10, 'TOTAL', 1);
+    $pdf->Cell(30, 10, $rs . number_format($total), 1, 1);
+    $pdf->Ln(5);
 
-    $pdf->Cell(118, 6, '', 0, 0);
-    $pdf->Cell(25, 6, 'Total', 1, 0, 'C');
-    $pdf->Cell(25, 6, $total, 1, 1, 'C');
-
-    $pdf->Line(10, 61, 178, 61);
+    // Terms and Conditions
+    $pdf->Cell(190, 10, 'TERMS AND CONDITIONS', 0, 1);
+    $pdf->SetFont('Arial', '', 8);
+    $pdf->MultiCell(190, 5, "1. Goods once sold will not be taken back or exchanged\n2. All disputes are subject to [ENTER_YOUR_CITY_NAME] jurisdiction only", 0, 1);
+    $pdf->Ln(5);
 
     $pdf->Output("D", $download . ".pdf");
 }

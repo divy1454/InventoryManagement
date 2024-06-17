@@ -113,7 +113,7 @@ if (isset($_POST['btn_bill'])) {
         $pdf->SetFont('Arial', '', 8);
         $pdf->Cell(0, 10, 'Plot No. 20-21/A, Sahaj Ind. Society, Bamroli, Surat.', 0, 1, 'C');
         $pdf->Cell(0, 2, 'Mobile: 9328210985   GSTIN: 24BCOPP6008E1ZN', 0, 1, 'C');
-        $pdf->Ln(10);
+        $pdf->Ln(18);
 
         $billNo = $_SESSION['bill_no'];
         // Invoice Details
@@ -174,7 +174,7 @@ if (isset($_POST['btn_bill'])) {
         $pdf->MultiCell(190, 5, "1. Goods once sold will not be taken back or exchanged\n2. All disputes are subject to [ENTER_YOUR_CITY_NAME] jurisdiction only", 0, 1);
         $pdf->Ln(5);
 
-        $pdf->Output("I", $billNo . ".pdf");
+        $pdf->Output("D", $billNo . ".pdf");
         unset($_SESSION['sales']);
         unset($_SESSION['cname']);
     } else {

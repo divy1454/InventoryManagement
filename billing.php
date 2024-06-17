@@ -281,7 +281,7 @@ if (isset($_SESSION['delete_message']) && $_SESSION['delete_message'] != '') {
                                             </thead>
                                             <tbody>
                                                 <?php
-                                                $query = "select customer_name,date,bill_no from billing_header where user_id='$u_id'";
+                                                $query = "select customer_name,date,bill_no from billing_header where user_id='$u_id' ORDER BY bill_no DESC";
                                                 $product_show_result = mysqli_query($con, $query);
                                                 $id = 1;
                                                 while ($row = mysqli_fetch_row($product_show_result)) {
