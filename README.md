@@ -58,47 +58,6 @@ C:\xampp\htdocs\IMS
 -  Click import and select database file.
 ```
 
-## Screenshots  
-
-#### Signup Page
-![Signup Page](assets/signup.png)
-
-#### Login Page
-![Login Page](assets/login.png)
-
-#### Dashboard Page
-![Dashboard page](assets/Dashboard.png)
-
-#### Products Page
-![Products Page](assets/manage_product.png)
-
-#### Customers Page
-![Customers Page](assets/manage_customer.png)
-
-#### Supplier Page
-![Customers Page](assets/manage_supplier.png)
-
-#### Sales Page
-![Customers Page](assets/product_sales.png)
-
-#### Purchase Page
-![Customers Page](assets/purchase_product.png)
-
-#### Report Page
-![Customers Page](assets/report_page.png)
-
-#### Bills Page
-![Customers Page](assets/show_bills.png)
-
-#### Bill Demo
-![Customers Page](assets/Bill.png)
-
-#### OTP Page
-![Customers Page](assets/OTP.png)
-
-#### User Profile Page
-![Customers Page](assets/user_profile.png)
-
 ## Contact  
 
 For further information or feedback, please contact:
