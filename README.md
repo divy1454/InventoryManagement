@@ -61,11 +61,11 @@ C:\xampp\htdocs\IMS
 ## Contact  
 
 For further information or feedback, please contact:
-- **Email**: harshpatel4086@gmail.com
-- **GitHub Profile**: [patelharshn](https://github.com/patelharshn)
+- **Email**: divy9954@gmail.com
+- **GitHub Profile**: [divy1454](https://github.com/divy1454)
 
 
 ## Feedback
 
-If you have any feedback, please reach out to us at harshpatel4086@gmail.com
+If you have any feedback, please reach out to us at divy9954@gmail.com
 
